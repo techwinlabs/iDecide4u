@@ -1,25 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vcH-3T-7AR">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--iDecide4u-->
+        <scene sceneID="RuH-eA-q1F">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="bDO-PX-3D9" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="mEo-xk-zSp"/>
+                        <viewControllerLayoutGuide type="bottom" id="s9P-Db-KGO"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="gbT-Fl-Pnx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIB-DH-NBy">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem width="12" systemItem="fixedSpace" id="08C-hT-0bb"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="IBp-Nb-aN3"/>
+                                    <barButtonItem title="Decide!" id="Wnu-56-eQJ"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="LV0-nP-xev"/>
+                                    <barButtonItem systemItem="trash" id="jTl-GC-DbU"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-N2-VD1">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sIB-DH-NBy" firstAttribute="trailing" secondItem="NR9-N2-VD1" secondAttribute="trailing" id="0it-7J-4oI"/>
+                            <constraint firstAttribute="trailing" secondItem="sIB-DH-NBy" secondAttribute="trailing" id="4Mx-fG-T3Y"/>
+                            <constraint firstItem="sIB-DH-NBy" firstAttribute="leading" secondItem="NR9-N2-VD1" secondAttribute="leading" id="9KH-IL-Hb5"/>
+                            <constraint firstItem="sIB-DH-NBy" firstAttribute="bottom" secondItem="s9P-Db-KGO" secondAttribute="top" id="N22-hW-98M"/>
+                            <constraint firstItem="sIB-DH-NBy" firstAttribute="leading" secondItem="gbT-Fl-Pnx" secondAttribute="leading" id="URL-Rs-TwQ"/>
+                            <constraint firstItem="sIB-DH-NBy" firstAttribute="top" secondItem="NR9-N2-VD1" secondAttribute="bottom" id="j5D-VD-IOI"/>
+                            <constraint firstItem="NR9-N2-VD1" firstAttribute="top" secondItem="mEo-xk-zSp" secondAttribute="bottom" id="vkU-q2-CcH"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="iDecide4u" id="Pls-KV-13e">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="tAY-ac-QbH"/>
+                    </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBr-eg-33k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1527" y="-325"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gbE-Ds-U53">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vcH-3T-7AR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LkJ-Qt-Y4a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bDO-PX-3D9" kind="relationship" relationship="rootViewController" id="X66-ki-Qwu"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Bi-Wk-Qta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="800" y="-325"/>
         </scene>
     </scenes>
 </document>
