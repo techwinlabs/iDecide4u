@@ -15,6 +15,7 @@
 		2F327F151AB33FFB00EE1CF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F131AB33FFB00EE1CF8 /* LaunchScreen.xib */; };
 		2F327F211AB33FFC00EE1CF8 /* iDecide4uTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */; };
 		2F663CAB1AB4A04A00263D54 /* IDFYAddNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F663CAA1AB4A04A00263D54 /* IDFYAddNewItemViewController.m */; };
+		2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iDecide4uTests.m; sourceTree = "<group>"; };
 		2F663CA91AB4A04A00263D54 /* IDFYAddNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFYAddNewItemViewController.h; sourceTree = "<group>"; };
 		2F663CAA1AB4A04A00263D54 /* IDFYAddNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFYAddNewItemViewController.m; sourceTree = "<group>"; };
+		2F663CAC1AB4A3A700263D54 /* IDFYMainSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFYMainSceneViewController.h; sourceTree = "<group>"; };
+		2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFYMainSceneViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 		2FF2C35D1AB349A800DA8DB6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2F663CAC1AB4A3A700263D54 /* IDFYMainSceneViewController.h */,
+				2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */,
 				2F663CA91AB4A04A00263D54 /* IDFYAddNewItemViewController.h */,
 				2F663CAA1AB4A04A00263D54 /* IDFYAddNewItemViewController.m */,
 			);
@@ -250,6 +255,7 @@
 				2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */,
 				2F663CAB1AB4A04A00263D54 /* IDFYAddNewItemViewController.m in Sources */,
 				2F327F041AB33FFB00EE1CF8 /* main.m in Sources */,
+				2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
