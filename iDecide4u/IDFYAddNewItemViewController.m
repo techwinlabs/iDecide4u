@@ -9,10 +9,12 @@
 #import "IDFYAddNewItemViewController.h"
 
 @interface IDFYAddNewItemViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 @end
 
 @implementation IDFYAddNewItemViewController
+
+#pragma mark - View Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,8 +26,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - User Interactions
+
 - (IBAction)doneButtonPressed:(id)sender {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)saveButtonPressed:(id)sender {
+    [self.delegate saveNewItem:self.textField.text];
+    self.textField.text = @"";
 }
 
 @end

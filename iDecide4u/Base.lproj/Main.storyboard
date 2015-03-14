@@ -77,10 +77,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="op5-rD-z3j">
-                                <rect key="frame" x="248" y="194" width="105" height="30"/>
+                                <rect key="frame" x="247" y="194" width="105" height="30"/>
                                 <state key="normal" title="Save new item!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="8i9-4u-zot" eventType="touchUpInside" id="e5r-Fv-ajZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -98,6 +101,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="eGf-es-9MH" id="Uxh-P2-HjX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M72-li-lVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
