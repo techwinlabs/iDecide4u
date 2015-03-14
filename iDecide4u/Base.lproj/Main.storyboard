@@ -7,7 +7,7 @@
         <!--iDecide4u-->
         <scene sceneID="RuH-eA-q1F">
             <objects>
-                <viewController id="bDO-PX-3D9" sceneMemberID="viewController">
+                <viewController id="bDO-PX-3D9" customClass="IDFYMainSceneViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mEo-xk-zSp"/>
                         <viewControllerLayoutGuide type="bottom" id="s9P-Db-KGO"/>
@@ -29,6 +29,18 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-N2-VD1">
                                 <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" id="cZ0-T3-3PX">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cZ0-T3-3PX" id="Pqe-LK-VZz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="bDO-PX-3D9" id="xtv-pG-hOM"/>
+                                    <outlet property="delegate" destination="bDO-PX-3D9" id="vKo-Jf-FaU"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,6 +61,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="NR9-N2-VD1" id="Vwc-Eb-xzZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBr-eg-33k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

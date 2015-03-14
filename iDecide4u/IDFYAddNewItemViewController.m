@@ -33,8 +33,10 @@
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
-    [self.delegate saveNewItem:self.textField.text];
-    self.textField.text = @"";
+    if (0 < self.textField.text.length) {
+        [self.delegate saveNewItem:self.textField.text];
+        self.textField.text = @"";
+    }
 }
 
 @end
