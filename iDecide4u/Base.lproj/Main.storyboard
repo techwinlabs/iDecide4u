@@ -57,7 +57,7 @@
         <!--Add new item-->
         <scene sceneID="wrr-fg-wFD">
             <objects>
-                <viewController id="8i9-4u-zot" sceneMemberID="viewController">
+                <viewController id="8i9-4u-zot" customClass="IDFYAddNewItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h2l-j4-aee"/>
                         <viewControllerLayoutGuide type="bottom" id="W33-AZ-wge"/>
@@ -92,7 +92,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add new item" id="5ls-V6-JOg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Rhp-Ub-wd8"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Rhp-Ub-wd8">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="8i9-4u-zot" id="qMW-aE-Enk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M72-li-lVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
