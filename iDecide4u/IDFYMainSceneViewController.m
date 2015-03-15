@@ -24,9 +24,8 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -53,7 +52,6 @@
 
 - (void)saveNewItem:(NSString *)newItem {
     [self.itemList addObject:newItem];
-    [self.tableView reloadData];
 }
 
 #pragma mark - Segues
