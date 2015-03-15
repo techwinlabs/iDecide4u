@@ -27,7 +27,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LV0-nP-xev"/>
-                                    <barButtonItem systemItem="trash" id="jTl-GC-DbU"/>
+                                    <barButtonItem systemItem="trash" id="jTl-GC-DbU">
+                                        <connections>
+                                            <action selector="trashButtonPressed:" destination="bDO-PX-3D9" id="MjG-hr-nQa"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-N2-VD1">

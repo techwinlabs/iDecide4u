@@ -96,4 +96,9 @@
     
 }
 
+- (IBAction)trashButtonPressed:(id)sender {
+    self.itemList = [NSMutableArray new];
+    [self.tableView reloadData];
+}
+
 @end
