@@ -8,7 +8,7 @@
 
 #import "IDFYMainSceneViewController.h"
 
-@interface IDFYMainSceneViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface IDFYMainSceneViewController () <UITableViewDataSource>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
 @end
@@ -46,7 +46,12 @@
     return tableViewCell;
 }
 
-#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        [self.itemList removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 
 #pragma mark - IDFYAddNewItemDelegate
 
@@ -72,8 +77,8 @@
 
 - (IBAction)decideButtonPressed:(id)sender {
     
-    NSString *title = @"dummy title";
-    NSString *message = @"dummy message";
+    NSString *title = @"";
+    NSString *message = @"";
     
     if (0 < self.itemList.count) {
         
@@ -96,6 +101,11 @@
     [alertController addAction:alertAction];
     [self presentViewController:alertController animated:YES completion:nil];
     
+}
+
+- (IBAction)trashButtonPressed:(id)sender {
+    self.itemList = [NSMutableArray new];
+    [self.tableView reloadData];
 }
 
 @end
