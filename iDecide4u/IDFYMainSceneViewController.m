@@ -46,6 +46,13 @@
     return tableViewCell;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (UITableViewCellEditingStyleDelete == editingStyle) {
+        [self.itemList removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 #pragma mark - IDFYAddNewItemDelegate
 
 - (void)saveNewItem:(NSString *)newItem {
