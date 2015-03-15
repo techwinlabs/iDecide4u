@@ -21,7 +21,11 @@
                                 <items>
                                     <barButtonItem width="12" systemItem="fixedSpace" id="08C-hT-0bb"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="IBp-Nb-aN3"/>
-                                    <barButtonItem title="Decide!" id="Wnu-56-eQJ"/>
+                                    <barButtonItem title="Decide!" id="Wnu-56-eQJ">
+                                        <connections>
+                                            <action selector="decideButtonPressed:" destination="bDO-PX-3D9" id="twc-NC-Rq9"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LV0-nP-xev"/>
                                     <barButtonItem systemItem="trash" id="jTl-GC-DbU"/>
                                 </items>

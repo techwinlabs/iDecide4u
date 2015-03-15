@@ -40,10 +40,10 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
+    // Just a standard UITableViewCell.
     UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     tableViewCell.textLabel.text = self.itemList[indexPath.row];
-    
     return tableViewCell;
 }
 
@@ -59,6 +59,8 @@
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    // Before we segue to the IDFYAddNewItemViewController, set the delegate there for the IDFYAddNewItemDelegate protocol.
     if ([[segue destinationViewController] isMemberOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = [segue destinationViewController];
         if ([navigationController.topViewController isMemberOfClass:[IDFYAddNewItemViewController class]]) {
@@ -66,6 +68,36 @@
             addNewItemViewController.delegate = self;
         }
     }
+}
+
+#pragma mark - IBActions
+
+- (IBAction)decideButtonPressed:(id)sender {
+    
+    NSString *title = @"dummy title";
+    NSString *message = @"dummy message";
+    
+    if (0 < self.itemList.count) {
+        
+        // Chose a winner and show it to the user.
+        NSUInteger winningChoice = arc4random() % self.itemList.count;
+        title = @"I decided for you!";
+        message = [NSString stringWithFormat:@"\nThe winner is %@.\n", self.itemList[winningChoice]];
+        
+    } else {
+        
+        // Show the user a warning, which tells him, that he has to add some items first.
+        title = @"Oups!";
+        message = @"\nPlase add some items first.\n";
+        
+    }
+    
+    // Create the UIAlertController with the predefined title and message, add an OK button an presend that alert to the user.
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+    [alertController addAction:alertAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 @end
