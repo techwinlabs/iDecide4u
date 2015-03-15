@@ -43,7 +43,6 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="bDO-PX-3D9" id="xtv-pG-hOM"/>
-                                    <outlet property="delegate" destination="bDO-PX-3D9" id="vKo-Jf-FaU"/>
                                 </connections>
                             </tableView>
                         </subviews>

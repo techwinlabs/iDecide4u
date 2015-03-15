@@ -8,7 +8,7 @@
 
 #import "IDFYMainSceneViewController.h"
 
-@interface IDFYMainSceneViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface IDFYMainSceneViewController () <UITableViewDataSource>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
 @end
@@ -45,8 +45,6 @@
     tableViewCell.textLabel.text = self.itemList[indexPath.row];
     return tableViewCell;
 }
-
-#pragma mark - UITableViewDelegate
 
 #pragma mark - IDFYAddNewItemDelegate
 
