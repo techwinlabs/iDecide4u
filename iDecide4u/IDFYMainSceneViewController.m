@@ -70,8 +70,8 @@
 
 - (IBAction)decideButtonPressed:(id)sender {
     
-    NSString *title = @"dummy title";
-    NSString *message = @"dummy message";
+    NSString *title = @"";
+    NSString *message = @"";
     
     if (0 < self.itemList.count) {
         
