@@ -174,7 +174,7 @@
         <!--Save list-->
         <scene sceneID="Exi-rR-P5a">
             <objects>
-                <viewController id="DSc-8l-0u2" sceneMemberID="viewController">
+                <viewController id="DSc-8l-0u2" customClass="IDFYSaveListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3Ow-Wn-I21"/>
                         <viewControllerLayoutGuide type="bottom" id="8R4-6m-eKk"/>
@@ -198,6 +198,9 @@
                                 <state key="normal" title="Save this list!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonPressed:" destination="DSc-8l-0u2" eventType="touchUpInside" id="rYe-e7-RxV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,6 +212,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Save list" id="ofj-R3-end"/>
+                    <connections>
+                        <outlet property="textField" destination="Dg0-5W-E3G" id="j9u-T1-Lda"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JtX-iD-nVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
