@@ -92,7 +92,7 @@
         
         // Show the user a warning, which tells him, that he has to add some items first.
         title = @"Oups!";
-        message = @"\nPlase add some items first.\n";
+        message = @"\nPlease add some items first.\n";
         
     }
     
