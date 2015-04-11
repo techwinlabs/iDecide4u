@@ -8,7 +8,7 @@
 
 #import "IDFYAddNewItemViewController.h"
 
-@interface IDFYAddNewItemViewController ()
+@interface IDFYAddNewItemViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @end
 
@@ -18,17 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.textField.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.textField becomeFirstResponder];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - User Interactions
@@ -42,6 +37,13 @@
         [self.delegate saveNewItem:self.textField.text];
         self.textField.text = @"";
     }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self saveButtonPressed:nil];
+    return YES;
 }
 
 @end
