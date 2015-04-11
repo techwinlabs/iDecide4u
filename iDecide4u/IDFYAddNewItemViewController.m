@@ -26,6 +26,11 @@
     [self.textField becomeFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
 #pragma mark - User Interactions
 
 - (IBAction)doneButtonPressed:(id)sender {
