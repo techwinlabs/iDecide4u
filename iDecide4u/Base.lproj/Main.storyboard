@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vcH-3T-7AR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--iDecide4u-->
@@ -89,14 +90,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGf-es-9MH">
-                                <rect key="frame" x="150" y="114" width="300" height="30"/>
+                                <rect key="frame" x="150" y="91" width="300" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="IA1-Wb-Nx8"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="U1a-IB-RGK"/>
-                                    <constraint firstAttribute="width" constant="300" id="zKI-PN-iWM"/>
+                                    <constraint firstAttribute="width" constant="300" id="ZPf-7I-JLg"/>
+                                    <constraint firstAttribute="height" priority="500" constant="30" id="ehn-7l-67F"/>
+                                    <constraint firstAttribute="width" constant="300" id="s6O-ol-cQ1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="s6O-ol-cQ1"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="50" y="114" width="300" height="30"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="114" width="300" height="30"/>
+                                </variation>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRU-sk-gC8">
                                 <rect key="frame" x="150" y="129" width="300" height="21"/>
@@ -116,11 +128,32 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="op5-rD-z3j" secondAttribute="centerX" id="CMZ-cW-qlR"/>
-                            <constraint firstItem="op5-rD-z3j" firstAttribute="top" secondItem="eGf-es-9MH" secondAttribute="bottom" constant="50" id="RME-Z9-8Vb"/>
-                            <constraint firstItem="eGf-es-9MH" firstAttribute="top" secondItem="h2l-j4-aee" secondAttribute="bottom" constant="50" id="X1Y-X9-ucm"/>
-                            <constraint firstAttribute="centerX" secondItem="eGf-es-9MH" secondAttribute="centerX" id="qL5-QA-7rS"/>
+                            <constraint firstItem="nRU-sk-gC8" firstAttribute="leading" secondItem="eGf-es-9MH" secondAttribute="leading" id="16a-q2-KBQ"/>
+                            <constraint firstItem="W33-AZ-wge" firstAttribute="top" secondItem="nRU-sk-gC8" secondAttribute="bottom" constant="427" id="3g5-XT-2Vf"/>
+                            <constraint firstItem="W33-AZ-wge" firstAttribute="top" secondItem="nRU-sk-gC8" secondAttribute="bottom" constant="427" id="5sI-Xv-ooB"/>
+                            <constraint firstItem="eGf-es-9MH" firstAttribute="leading" secondItem="M3H-E5-7EA" secondAttribute="leadingMargin" constant="100" id="7BK-v1-Kb2"/>
+                            <constraint firstAttribute="centerX" secondItem="eGf-es-9MH" secondAttribute="centerX" id="DHi-V6-tYY"/>
+                            <constraint firstAttribute="centerY" secondItem="eGf-es-9MH" secondAttribute="centerY" constant="171" id="H6r-TF-eZs"/>
+                            <constraint firstAttribute="centerY" secondItem="eGf-es-9MH" secondAttribute="centerY" constant="171" id="HeT-vt-3Tu"/>
+                            <constraint firstItem="nRU-sk-gC8" firstAttribute="trailing" secondItem="eGf-es-9MH" secondAttribute="trailing" id="ICh-Ht-fan"/>
+                            <constraint firstItem="W33-AZ-wge" firstAttribute="top" secondItem="nRU-sk-gC8" secondAttribute="bottom" constant="450" id="JFv-Uq-wJ7"/>
+                            <constraint firstItem="nRU-sk-gC8" firstAttribute="centerX" secondItem="eGf-es-9MH" secondAttribute="centerX" id="MiJ-k1-Up4"/>
+                            <constraint firstItem="nRU-sk-gC8" firstAttribute="top" secondItem="eGf-es-9MH" secondAttribute="bottom" constant="8" id="OP7-Ud-GX5"/>
+                            <constraint firstItem="eGf-es-9MH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="h2l-j4-aee" secondAttribute="bottom" constant="15" id="PAc-jp-9fT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eGf-es-9MH" secondAttribute="trailing" constant="100" id="dTr-8Q-OLD"/>
+                            <constraint firstAttribute="centerX" secondItem="eGf-es-9MH" secondAttribute="centerX" id="oXe-0m-jkx"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7BK-v1-Kb2"/>
+                                <exclude reference="H6r-TF-eZs"/>
+                                <exclude reference="HeT-vt-3Tu"/>
+                                <exclude reference="dTr-8Q-OLD"/>
+                                <exclude reference="oXe-0m-jkx"/>
+                                <exclude reference="3g5-XT-2Vf"/>
+                                <exclude reference="5sI-Xv-ooB"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add new option" id="5ls-V6-JOg">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Rhp-Ub-wd8">
@@ -130,6 +163,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="keyboardConstraint" destination="JFv-Uq-wJ7" id="FSD-jE-Tqb"/>
                         <outlet property="label" destination="nRU-sk-gC8" id="sgZ-TK-BKM"/>
                         <outlet property="textField" destination="eGf-es-9MH" id="Uxh-P2-HjX"/>
                     </connections>
