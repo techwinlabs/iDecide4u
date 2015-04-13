@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @protocol IDFYAddNewItemDelegate
-- (void)saveNewItem:(NSString *)newItem;
+// The return value has to be interpreted like that:
+// - YES: Item was saved successfully.
+// - NO: Item was a duplicate and therefore not saved.
+- (BOOL)saveNewItem:(NSString *)newItem;
 @end
 
 @interface IDFYAddNewItemViewController : UIViewController

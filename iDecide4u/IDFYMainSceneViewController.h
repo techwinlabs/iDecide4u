@@ -11,6 +11,6 @@
 
 @interface IDFYMainSceneViewController : UIViewController<IDFYAddNewItemDelegate>
 
-- (void)saveNewItem:(NSString *)newItem;
+- (BOOL)saveNewItem:(NSString *)newItem;
 
 @end

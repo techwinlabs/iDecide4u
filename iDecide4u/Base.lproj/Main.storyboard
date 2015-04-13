@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="2339" y="-317"/>
         </scene>
-        <!--Add new item-->
+        <!--Add new option-->
         <scene sceneID="wrr-fg-wFD">
             <objects>
                 <viewController id="8i9-4u-zot" customClass="IDFYAddNewItemViewController" sceneMemberID="viewController">
@@ -98,15 +98,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="op5-rD-z3j">
-                                <rect key="frame" x="247" y="194" width="105" height="30"/>
-                                <state key="normal" title="Save new item!">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveButtonPressed:" destination="8i9-4u-zot" eventType="touchUpInside" id="e5r-Fv-ajZ"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRU-sk-gC8">
+                                <rect key="frame" x="150" y="129" width="300" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="500" constant="21" id="vh9-A2-cuh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=compact-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="50" y="152" width="300" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES">
+                                    <rect key="frame" x="0.0" y="152" width="300" height="0.0"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -116,7 +122,7 @@
                             <constraint firstAttribute="centerX" secondItem="eGf-es-9MH" secondAttribute="centerX" id="qL5-QA-7rS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add new item" id="5ls-V6-JOg">
+                    <navigationItem key="navigationItem" title="Add new option" id="5ls-V6-JOg">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Rhp-Ub-wd8">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="8i9-4u-zot" id="qMW-aE-Enk"/>
@@ -124,6 +130,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="label" destination="nRU-sk-gC8" id="sgZ-TK-BKM"/>
                         <outlet property="textField" destination="eGf-es-9MH" id="Uxh-P2-HjX"/>
                     </connections>
                 </viewController>

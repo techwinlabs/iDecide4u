@@ -10,6 +10,7 @@
 
 @interface IDFYAddNewItemViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 @end
 
 @implementation IDFYAddNewItemViewController
@@ -37,18 +38,29 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)saveButtonPressed:(id)sender {
-    if (0 < self.textField.text.length) {
-        [self.delegate saveNewItem:self.textField.text];
-        self.textField.text = @"";
-    }
-}
-
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self saveButtonPressed:nil];
+    if (0 < self.textField.text.length) {
+        BOOL itemWasSavedSuccessfully = [self.delegate saveNewItem:self.textField.text];
+        if (itemWasSavedSuccessfully) {
+            self.label.text = @"New option successfully saved.";
+        } else {
+            self.label.text = @"This option was already in the list.";
+        }
+        
+        self.label.alpha = 1;
+        [UIView animateWithDuration:2.0 delay:0 options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{ self.label.alpha = 0;}
+                         completion:nil];
+        
+        self.textField.text = @"";
+    }
     return YES;
+}
+
+
+
 }
 
 @end

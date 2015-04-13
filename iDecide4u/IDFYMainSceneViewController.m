@@ -56,8 +56,13 @@
 
 #pragma mark - IDFYAddNewItemDelegate
 
-- (void)saveNewItem:(NSString *)newItem {
-    [self.itemList addObject:newItem];
+- (BOOL)saveNewItem:(NSString *)newItem {
+    if (![self.itemList containsObject:newItem]) {
+        [self.itemList addObject:newItem];
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma mark - Segues
@@ -86,7 +91,7 @@
         // Chose a winner and show it to the user.
         NSUInteger winningChoice = arc4random() % self.itemList.count;
         title = @"I decided for you!";
-        message = [NSString stringWithFormat:@"\nThe winner is %@.\n", self.itemList[winningChoice]];
+        message = [NSString stringWithFormat:@"\nThe winner is: %@\n", self.itemList[winningChoice]];
         
     } else {
         
