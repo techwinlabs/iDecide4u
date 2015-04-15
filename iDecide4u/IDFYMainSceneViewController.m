@@ -11,6 +11,9 @@
 @interface IDFYMainSceneViewController () <UITableViewDataSource>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
 @end
 
 @implementation IDFYMainSceneViewController
