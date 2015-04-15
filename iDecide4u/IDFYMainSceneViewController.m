@@ -8,7 +8,7 @@
 
 #import "IDFYMainSceneViewController.h"
 
-@interface IDFYMainSceneViewController () <UITableViewDataSource>
+@interface IDFYMainSceneViewController () <UITableViewDataSource, UITextFieldDelegate>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
@@ -25,6 +25,7 @@
     if (!self.itemList) {
         self.itemList = [NSMutableArray new];
     }
+    self.textField.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,6 +76,55 @@
             addNewItemViewController.delegate = self;
         }
     }
+}
+
+#pragma mark - UITextFieldDelegate
+
+// When the user clicks into the text field, the add button needs to appear.
+// This is done here with an animated constraint change.
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
+    [self.view layoutIfNeeded];
+    
+    self.textFieldTrailingSpaceConstraint.constant = 42;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.addButton.hidden = NO;
+    }];
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *newTextFieldContent = [self.textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([newTextFieldContent isEqualToString:@""]) {
+        self.addButton.enabled = NO;
+    } else {
+        self.addButton.enabled = YES;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
+    [self.view layoutIfNeeded];
+    
+    self.textField.text = @"";
+    self.textFieldTrailingSpaceConstraint.constant = 12;
+    self.addButton.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.textField layoutIfNeeded];
+    }];
+    
+    return YES;
 }
 
 #pragma mark - IBActions
