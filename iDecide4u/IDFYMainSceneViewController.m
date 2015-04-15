@@ -22,14 +22,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (!self.itemList) {
-        self.itemList = [NSMutableArray new];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+}
+
+#pragma mark - get / set
+
+- (NSMutableArray *)itemList {
+    if (!_itemList) {
+        _itemList = [NSMutableArray new];
+    }
+    return _itemList;
 }
 
 #pragma mark - UITableViewDataSource
