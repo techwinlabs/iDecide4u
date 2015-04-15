@@ -58,26 +58,6 @@
     }
 }
 
-#pragma mark - IDFYAddNewItemDelegate
-
-- (void)saveNewItem:(NSString *)newItem {
-    [self.itemList addObject:newItem];
-}
-
-#pragma mark - Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    // Before we segue to the IDFYAddNewItemViewController, set the delegate there for the IDFYAddNewItemDelegate protocol.
-    if ([[segue destinationViewController] isMemberOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        if ([navigationController.topViewController isMemberOfClass:[IDFYAddNewItemViewController class]]) {
-            IDFYAddNewItemViewController *addNewItemViewController = (IDFYAddNewItemViewController *)navigationController.topViewController;
-            addNewItemViewController.delegate = self;
-        }
-    }
-}
-
 #pragma mark - UITextFieldDelegate
 
 // When the user clicks into the text field, the add button needs to appear.
