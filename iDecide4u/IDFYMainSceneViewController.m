@@ -110,8 +110,20 @@
 }
 
 - (IBAction)trashButtonPressed:(id)sender {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete all options?" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *alertActionTrash = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     self.itemList = [NSMutableArray new];
     [self.tableView reloadData];
+    }];
+    UIAlertAction *alertActionAbort = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:alertActionTrash];
+    [alertController addAction:alertActionAbort];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 @end
