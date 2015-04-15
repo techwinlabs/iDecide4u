@@ -90,8 +90,7 @@
         
         // Chose a winner and show it to the user.
         NSUInteger winningChoice = arc4random() % self.itemList.count;
-        title = @"I decided for you!";
-        message = [NSString stringWithFormat:@"\nThe winner is: %@\n", self.itemList[winningChoice]];
+        title = [NSString stringWithFormat:@"The winner is:\n\n%@", self.itemList[winningChoice]];
         
     } else {
         
