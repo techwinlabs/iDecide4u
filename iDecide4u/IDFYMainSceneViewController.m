@@ -25,7 +25,6 @@
     if (!self.itemList) {
         self.itemList = [NSMutableArray new];
     }
-    self.textField.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
