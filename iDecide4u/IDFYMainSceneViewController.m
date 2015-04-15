@@ -25,6 +25,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
 
@@ -84,20 +85,20 @@
         
         // Chose a winner and show it to the user.
         NSUInteger winningChoice = arc4random() % self.itemList.count;
-        title = @"I decided for you!";
-        message = [NSString stringWithFormat:@"\nThe winner is %@.\n", self.itemList[winningChoice]];
+        title = NSLocalizedString(@"main.scene_dicision.alert.title", @"title for a decision");
+        message = [NSString stringWithFormat:@"\n%@ %@.\n", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), self.itemList[winningChoice]];
         
     } else {
         
         // Show the user a warning, which tells him, that he has to add some items first.
-        title = @"Oups!";
-        message = @"\nPlase add some items first.\n";
+        title = NSLocalizedString(@"main.scene_dicision.alert.no.items.title", @"title for a dicision without options");
+        message = [NSString stringWithFormat:@"\n%@\n", NSLocalizedString(@"main.scene_dicision.alert.no.items.message", @"message for a dicision without options")];
         
     }
     
     // Create the UIAlertController with the predefined title and message, add an OK button an presend that alert to the user.
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"main.scene_dicision.alert.ok.button", @"button title for a dicision") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
     [alertController addAction:alertAction];
     [self presentViewController:alertController animated:YES completion:nil];
     

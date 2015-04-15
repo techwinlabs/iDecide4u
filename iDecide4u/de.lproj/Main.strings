@@ -1,0 +1,12 @@
+
+/* Class = "UINavigationItem"; title = "Add new item"; ObjectID = "5ls-V6-JOg"; */
+"5ls-V6-JOg.title" = "Neue Option hinzufügen";
+
+/* Class = "UINavigationItem"; title = "iDecide4u"; ObjectID = "Pls-KV-13e"; */
+"Pls-KV-13e.title" = "iDecide4u";
+
+/* Class = "UIBarButtonItem"; title = "Decide!"; ObjectID = "Wnu-56-eQJ"; */
+"Wnu-56-eQJ.title" = "Entscheide!";
+
+/* Class = "UIButton"; normalTitle = "Save new item!"; ObjectID = "op5-rD-z3j"; */
+"op5-rD-z3j.normalTitle" = "Option speichern!";
