@@ -162,4 +162,14 @@
     [self.tableView reloadData];
 }
 
+- (IBAction)addButtonPressed:(id)sender {
+    if (![self.itemList containsObject:self.textField.text]) {
+        [self.itemList addObject:self.textField.text];
+    }
+    [self.tableView reloadData];
+    self.textField.text = @"";
+    self.addButton.enabled = NO;
+}
+
+
 @end
