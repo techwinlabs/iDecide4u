@@ -14,7 +14,6 @@
 		2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */; };
 		2F327F101AB33FFB00EE1CF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F0E1AB33FFB00EE1CF8 /* Main.storyboard */; };
 		2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F111AB33FFB00EE1CF8 /* Images.xcassets */; };
-		2F327F151AB33FFB00EE1CF8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F131AB33FFB00EE1CF8 /* LaunchScreen.xib */; };
 		2F327F211AB33FFC00EE1CF8 /* iDecide4uTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */; };
 		2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */; };
 		2F8FBE6C1AB77F5000236415 /* IDFYSaveListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8FBE6B1AB77F5000236415 /* IDFYSaveListViewController.m */; };
@@ -43,7 +42,6 @@
 		2F327F091AB33FFB00EE1CF8 /* iDecide4u.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iDecide4u.xcdatamodel; sourceTree = "<group>"; };
 		2F327F0F1AB33FFB00EE1CF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F327F111AB33FFB00EE1CF8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2F327F141AB33FFB00EE1CF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2F327F1A1AB33FFC00EE1CF8 /* iDecide4uTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDecide4uTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F327F1F1AB33FFC00EE1CF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iDecide4uTests.m; sourceTree = "<group>"; };
@@ -105,6 +103,7 @@
 		2F327F011AB33FFB00EE1CF8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2F327F111AB33FFB00EE1CF8 /* Images.xcassets */,
 				2F00FA1D1ADEC3DA000A3AC5 /* Localizable.strings */,
 				2F327F021AB33FFB00EE1CF8 /* Info.plist */,
 				2F327F031AB33FFB00EE1CF8 /* main.m */,
@@ -133,8 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				2F327F0E1AB33FFB00EE1CF8 /* Main.storyboard */,
-				2F327F111AB33FFB00EE1CF8 /* Images.xcassets */,
-				2F327F131AB33FFB00EE1CF8 /* LaunchScreen.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -202,6 +199,7 @@
 		2F327EF61AB33FFB00EE1CF8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = IDFY;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = dominicfrei.com;
 				TargetAttributes = {
@@ -336,7 +334,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dominic Frei (738RLY838Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dominic Frei (738RLY838Z)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -353,9 +352,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -378,7 +378,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dominic Frei (B77WPD77G9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dominic Frei (B77WPD77G9)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -389,8 +390,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -401,9 +403,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Dominic Frei (738RLY838Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dominic Frei (738RLY838Z)";
 				INFOPLIST_FILE = iDecide4u/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
 			};
 			name = Debug;
 		};
@@ -411,9 +416,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Dominic Frei (B77WPD77G9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dominic Frei (B77WPD77G9)";
 				INFOPLIST_FILE = iDecide4u/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
 			};
 			name = Release;
 		};
