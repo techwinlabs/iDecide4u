@@ -8,9 +8,14 @@
 
 #import "IDFYMainSceneViewController.h"
 
-@interface IDFYMainSceneViewController () <UITableViewDataSource>
+@interface IDFYMainSceneViewController () <UITableViewDataSource, UITextFieldDelegate>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 @end
 
 @implementation IDFYMainSceneViewController
@@ -19,14 +24,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (!self.itemList) {
-        self.itemList = [NSMutableArray new];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+}
+
+#pragma mark - get / set
+
+- (NSMutableArray *)itemList {
+    if (!_itemList) {
+        _itemList = [NSMutableArray new];
+    }
+    return _itemList;
 }
 
 #pragma mark - UITableViewDataSource
@@ -54,24 +67,53 @@
     }
 }
 
-#pragma mark - IDFYAddNewItemDelegate
+#pragma mark - UITextFieldDelegate
 
-- (void)saveNewItem:(NSString *)newItem {
-    [self.itemList addObject:newItem];
+// When the user clicks into the text field, the add button needs to appear.
+// This is done here with an animated constraint change.
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
+    [self.view layoutIfNeeded];
+    
+    self.textFieldTrailingSpaceConstraint.constant = 42;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        self.addButton.hidden = NO;
+    }];
+    
+    return YES;
 }
 
-#pragma mark - Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    // Before we segue to the IDFYAddNewItemViewController, set the delegate there for the IDFYAddNewItemDelegate protocol.
-    if ([[segue destinationViewController] isMemberOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = [segue destinationViewController];
-        if ([navigationController.topViewController isMemberOfClass:[IDFYAddNewItemViewController class]]) {
-            IDFYAddNewItemViewController *addNewItemViewController = (IDFYAddNewItemViewController *)navigationController.topViewController;
-            addNewItemViewController.delegate = self;
-        }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *newTextFieldContent = [self.textField.text stringByReplacingCharactersInRange:range withString:string];
+    if ([newTextFieldContent isEqualToString:@""]) {
+        self.addButton.enabled = NO;
+    } else {
+        self.addButton.enabled = YES;
     }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
+    [self.view layoutIfNeeded];
+    
+    self.textField.text = @"";
+    self.textFieldTrailingSpaceConstraint.constant = 12;
+    self.addButton.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.textField layoutIfNeeded];
+    }];
+    
+    return YES;
 }
 
 #pragma mark - IBActions
@@ -107,6 +149,44 @@
 - (IBAction)trashButtonPressed:(id)sender {
     self.itemList = [NSMutableArray new];
     [self.tableView reloadData];
+}
+
+- (IBAction)addButtonPressed:(id)sender {
+    if (![self.itemList containsObject:self.textField.text]) {
+        [self.itemList addObject:self.textField.text];
+    }
+    [self.tableView reloadData];
+    self.textField.text = @"";
+    self.addButton.enabled = NO;
+    
+    // We need to scroll to the new item so the user can see it.
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.itemList.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+#pragma mark - Keyboard notification selectors
+
+// When the keyboard is shown we need to shrink the table view so it does not get hidden by the keyboard.
+- (void)keyboardDidShow:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *keyboardFrame = [userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardRect = [keyboardFrame CGRectValue];
+    
+    CGFloat keyboardHeight = keyboardRect.size.height;
+    CGFloat toolBarHeight = self.toolbar.frame.size.height;
+
+    self.tableViewBottomConstraint.constant = keyboardHeight - toolBarHeight;
+}
+
+// When the keyboard will be hidden we need to exapand the table view to it's original size.
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSTimeInterval timeIntervalKeyboardAnimationDuration = [[userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView animateWithDuration:timeIntervalKeyboardAnimationDuration animations:^{
+        self.tableViewBottomConstraint.constant = -self.toolbar.frame.size.height;
+    } completion:^(BOOL finished) {
+        self.tableViewBottomConstraint.constant = 0;
+    }];
 }
 
 @end
