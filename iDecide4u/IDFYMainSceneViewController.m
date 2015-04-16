@@ -11,8 +11,8 @@
 @interface IDFYMainSceneViewController () <UITableViewDataSource, UITextFieldDelegate>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (nonatomic) UITextField *textFieldListName;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldAddNewOption;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -88,7 +88,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *newTextFieldContent = [self.textField.text stringByReplacingCharactersInRange:range withString:string];
+        NSString *newTextFieldContent = [self.textFieldAddNewOption.text stringByReplacingCharactersInRange:range withString:string];
     if ([newTextFieldContent isEqualToString:@""]) {
         self.addButton.enabled = NO;
     } else {
@@ -98,7 +98,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.textField resignFirstResponder];
+        [self.textFieldAddNewOption resignFirstResponder];
     return YES;
 }
 
@@ -107,11 +107,11 @@
     // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
     [self.view layoutIfNeeded];
     
-    self.textField.text = @"";
+        self.textFieldAddNewOption.text = @"";
     self.textFieldTrailingSpaceConstraint.constant = 12;
     self.addButton.hidden = YES;
     [UIView animateWithDuration:0.3 animations:^{
-        [self.textField layoutIfNeeded];
+            [self.textFieldAddNewOption layoutIfNeeded];
     }];
     
     return YES;
@@ -153,11 +153,11 @@
 }
 
 - (IBAction)addButtonPressed:(id)sender {
-    if (![self.itemList containsObject:self.textField.text]) {
-        [self.itemList addObject:self.textField.text];
+    if (![self.itemList containsObject:self.textFieldAddNewOption.text]) {
+        [self.itemList addObject:self.textFieldAddNewOption.text];
     }
     [self.tableView reloadData];
-    self.textField.text = @"";
+    self.textFieldAddNewOption.text = @"";
     self.addButton.enabled = NO;
     
     // We need to scroll to the new item so the user can see it.

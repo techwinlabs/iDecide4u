@@ -185,7 +185,7 @@
                         <outlet property="addButton" destination="cxL-6p-fHz" id="dLc-EL-AbV"/>
                         <outlet property="tableView" destination="NR9-N2-VD1" id="Vwc-Eb-xzZ"/>
                         <outlet property="tableViewBottomConstraint" destination="svU-5j-XEX" id="zLb-np-xWD"/>
-                        <outlet property="textField" destination="oMC-BU-pKD" id="YHe-bk-nzv"/>
+                        <outlet property="textFieldAddNewOption" destination="oMC-BU-pKD" id="PkA-Y0-wrF"/>
                         <outlet property="textFieldTrailingSpaceConstraint" destination="INZ-P3-HR5" id="4B8-Io-6F4"/>
                         <outlet property="toolbar" destination="sIB-DH-NBy" id="2gq-Hj-nVT"/>
                     </connections>
