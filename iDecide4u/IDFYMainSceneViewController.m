@@ -74,6 +74,7 @@
 // This is done here with an animated constraint change.
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
+    if ([textField isEqual:self.textFieldAddNewOption]) {
     // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
     [self.view layoutIfNeeded];
     
@@ -83,27 +84,33 @@
     } completion:^(BOOL finished) {
         self.addButton.hidden = NO;
     }];
+    }
     
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([textField isEqual:self.textFieldAddNewOption]) {
         NSString *newTextFieldContent = [self.textFieldAddNewOption.text stringByReplacingCharactersInRange:range withString:string];
     if ([newTextFieldContent isEqualToString:@""]) {
         self.addButton.enabled = NO;
     } else {
         self.addButton.enabled = YES;
     }
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:self.textFieldAddNewOption]) {
         [self.textFieldAddNewOption resignFirstResponder];
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
+    if ([textField isEqual:self.textFieldAddNewOption]) {
     // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
     [self.view layoutIfNeeded];
     
@@ -113,6 +120,7 @@
     [UIView animateWithDuration:0.3 animations:^{
             [self.textFieldAddNewOption layoutIfNeeded];
     }];
+    }
     
     return YES;
 }
