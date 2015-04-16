@@ -10,6 +10,7 @@
 
 @interface IDFYMainSceneViewController () <UITableViewDataSource, UITextFieldDelegate>
 @property IBOutlet UITableView *tableView;
+@property (nonatomic) NSString *listName;
 @property (nonatomic)  NSMutableArray *itemList;
 @property (nonatomic) UITextField *textFieldListName;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldAddNewOption;
@@ -68,6 +69,10 @@
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.listName;
+}
+
 #pragma mark - UITextFieldDelegate
 
 // When the user clicks into the text field, the add button needs to appear.
@@ -75,15 +80,15 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
     if ([textField isEqual:self.textFieldAddNewOption]) {
-    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
-    [self.view layoutIfNeeded];
-    
-    self.textFieldTrailingSpaceConstraint.constant = 42;
-    [UIView animateWithDuration:0.3 animations:^{
+        // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
         [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        self.addButton.hidden = NO;
-    }];
+        
+        self.textFieldTrailingSpaceConstraint.constant = 42;
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            self.addButton.hidden = NO;
+        }];
     }
     
     return YES;
@@ -92,11 +97,11 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if ([textField isEqual:self.textFieldAddNewOption]) {
         NSString *newTextFieldContent = [self.textFieldAddNewOption.text stringByReplacingCharactersInRange:range withString:string];
-    if ([newTextFieldContent isEqualToString:@""]) {
-        self.addButton.enabled = NO;
-    } else {
-        self.addButton.enabled = YES;
-    }
+        if ([newTextFieldContent isEqualToString:@""]) {
+            self.addButton.enabled = NO;
+        } else {
+            self.addButton.enabled = YES;
+        }
     }
     return YES;
 }
@@ -111,15 +116,15 @@
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
     if ([textField isEqual:self.textFieldAddNewOption]) {
-    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
-    [self.view layoutIfNeeded];
-    
+        // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
+        [self.view layoutIfNeeded];
+        
         self.textFieldAddNewOption.text = @"";
-    self.textFieldTrailingSpaceConstraint.constant = 12;
-    self.addButton.hidden = YES;
-    [UIView animateWithDuration:0.3 animations:^{
+        self.textFieldTrailingSpaceConstraint.constant = 12;
+        self.addButton.hidden = YES;
+        [UIView animateWithDuration:0.3 animations:^{
             [self.textFieldAddNewOption layoutIfNeeded];
-    }];
+        }];
     }
     
     return YES;
@@ -199,7 +204,7 @@
     
     CGFloat keyboardHeight = keyboardRect.size.height;
     CGFloat toolBarHeight = self.toolbar.frame.size.height;
-
+    
     self.tableViewBottomConstraint.constant = keyboardHeight - toolBarHeight;
 }
 
