@@ -158,6 +158,10 @@
     [self.tableView reloadData];
     self.textField.text = @"";
     self.addButton.enabled = NO;
+    
+    // We need to scroll to the new item so the user can see it.
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.itemList.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
 
 #pragma mark - Keyboard notification selectors
 
