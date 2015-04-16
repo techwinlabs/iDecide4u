@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 @end
 
 @implementation IDFYMainSceneViewController
@@ -22,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -154,7 +158,31 @@
     [self.tableView reloadData];
     self.textField.text = @"";
     self.addButton.enabled = NO;
+
+#pragma mark - Keyboard notification selectors
+
+// When the keyboard is shown we need to shrink the table view so it does not get hidden by the keyboard.
+- (void)keyboardDidShow:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue *keyboardFrame = [userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardRect = [keyboardFrame CGRectValue];
+    
+    CGFloat keyboardHeight = keyboardRect.size.height;
+    CGFloat toolBarHeight = self.toolbar.frame.size.height;
+
+    self.tableViewBottomConstraint.constant = keyboardHeight - toolBarHeight;
 }
 
+// When the keyboard will be hidden we need to exapand the table view to it's original size.
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSTimeInterval timeIntervalKeyboardAnimationDuration = [[userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView animateWithDuration:timeIntervalKeyboardAnimationDuration animations:^{
+        self.tableViewBottomConstraint.constant = -self.toolbar.frame.size.height;
+    } completion:^(BOOL finished) {
+        self.tableViewBottomConstraint.constant = 0;
+    }];
+}
 
 @end
