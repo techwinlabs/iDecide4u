@@ -12,6 +12,7 @@
 @property IBOutlet UITableView *tableView;
 @property (nonatomic)  NSMutableArray *itemList;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (nonatomic) UITextField *textFieldListName;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -161,6 +162,23 @@
     
     // We need to scroll to the new item so the user can see it.
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.itemList.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (IBAction)saveButtonPressed:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Save the current list" message:@"The list will be saved with that name. If you want to create a new list ..." preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        self.textFieldListName = textField;
+        textField.delegate = self;
+        textField.text = self.listName;
+    }];
+    UIAlertAction *alertActionSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        self.listName = self.textFieldListName.text;
+        [self.tableView reloadData];
+    }];
+    [alertController addAction:alertActionSave];
+    UIAlertAction *alertActionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:alertActionCancel];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - Keyboard notification selectors

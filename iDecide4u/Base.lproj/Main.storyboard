@@ -106,7 +106,7 @@
                                 <items>
                                     <barButtonItem systemItem="save" id="08C-hT-0bb">
                                         <connections>
-                                            <segue destination="qo3-m4-MMb" kind="presentation" id="Ui4-K8-Jko"/>
+                                            <action selector="saveButtonPressed:" destination="bDO-PX-3D9" id="TN0-XG-L3s"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="IBp-Nb-aN3"/>
