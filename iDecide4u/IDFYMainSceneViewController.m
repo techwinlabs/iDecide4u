@@ -7,17 +7,20 @@
 //
 
 #import "IDFYMainSceneViewController.h"
+#import <CoreData/CoreData.h>
+#import "IDFYOptionList+Extensions.h"
+#import "AppDelegate.h"
 
 @interface IDFYMainSceneViewController () <UITableViewDataSource, UITextFieldDelegate>
 @property IBOutlet UITableView *tableView;
-@property (nonatomic) NSString *listName;
-@property (nonatomic)  NSMutableArray *itemList;
+@property (nonatomic) IDFYOptionList *optionList;
 @property (nonatomic) UITextField *textFieldListName;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldAddNewOption;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
+@property NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation IDFYMainSceneViewController
@@ -28,6 +31,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    self.managedObjectContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -37,11 +41,12 @@
 
 #pragma mark - get / set
 
-- (NSMutableArray *)itemList {
-    if (!_itemList) {
-        _itemList = [NSMutableArray new];
+- (IDFYOptionList *)optionList {
+    if (!_optionList) {
+        _optionList = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([IDFYOptionList class]) inManagedObjectContext:self.managedObjectContext];
+        [_optionList initalize];
     }
-    return _itemList;
+    return _optionList;
 }
 
 #pragma mark - UITableViewDataSource
@@ -51,26 +56,26 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.itemList.count;
+    return self.optionList.size;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Just a standard UITableViewCell.
     UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-    tableViewCell.textLabel.text = self.itemList[indexPath.row];
+    tableViewCell.textLabel.text = [self.optionList optionAtIndex:indexPath.row];
     return tableViewCell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (UITableViewCellEditingStyleDelete == editingStyle) {
-        [self.itemList removeObjectAtIndex:indexPath.row];
+        [self.optionList removeOption:[self.optionList optionAtIndex:indexPath.row]];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.listName;
+    return self.optionList.name;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -137,12 +142,12 @@
     NSString *title = @"";
     NSString *message = @"";
     
-    if (0 < self.itemList.count) {
+    if (0 < self.optionList.size) {
         
         // Chose a winner and show it to the user.
-        NSUInteger winningChoice = arc4random() % self.itemList.count;
+        NSUInteger winningChoice = arc4random() % self.optionList.size;
         title = NSLocalizedString(@"main.scene_dicision.alert.title", @"title for a decision");
-        message = [NSString stringWithFormat:@"\n%@ %@.\n", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), self.itemList[winningChoice]];
+        message = [NSString stringWithFormat:@"\n%@ %@.\n", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), [self.optionList optionAtIndex:winningChoice]];
         
     } else {
         
@@ -165,7 +170,7 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete all options?" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *alertActionTrash = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    self.itemList = [NSMutableArray new];
+    [self.optionList clearList];
     [self.tableView reloadData];
     }];
     UIAlertAction *alertActionAbort = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
@@ -178,15 +183,13 @@
 }
 
 - (IBAction)addButtonPressed:(id)sender {
-    if (![self.itemList containsObject:self.textFieldAddNewOption.text]) {
-        [self.itemList addObject:self.textFieldAddNewOption.text];
-    }
+    [self.optionList addOption:self.textFieldAddNewOption.text];
     [self.tableView reloadData];
     self.textFieldAddNewOption.text = @"";
     self.addButton.enabled = NO;
     
     // We need to scroll to the new item so the user can see it.
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.itemList.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.optionList.size-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (IBAction)saveButtonPressed:(id)sender {
@@ -194,10 +197,10 @@
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         self.textFieldListName = textField;
         textField.delegate = self;
-        textField.text = self.listName;
+        textField.text = self.optionList.name;
     }];
     UIAlertAction *alertActionSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        self.listName = self.textFieldListName.text;
+        self.optionList.name = self.textFieldListName.text;
         [self.tableView reloadData];
     }];
     [alertController addAction:alertActionSave];

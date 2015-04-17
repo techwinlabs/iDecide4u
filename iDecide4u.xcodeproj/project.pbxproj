@@ -16,7 +16,8 @@
 		2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F111AB33FFB00EE1CF8 /* Images.xcassets */; };
 		2F327F211AB33FFC00EE1CF8 /* iDecide4uTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */; };
 		2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */; };
-		2FBB8A551AE055DD008CE0EF /* OptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB8A541AE055DD008CE0EF /* OptionList.m */; };
+		2FBB8A611AE05C29008CE0EF /* IDFYOptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB8A601AE05C29008CE0EF /* IDFYOptionList.m */; };
+		2FBB8A681AE05D3A008CE0EF /* IDFYOptionList+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB8A671AE05D3A008CE0EF /* IDFYOptionList+Extensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +47,10 @@
 		2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iDecide4uTests.m; sourceTree = "<group>"; };
 		2F663CAC1AB4A3A700263D54 /* IDFYMainSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFYMainSceneViewController.h; sourceTree = "<group>"; };
 		2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFYMainSceneViewController.m; sourceTree = "<group>"; };
-		2FBB8A531AE055DD008CE0EF /* OptionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionList.h; path = ../OptionList.h; sourceTree = "<group>"; };
-		2FBB8A541AE055DD008CE0EF /* OptionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionList.m; path = ../OptionList.m; sourceTree = "<group>"; };
+		2FBB8A5F1AE05C29008CE0EF /* IDFYOptionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFYOptionList.h; sourceTree = "<group>"; };
+		2FBB8A601AE05C29008CE0EF /* IDFYOptionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFYOptionList.m; sourceTree = "<group>"; };
+		2FBB8A661AE05D3A008CE0EF /* IDFYOptionList+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDFYOptionList+Extensions.h"; sourceTree = "<group>"; };
+		2FBB8A671AE05D3A008CE0EF /* IDFYOptionList+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDFYOptionList+Extensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */,
-				2FBB8A531AE055DD008CE0EF /* OptionList.h */,
-				2FBB8A541AE055DD008CE0EF /* OptionList.m */,
+				2FBB8A5F1AE05C29008CE0EF /* IDFYOptionList.h */,
+				2FBB8A601AE05C29008CE0EF /* IDFYOptionList.m */,
+				2FBB8A661AE05D3A008CE0EF /* IDFYOptionList+Extensions.h */,
+				2FBB8A671AE05D3A008CE0EF /* IDFYOptionList+Extensions.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -259,9 +264,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F327F071AB33FFB00EE1CF8 /* AppDelegate.m in Sources */,
+				2FBB8A611AE05C29008CE0EF /* IDFYOptionList.m in Sources */,
 				2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */,
 				2F327F041AB33FFB00EE1CF8 /* main.m in Sources */,
-				2FBB8A551AE055DD008CE0EF /* OptionList.m in Sources */,
+				2FBB8A681AE05D3A008CE0EF /* IDFYOptionList+Extensions.m in Sources */,
 				2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

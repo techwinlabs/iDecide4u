@@ -1,5 +1,5 @@
 //
-//  OptionList.h
+//  IDFYOptionList.h
 //  iDecide4u
 //
 //  Created by Dominic Frei on 16/04/2015.
@@ -10,9 +10,9 @@
 #import <CoreData/CoreData.h>
 
 
-@interface OptionList : NSManagedObject
+@interface IDFYOptionList : NSManagedObject
 
-@property (nonatomic, retain) NSString * listName;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSMutableArray *options;
 
 @end
