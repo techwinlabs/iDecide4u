@@ -33,6 +33,18 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     self.managedObjectContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    NSFetchRequest *fetchRequest =[NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([IDFYOptionList class])];
+    NSError *error = nil;
+    NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (!error && fetchResult && 0 < fetchResult.count) {
+        _optionList = fetchResult[0];
+        [self.tableView reloadData];
+        if (0 < self.optionList.size) {
+            self.saveButton.enabled = YES;
+        }
+    } else {
+        NSLog(@"Error loading option list from data base: %@", [error description]);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -152,7 +164,7 @@
     
     if (0 < self.optionList.size) {
         
-        // Chose a winner and show it to the user.
+        // Choose a winner and show it to the user.
         NSUInteger winningChoice = arc4random() % self.optionList.size;
         title = NSLocalizedString(@"main.scene_dicision.alert.title", @"title for a decision");
         message = [NSString stringWithFormat:@"\n%@ %@.\n", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), [self.optionList optionAtIndex:winningChoice]];
