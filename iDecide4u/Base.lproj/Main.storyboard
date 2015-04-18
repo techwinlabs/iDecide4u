@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vcH-3T-7AR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vcH-3T-7AR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -181,7 +181,7 @@
                         <outlet property="addButton" destination="cxL-6p-fHz" id="dLc-EL-AbV"/>
                         <outlet property="tableView" destination="NR9-N2-VD1" id="Vwc-Eb-xzZ"/>
                         <outlet property="tableViewBottomConstraint" destination="svU-5j-XEX" id="zLb-np-xWD"/>
-                        <outlet property="textField" destination="oMC-BU-pKD" id="YHe-bk-nzv"/>
+                        <outlet property="textFieldAddNewOption" destination="oMC-BU-pKD" id="yGa-S7-rhJ"/>
                         <outlet property="textFieldTrailingSpaceConstraint" destination="INZ-P3-HR5" id="4B8-Io-6F4"/>
                         <outlet property="toolbar" destination="sIB-DH-NBy" id="2gq-Hj-nVT"/>
                     </connections>
