@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 @property NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @end
 
 @implementation IDFYMainSceneViewController
@@ -70,6 +71,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (UITableViewCellEditingStyleDelete == editingStyle) {
         [self.optionList removeOption:[self.optionList optionAtIndex:indexPath.row]];
+        if (self.optionList.isEmpty) {
+            self.saveButton.enabled = NO;
+        }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -171,6 +175,7 @@
     
     UIAlertAction *alertActionTrash = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     [self.optionList clearList];
+        self.saveButton.enabled = NO;
     [self.tableView reloadData];
     }];
     UIAlertAction *alertActionAbort = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
@@ -184,6 +189,7 @@
 
 - (IBAction)addButtonPressed:(id)sender {
     [self.optionList addOption:self.textFieldAddNewOption.text];
+    self.saveButton.enabled = YES;
     [self.tableView reloadData];
     self.textFieldAddNewOption.text = @"";
     self.addButton.enabled = NO;
