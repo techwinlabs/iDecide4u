@@ -117,6 +117,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:self.textFieldAddNewOption]) {
+        if (0 < self.textFieldAddNewOption.text.length) {
+            [self.optionList addOption:self.textFieldAddNewOption.text];
+            [self.tableView reloadData];
+        }
         [self.textFieldAddNewOption resignFirstResponder];
     }
     return YES;
@@ -174,9 +178,9 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete all options?" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *alertActionTrash = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    [self.optionList clearList];
+        [self.optionList clearList];
         self.saveButton.enabled = NO;
-    [self.tableView reloadData];
+        [self.tableView reloadData];
     }];
     UIAlertAction *alertActionAbort = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     
