@@ -7,15 +7,21 @@
 //
 
 #import "IDFYMainSceneViewController.h"
+#import <CoreData/CoreData.h>
+#import "IDFYOptionList+Extensions.h"
+#import "AppDelegate.h"
 
 @interface IDFYMainSceneViewController () <UITableViewDataSource, UITextFieldDelegate>
 @property IBOutlet UITableView *tableView;
-@property (nonatomic)  NSMutableArray *itemList;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (nonatomic) IDFYOptionList *optionList;
+@property (nonatomic) UITextField *textFieldListName;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldAddNewOption;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textFieldTrailingSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
+@property NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @end
 
 @implementation IDFYMainSceneViewController
@@ -26,6 +32,19 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    self.managedObjectContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    NSFetchRequest *fetchRequest =[NSFetchRequest fetchRequestWithEntityName:NSStringFromClass([IDFYOptionList class])];
+    NSError *error = nil;
+    NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (!error && fetchResult && 0 < fetchResult.count) {
+        _optionList = fetchResult[0];
+        [self.tableView reloadData];
+        if (0 < self.optionList.size) {
+            self.saveButton.enabled = YES;
+        }
+    } else {
+        NSLog(@"Error loading option list from data base: %@", [error description]);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -35,11 +54,12 @@
 
 #pragma mark - get / set
 
-- (NSMutableArray *)itemList {
-    if (!_itemList) {
-        _itemList = [NSMutableArray new];
+- (IDFYOptionList *)optionList {
+    if (!_optionList) {
+        _optionList = [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([IDFYOptionList class]) inManagedObjectContext:self.managedObjectContext];
+        [_optionList initalize];
     }
-    return _itemList;
+    return _optionList;
 }
 
 #pragma mark - UITableViewDataSource
@@ -49,22 +69,29 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.itemList.count;
+    return self.optionList.size;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     // Just a standard UITableViewCell.
     UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-    tableViewCell.textLabel.text = self.itemList[indexPath.row];
+    tableViewCell.textLabel.text = [self.optionList optionAtIndex:indexPath.row];
     return tableViewCell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (UITableViewCellEditingStyleDelete == editingStyle) {
-        [self.itemList removeObjectAtIndex:indexPath.row];
+        [self.optionList removeOption:[self.optionList optionAtIndex:indexPath.row]];
+        if (self.optionList.isEmpty) {
+            self.saveButton.enabled = NO;
+        }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return self.optionList.name;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -73,45 +100,57 @@
 // This is done here with an animated constraint change.
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
-    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
-    [self.view layoutIfNeeded];
-    
-    self.textFieldTrailingSpaceConstraint.constant = 42;
-    [UIView animateWithDuration:0.3 animations:^{
+    if ([textField isEqual:self.textFieldAddNewOption]) {
+        // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
         [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        self.addButton.hidden = NO;
-    }];
+        
+        self.textFieldTrailingSpaceConstraint.constant = 42;
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            self.addButton.hidden = NO;
+        }];
+    }
     
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *newTextFieldContent = [self.textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([newTextFieldContent isEqualToString:@""]) {
-        self.addButton.enabled = NO;
-    } else {
-        self.addButton.enabled = YES;
+    if ([textField isEqual:self.textFieldAddNewOption]) {
+        NSString *newTextFieldContent = [self.textFieldAddNewOption.text stringByReplacingCharactersInRange:range withString:string];
+        if ([newTextFieldContent isEqualToString:@""]) {
+            self.addButton.enabled = NO;
+        } else {
+            self.addButton.enabled = YES;
+        }
     }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.textField resignFirstResponder];
+    if ([textField isEqual:self.textFieldAddNewOption]) {
+        if (0 < self.textFieldAddNewOption.text.length) {
+            [self.optionList addOption:self.textFieldAddNewOption.text];
+            [self.tableView reloadData];
+        }
+        [self.textFieldAddNewOption resignFirstResponder];
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
-    // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
-    [self.view layoutIfNeeded];
-    
-    self.textField.text = @"";
-    self.textFieldTrailingSpaceConstraint.constant = 12;
-    self.addButton.hidden = YES;
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.textField layoutIfNeeded];
-    }];
+    if ([textField isEqual:self.textFieldAddNewOption]) {
+        // The Apple documentation recommends to call layoutIfNeeded at the beginning, just to make sure, the layout is up to date.
+        [self.view layoutIfNeeded];
+        
+        self.textFieldAddNewOption.text = @"";
+        self.textFieldTrailingSpaceConstraint.constant = 12;
+        self.addButton.hidden = YES;
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.textFieldAddNewOption layoutIfNeeded];
+        }];
+    }
     
     return YES;
 }
@@ -123,12 +162,12 @@
     NSString *title = @"";
     NSString *message = @"";
     
-    if (0 < self.itemList.count) {
+    if (0 < self.optionList.size) {
         
-        // Chose a winner and show it to the user.
-        NSUInteger winningChoice = arc4random() % self.itemList.count;
+        // Choose a winner and show it to the user.
+        NSUInteger winningChoice = arc4random() % self.optionList.size;
         title = NSLocalizedString(@"main.scene_dicision.alert.title", @"title for a decision");
-        message = [NSString stringWithFormat:@"\n%@ %@.\n", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), self.itemList[winningChoice]];
+        message = [NSString stringWithFormat:@"\n%@ %@.\n", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), [self.optionList optionAtIndex:winningChoice]];
         
     } else {
         
@@ -147,20 +186,49 @@
 }
 
 - (IBAction)trashButtonPressed:(id)sender {
-    self.itemList = [NSMutableArray new];
-    [self.tableView reloadData];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete all options?" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *alertActionTrash = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [self.optionList clearList];
+        self.saveButton.enabled = NO;
+        [self.tableView reloadData];
+    }];
+    UIAlertAction *alertActionAbort = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    
+    [alertController addAction:alertActionTrash];
+    [alertController addAction:alertActionAbort];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
 }
 
 - (IBAction)addButtonPressed:(id)sender {
-    if (![self.itemList containsObject:self.textField.text]) {
-        [self.itemList addObject:self.textField.text];
-    }
+    [self.optionList addOption:self.textFieldAddNewOption.text];
+    self.saveButton.enabled = YES;
     [self.tableView reloadData];
-    self.textField.text = @"";
+    self.textFieldAddNewOption.text = @"";
     self.addButton.enabled = NO;
     
     // We need to scroll to the new item so the user can see it.
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.itemList.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.optionList.size-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (IBAction)saveButtonPressed:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Save the current list" message:@"The list will be saved with that name. If you want to create a new list ..." preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        self.textFieldListName = textField;
+        textField.delegate = self;
+        textField.text = self.optionList.name;
+    }];
+    UIAlertAction *alertActionSave = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        self.optionList.name = self.textFieldListName.text;
+        [self.tableView reloadData];
+    }];
+    [alertController addAction:alertActionSave];
+    UIAlertAction *alertActionCancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:alertActionCancel];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - Keyboard notification selectors
@@ -173,7 +241,7 @@
     
     CGFloat keyboardHeight = keyboardRect.size.height;
     CGFloat toolBarHeight = self.toolbar.frame.size.height;
-
+    
     self.tableViewBottomConstraint.constant = keyboardHeight - toolBarHeight;
 }
 
