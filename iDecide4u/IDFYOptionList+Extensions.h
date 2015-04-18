@@ -10,9 +10,15 @@
 
 @interface IDFYOptionList (Extensions)
 
+#pragma mark - Initialization
 - (void)initalize;
+
+#pragma mark - Inspecting the OptionsList
 - (NSUInteger)size;
+- (BOOL)isEmpty;
 - (NSString *)optionAtIndex:(NSUInteger)index;
+
+#pragma mark - Editing the OptionList
 - (void)addOption:(NSString *)option;
 - (void)removeOption:(NSString *)option;
 - (void)clearList;

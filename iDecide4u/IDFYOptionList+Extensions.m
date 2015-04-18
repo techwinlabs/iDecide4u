@@ -18,6 +18,10 @@
     return self.options.count;
 }
 
+- (BOOL)isEmpty {
+    return 0 == self.options.count;
+}
+
 - (NSString *)optionAtIndex:(NSUInteger)index {
     return self.options[index];
 }
