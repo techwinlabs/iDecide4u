@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IDFYAddNewItemViewController.h"
 
-@interface IDFYMainSceneViewController : UIViewController<IDFYAddNewItemDelegate>
-
-- (BOOL)saveNewItem:(NSString *)newItem;
+@interface IDFYMainSceneViewController : UIViewController
 
 @end
