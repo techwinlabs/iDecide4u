@@ -156,6 +156,9 @@
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete all options?" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
+    UIBarButtonItem *trashButton = (UIBarButtonItem *)sender;
+    alertController.popoverPresentationController.barButtonItem = trashButton;
+    
     UIAlertAction *alertActionTrash = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         self.itemList = [NSMutableArray new];
         self.addButton.enabled = NO;
