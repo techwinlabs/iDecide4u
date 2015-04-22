@@ -233,7 +233,6 @@
 			files = (
 				2F327F101AB33FFB00EE1CF8 /* Main.storyboard in Resources */,
 				2F00FA1F1ADEC3DA000A3AC5 /* Localizable.strings in Resources */,
-				2F327F151AB33FFB00EE1CF8 /* LaunchScreen.xib in Resources */,
 				2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,15 +293,6 @@
 				2F00FA181ADEBEF8000A3AC5 /* de */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2F327F131AB33FFB00EE1CF8 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F327F141AB33FFB00EE1CF8 /* Base */,
-				2F00FA191ADEBEF8000A3AC5 /* de */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
