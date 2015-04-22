@@ -346,7 +346,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
+				PROVISIONING_PROFILE = "e81977b6-dac6-4158-8519-f273f6ed1e76";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -399,7 +399,7 @@
 				INFOPLIST_FILE = iDecide4u/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
+				PROVISIONING_PROFILE = "e81977b6-dac6-4158-8519-f273f6ed1e76";
 			};
 			name = Debug;
 		};
