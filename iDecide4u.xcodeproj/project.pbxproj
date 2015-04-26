@@ -8,16 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		2F00FA1F1ADEC3DA000A3AC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F00FA1D1ADEC3DA000A3AC5 /* Localizable.strings */; };
-		2F00FA211ADEC3E1000A3AC5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F021AB33FFB00EE1CF8 /* Info.plist */; };
-		2F327F041AB33FFB00EE1CF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F031AB33FFB00EE1CF8 /* main.m */; };
-		2F327F071AB33FFB00EE1CF8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F061AB33FFB00EE1CF8 /* AppDelegate.m */; };
+		2F03C42C1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */; };
+		2F03C42D1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */; };
 		2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */; };
 		2F327F101AB33FFB00EE1CF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F0E1AB33FFB00EE1CF8 /* Main.storyboard */; };
 		2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F111AB33FFB00EE1CF8 /* Images.xcassets */; };
-		2F327F211AB33FFC00EE1CF8 /* iDecide4uTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */; };
-		2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */; };
-		2FBB8A611AE05C29008CE0EF /* IDFYOptionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB8A601AE05C29008CE0EF /* IDFYOptionList.m */; };
-		2FBB8A681AE05D3A008CE0EF /* IDFYOptionList+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBB8A671AE05D3A008CE0EF /* IDFYOptionList+Extensions.m */; };
+		2F81417F1AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */; };
+		2F8141801AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */; };
+		2F8141881AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8141871AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift */; };
+		2F8141891AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8141871AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift */; };
+		2F81418B1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F81418A1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift */; };
+		2F81418C1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F81418A1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,23 +35,17 @@
 		2F00FA181ADEBEF8000A3AC5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		2F00FA1E1ADEC3DA000A3AC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2F00FA201ADEC3E1000A3AC5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYManagedOptionList.swift; path = iDecide4u/IDFYManagedOptionList.swift; sourceTree = "<group>"; };
 		2F327EFE1AB33FFB00EE1CF8 /* iDecide4u.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDecide4u.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F327F021AB33FFB00EE1CF8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F327F031AB33FFB00EE1CF8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2F327F051AB33FFB00EE1CF8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2F327F061AB33FFB00EE1CF8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2F327F091AB33FFB00EE1CF8 /* iDecide4u.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iDecide4u.xcdatamodel; sourceTree = "<group>"; };
 		2F327F0F1AB33FFB00EE1CF8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2F327F111AB33FFB00EE1CF8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F327F1A1AB33FFC00EE1CF8 /* iDecide4uTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDecide4uTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F327F1F1AB33FFC00EE1CF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iDecide4uTests.m; sourceTree = "<group>"; };
-		2F663CAC1AB4A3A700263D54 /* IDFYMainSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFYMainSceneViewController.h; sourceTree = "<group>"; };
-		2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFYMainSceneViewController.m; sourceTree = "<group>"; };
-		2FBB8A5F1AE05C29008CE0EF /* IDFYOptionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFYOptionList.h; sourceTree = "<group>"; };
-		2FBB8A601AE05C29008CE0EF /* IDFYOptionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFYOptionList.m; sourceTree = "<group>"; };
-		2FBB8A661AE05D3A008CE0EF /* IDFYOptionList+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IDFYOptionList+Extensions.h"; sourceTree = "<group>"; };
-		2FBB8A671AE05D3A008CE0EF /* IDFYOptionList+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IDFYOptionList+Extensions.m"; sourceTree = "<group>"; };
+		2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYAppDelegate.swift; path = iDecide4u/IDFYAppDelegate.swift; sourceTree = "<group>"; };
+		2F8141871AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYMainSceneViewController.swift; sourceTree = "<group>"; };
+		2F81418A1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYManagedOptionListSubclass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +69,7 @@
 		2F327EF51AB33FFB00EE1CF8 = {
 			isa = PBXGroup;
 			children = (
-				2F327F001AB33FFB00EE1CF8 /* iDecide4u */,
-				2F327F1D1AB33FFC00EE1CF8 /* iDecide4uTests */,
-				2F327EFF1AB33FFB00EE1CF8 /* Products */,
+				2F81417B1AEBF20100E9E8EB /* SWIFTED */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,34 +82,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2F327F001AB33FFB00EE1CF8 /* iDecide4u */ = {
-			isa = PBXGroup;
-			children = (
-				2F327F051AB33FFB00EE1CF8 /* AppDelegate.h */,
-				2F327F061AB33FFB00EE1CF8 /* AppDelegate.m */,
-				2FF2C35C1AB349A400DA8DB6 /* View */,
-				2FF2C35D1AB349A800DA8DB6 /* Controller */,
-				2FF2C35E1AB349AC00DA8DB6 /* Model */,
-				2F327F011AB33FFB00EE1CF8 /* Supporting Files */,
-			);
-			path = iDecide4u;
-			sourceTree = "<group>";
-		};
 		2F327F011AB33FFB00EE1CF8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				2F327F111AB33FFB00EE1CF8 /* Images.xcassets */,
 				2F00FA1D1ADEC3DA000A3AC5 /* Localizable.strings */,
 				2F327F021AB33FFB00EE1CF8 /* Info.plist */,
-				2F327F031AB33FFB00EE1CF8 /* main.m */,
 			);
 			name = "Supporting Files";
+			path = iDecide4u;
 			sourceTree = "<group>";
 		};
 		2F327F1D1AB33FFC00EE1CF8 /* iDecide4uTests */ = {
 			isa = PBXGroup;
 			children = (
-				2F327F201AB33FFC00EE1CF8 /* iDecide4uTests.m */,
 				2F327F1E1AB33FFC00EE1CF8 /* Supporting Files */,
 			);
 			path = iDecide4uTests;
@@ -130,33 +109,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2FF2C35C1AB349A400DA8DB6 /* View */ = {
+		2F81417B1AEBF20100E9E8EB /* SWIFTED */ = {
 			isa = PBXGroup;
 			children = (
+				2F81417C1AEBF20B00E9E8EB /* iDecide4u */,
+				2F327F1D1AB33FFC00EE1CF8 /* iDecide4uTests */,
+				2F327EFF1AB33FFB00EE1CF8 /* Products */,
+			);
+			name = SWIFTED;
+			sourceTree = "<group>";
+		};
+		2F81417C1AEBF20B00E9E8EB /* iDecide4u */ = {
+			isa = PBXGroup;
+			children = (
+				2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */,
 				2F327F0E1AB33FFB00EE1CF8 /* Main.storyboard */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		2FF2C35D1AB349A800DA8DB6 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				2F663CAC1AB4A3A700263D54 /* IDFYMainSceneViewController.h */,
-				2F663CAD1AB4A3A700263D54 /* IDFYMainSceneViewController.m */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		2FF2C35E1AB349AC00DA8DB6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
+				2F8141871AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift */,
 				2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */,
-				2FBB8A5F1AE05C29008CE0EF /* IDFYOptionList.h */,
-				2FBB8A601AE05C29008CE0EF /* IDFYOptionList.m */,
-				2FBB8A661AE05D3A008CE0EF /* IDFYOptionList+Extensions.h */,
-				2FBB8A671AE05D3A008CE0EF /* IDFYOptionList+Extensions.m */,
+				2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */,
+				2F81418A1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift */,
+				2F327F011AB33FFB00EE1CF8 /* Supporting Files */,
 			);
-			name = Model;
+			name = iDecide4u;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +178,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IDFY;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = dominicfrei.com;
 				TargetAttributes = {
 					2F327EFD1AB33FFB00EE1CF8 = {
@@ -217,7 +191,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2F327EF91AB33FFB00EE1CF8 /* Build configuration list for PBXProject "iDecide4u" */;
+			buildConfigurationList = 2F327EF91AB33FFB00EE1CF8 /* Build configuration list for PBXProject "iDecide4U" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -244,7 +218,6 @@
 			files = (
 				2F327F101AB33FFB00EE1CF8 /* Main.storyboard in Resources */,
 				2F00FA1F1ADEC3DA000A3AC5 /* Localizable.strings in Resources */,
-				2F00FA211ADEC3E1000A3AC5 /* Info.plist in Resources */,
 				2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,12 +236,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F327F071AB33FFB00EE1CF8 /* AppDelegate.m in Sources */,
-				2FBB8A611AE05C29008CE0EF /* IDFYOptionList.m in Sources */,
+				2F8141881AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift in Sources */,
+				2F03C42C1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */,
+				2F81417F1AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */,
+				2F81418B1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift in Sources */,
 				2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */,
-				2F327F041AB33FFB00EE1CF8 /* main.m in Sources */,
-				2FBB8A681AE05D3A008CE0EF /* IDFYOptionList+Extensions.m in Sources */,
-				2F663CAE1AB4A3A700263D54 /* IDFYMainSceneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +248,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F327F211AB33FFC00EE1CF8 /* iDecide4uTests.m in Sources */,
+				2F03C42D1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */,
+				2F8141801AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */,
+				2F81418C1AEC348200E9E8EB /* IDFYManagedOptionListSubclass.swift in Sources */,
+				2F8141891AEBFC8400E9E8EB /* IDFYMainSceneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +282,7 @@
 				2F00FA181ADEBEF8000A3AC5 /* de */,
 			);
 			name = Main.storyboard;
+			path = iDecide4u;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -398,12 +374,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Dominic Frei (738RLY838Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dominic Frei (738RLY838Z)";
 				INFOPLIST_FILE = iDecide4u/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ea694120-35eb-4812-8ce1-fa17db5b4030";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -411,6 +389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Dominic Frei (B77WPD77G9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dominic Frei (B77WPD77G9)";
 				INFOPLIST_FILE = iDecide4u/Info.plist;
@@ -424,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -435,6 +415,7 @@
 				INFOPLIST_FILE = iDecide4uTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iDecide4u.app/iDecide4u";
 			};
 			name = Debug;
@@ -443,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -457,7 +439,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2F327EF91AB33FFB00EE1CF8 /* Build configuration list for PBXProject "iDecide4u" */ = {
+		2F327EF91AB33FFB00EE1CF8 /* Build configuration list for PBXProject "iDecide4U" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F327F221AB33FFC00EE1CF8 /* Debug */,
@@ -493,7 +475,8 @@
 				2F327F091AB33FFB00EE1CF8 /* iDecide4u.xcdatamodel */,
 			);
 			currentVersion = 2F327F091AB33FFB00EE1CF8 /* iDecide4u.xcdatamodel */;
-			path = iDecide4u.xcdatamodeld;
+			name = iDecide4u.xcdatamodeld;
+			path = iDecide4u/iDecide4u.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
