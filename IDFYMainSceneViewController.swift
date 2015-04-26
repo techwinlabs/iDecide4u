@@ -218,6 +218,7 @@ class IDFYMainSceneViewController : UIViewController, UITableViewDataSource, UIT
   @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
     
     let alertController = UIAlertController(title: NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    alertController.popoverPresentationController?.barButtonItem = sender
     let alertActionTrash = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.yes", comment: "yes button for trash alert"), style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
       self.optionList.clearList()
       self.saveButton.enabled = false
