@@ -69,7 +69,9 @@
 		2F327EF51AB33FFB00EE1CF8 = {
 			isa = PBXGroup;
 			children = (
-				2F81417B1AEBF20100E9E8EB /* SWIFTED */,
+				2F81417C1AEBF20B00E9E8EB /* iDecide4u */,
+				2F327F1D1AB33FFC00EE1CF8 /* iDecide4uTests */,
+				2F327EFF1AB33FFB00EE1CF8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,16 +109,6 @@
 				2F327F1F1AB33FFC00EE1CF8 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2F81417B1AEBF20100E9E8EB /* SWIFTED */ = {
-			isa = PBXGroup;
-			children = (
-				2F81417C1AEBF20B00E9E8EB /* iDecide4u */,
-				2F327F1D1AB33FFC00EE1CF8 /* iDecide4uTests */,
-				2F327EFF1AB33FFB00EE1CF8 /* Products */,
-			);
-			name = SWIFTED;
 			sourceTree = "<group>";
 		};
 		2F81417C1AEBF20B00E9E8EB /* iDecide4u */ = {
