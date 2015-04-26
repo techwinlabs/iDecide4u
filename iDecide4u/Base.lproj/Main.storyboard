@@ -8,7 +8,7 @@
         <!--iDecide4u-->
         <scene sceneID="RuH-eA-q1F">
             <objects>
-                <viewController id="bDO-PX-3D9" customClass="IDFYMainSceneViewController" customModule="iDecide4u" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bDO-PX-3D9" customClass="IDFYAddAndDecideViewController" customModule="iDecide4u" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mEo-xk-zSp"/>
                         <viewControllerLayoutGuide type="bottom" id="s9P-Db-KGO"/>

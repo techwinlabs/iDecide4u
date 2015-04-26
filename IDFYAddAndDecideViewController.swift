@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class IDFYMainSceneViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var textFieldAddNewOption: UITextField!
@@ -181,7 +181,6 @@ class IDFYMainSceneViewController : UIViewController, UITableViewDataSource, UIT
   // MARK: - IBActions
   
   @IBAction func addButtonPressed(sender: UIButton) {
-    
     optionList.addOption(textFieldAddNewOption.text)
     saveButton.enabled = true
     tableView.reloadData()
@@ -216,7 +215,6 @@ class IDFYMainSceneViewController : UIViewController, UITableViewDataSource, UIT
   }
   
   @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
-    
     let alertController = UIAlertController(title: NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
     alertController.popoverPresentationController?.barButtonItem = sender
     let alertActionTrash = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.yes", comment: "yes button for trash alert"), style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
@@ -233,7 +231,6 @@ class IDFYMainSceneViewController : UIViewController, UITableViewDataSource, UIT
   }
   
   @IBAction func saveButtonPressed(sender: UIBarButtonItem) {
-    
     let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
       self.textFieldListName = textField
