@@ -13,7 +13,6 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInput {
   var addAndDecidePresenter: IDFYAddAndDecideInteractorOutput!
   var dataManager = IDFYAddAndDecideDataManager()
   var optionList: IDFYOptionList!
-  var lastUsedListNameKey = "iDecide4u.lastUserListName"
   
   init(presenter: IDFYAddAndDecidePresenter) {
     addAndDecidePresenter = presenter
@@ -66,7 +65,7 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInput {
   }
   
   func getInitialList() {
-    let lastUsedListName = getLastUsedListName()
+    let lastUsedListName = IDFYCommonUtilities().getLastUsedListName()
     // Check if there is a last used list saved. If so, retrieve that list.
     if let lastUsedListName = lastUsedListName {
       optionList = dataManager.getListWithName(lastUsedListName)
@@ -76,14 +75,6 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInput {
     }
     addAndDecidePresenter.updateNameWithGivenName(optionList.name)
     addAndDecidePresenter.updateListWithGivenList(optionList.options)
-  }
-  
-  func getLastUsedListName() -> String? {
-    return NSUserDefaults.standardUserDefaults().stringForKey(lastUsedListNameKey)
-  }
-  
-  func setLastUsedListName(listName: String) {
-    NSUserDefaults.standardUserDefaults().setObject(optionList.name, forKey: lastUsedListNameKey)
   }
   
 }

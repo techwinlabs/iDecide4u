@@ -47,6 +47,8 @@
 		2FD603581AF3D4FE00227FD6 /* IDFYCommonDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603561AF3D4FE00227FD6 /* IDFYCommonDataManager.swift */; };
 		2FD6035A1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */; };
 		2FD6035B1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */; };
+		2FD6035D1AF3EA5500227FD6 /* IDFYCommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD6035C1AF3EA5500227FD6 /* IDFYCommonUtilities.swift */; };
+		2FD6035E1AF3EA5500227FD6 /* IDFYCommonUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD6035C1AF3EA5500227FD6 /* IDFYCommonUtilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,7 @@
 		2F8141871AEBFC8400E9E8EB /* IDFYAddAndDecideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecideViewController.swift; sourceTree = "<group>"; };
 		2FD603561AF3D4FE00227FD6 /* IDFYCommonDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYCommonDataManager.swift; path = iDecide4u/IDFYCommonDataManager.swift; sourceTree = "<group>"; };
 		2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYMockGenerator.swift; sourceTree = "<group>"; };
+		2FD6035C1AF3EA5500227FD6 /* IDFYCommonUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYCommonUtilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,7 @@
 				2FD603561AF3D4FE00227FD6 /* IDFYCommonDataManager.swift */,
 				2F20A6A31AF3CF6E007BB418 /* IDFYCoreDataStack.swift */,
 				2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */,
+				2FD6035C1AF3EA5500227FD6 /* IDFYCommonUtilities.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -341,6 +345,7 @@
 				2F20A6A41AF3CF6E007BB418 /* IDFYCoreDataStack.swift in Sources */,
 				2F20A6A11AF3C4A4007BB418 /* IDFYListOperationWireframe.swift in Sources */,
 				2F0FB7391AED3AC200CB2179 /* IDFYAddAndDecideModuleInterace.swift in Sources */,
+				2FD6035D1AF3EA5500227FD6 /* IDFYCommonUtilities.swift in Sources */,
 				2F0FB73C1AED422000CB2179 /* IDFYAddAndDecideInteractor.swift in Sources */,
 				2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */,
 			);
@@ -365,6 +370,7 @@
 				2F0FB7431AED48B000CB2179 /* IDFYAddAndDecideDataManager.swift in Sources */,
 				2F0FB7341AED38F100CB2179 /* IDFYAddAndDecideViewInterface.swift in Sources */,
 				2F0FB7401AED422600CB2179 /* IDFYAddAndDecideInteractorPresenterIO.swift in Sources */,
+				2FD6035E1AF3EA5500227FD6 /* IDFYCommonUtilities.swift in Sources */,
 				2F0FB7461AED4AA000CB2179 /* IDFYOptionList.swift in Sources */,
 				2F8141891AEBFC8400E9E8EB /* IDFYAddAndDecideViewController.swift in Sources */,
 				2F20A6A21AF3C4A4007BB418 /* IDFYListOperationWireframe.swift in Sources */,

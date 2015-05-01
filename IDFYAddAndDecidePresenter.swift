@@ -66,11 +66,6 @@ class IDFYAddAndDecidePresenter: NSObject, IDFYAddAndDecideModuleInterface, IDFY
   
   func updateListWithGivenList(list: [String]) {
     addAndDecideViewInterface.updateList(list)
-    if 0 < list.count {
-      addAndDecideViewInterface.setSaveEnabled(true)
-    } else {
-      addAndDecideViewInterface.setSaveEnabled(false)
-    }
     addAndDecideViewInterface.reloadView()
   }
   
