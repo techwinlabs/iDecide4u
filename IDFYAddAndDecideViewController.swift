@@ -8,9 +8,10 @@
 
 import Foundation
 import UIKit
-import CoreData
 
-class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, IDFYAddAndDecideViewInterface {
+  
+  var addAndDecidePresenter: IDFYAddAndDecideModuleInterface!
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var textFieldAddNewOption: UITextField!
@@ -20,9 +21,10 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var saveButton: UIBarButtonItem!
   
-  private var optionList: IDFYManagedOptionList!
+  private var listName = ""
+  private var listItems = [String]()
+  
   private var textFieldListName = UITextField()
-  private var managedObjectContext = NSManagedObjectContext()
   
   private let optionListEntityName = "IDFYManagedOptionList"
   private let tableViewCellIdentifier = "ItemCell"
@@ -30,32 +32,14 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   // MARK: - View Lifecycle
   
   override func viewDidLoad() {
+    addAndDecidePresenter = IDFYAddAndDecidePresenter(viewInterface: self)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    
-    managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
-    
-    optionList = NSEntityDescription.insertNewObjectForEntityForName(optionListEntityName, inManagedObjectContext: managedObjectContext) as! IDFYManagedOptionList
-    optionList.initialize()
-    
-    let fetchRequest = NSFetchRequest(entityName: optionListEntityName)
-    var error: NSError?
-    let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)
-    
-    if let error = error {
-      println("Error loading option list from data base: " + error.description)
-    } else if let fetchResult = fetchResult where 0 < fetchResult.count {
-      optionList = fetchResult[0] as! IDFYManagedOptionList
-      tableView.reloadData()
-      if 0 < optionList.count() {
-        saveButton.enabled = true
-      }
-    }
-    
     super.viewDidLoad()
   }
   
   override func viewWillAppear(animated: Bool) {
+    addAndDecidePresenter.loadInitialUI()
     super.viewWillAppear(animated)
     tableView.reloadData()
   }
@@ -68,26 +52,22 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   }
   
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return optionList.name
+    return listName
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return optionList.count()
+    return listItems.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let tableViewCell = tableView.dequeueReusableCellWithIdentifier(tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
-    tableViewCell.textLabel?.text = optionList.optionAtIndex(indexPath.row)
+    tableViewCell.textLabel?.text = listItems[indexPath.row]
     return tableViewCell
   }
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if UITableViewCellEditingStyle.Delete == editingStyle {
-      optionList.removeOption(optionList.optionAtIndex(indexPath.row))
-      if optionList.isEmpty() {
-        saveButton.enabled = false
-      }
-      tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+      addAndDecidePresenter.didDeleteEntryWithName(listItems[indexPath.row])
     }
   }
   
@@ -124,11 +104,7 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     if textField == textFieldAddNewOption {
-      if 0 < textFieldAddNewOption.text.lengthOfBytesUsingEncoding(NSUTF16StringEncoding) {
-        optionList.addOption(textFieldAddNewOption.text)
-        saveButton.enabled = true
-        tableView.reloadData()
-      }
+      addAndDecidePresenter.didAddNewEntryWithName(textFieldAddNewOption.text)
       textFieldAddNewOption.resignFirstResponder()
     }
     return true
@@ -158,7 +134,7 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
     let keyboardRect = keyboardFrame.CGRectValue()
     
     let keyboardHeight = keyboardRect.size.height;
-    let toolBarHeight = self.toolbar.frame.size.height;
+    let toolBarHeight = toolbar.frame.size.height;
     
     tableViewBottomConstraint.constant = keyboardHeight - toolBarHeight;
   }
@@ -181,53 +157,26 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   // MARK: - IBActions
   
   @IBAction func addButtonPressed(sender: UIButton) {
-    optionList.addOption(textFieldAddNewOption.text)
-    saveButton.enabled = true
-    tableView.reloadData()
+    addAndDecidePresenter.didAddNewEntryWithName(textFieldAddNewOption.text)
     textFieldAddNewOption.text = ""
     addButton.enabled = false
-    
+
     // We need to scroll to the new item so the user can see it.
-    tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: optionList.count()-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+//    tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
   }
   
   @IBAction func decideButtonPressed(sender: UIBarButtonItem) {
-    var title = ""
-    var message = ""
-    
-    if 0 < optionList.count() {
-      
-      let winningChoice = Int(rand()) % (optionList.count())
-      title = NSLocalizedString("main.scene_dicision.alert.title", comment: "title for a decision")
-      message = optionList.optionAtIndex(winningChoice)
-      
-    } else {
-      
-      title = NSLocalizedString("main.scene_dicision.alert.no.items.title", comment: "title for a dicision without options")
-      message = "\n" + NSLocalizedString("main.scene_dicision.alert.no.items.message", comment: "message for a dicision without options") + "\n"
-      
-    }
-    
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    let alertAction = UIAlertAction(title: NSLocalizedString("main.scene_dicision.alert.ok.button", comment: "button title for a dicision"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in }
-    alertController.addAction(alertAction)
-    self.presentViewController(alertController, animated: true, completion: nil)
+    addAndDecidePresenter.didRequestDecision()
   }
   
   @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
-    let alertController = UIAlertController(title: NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
-    alertController.popoverPresentationController?.barButtonItem = sender
     let alertActionTrash = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.yes", comment: "yes button for trash alert"), style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
-      self.optionList.clearList()
-      self.saveButton.enabled = false
-      self.tableView.reloadData()
+      self.addAndDecidePresenter.didDeleteAllEntries()
     }
     let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.cancel", comment: "cancel button for trash alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
       
     }
-    alertController.addAction(alertActionTrash)
-    alertController.addAction(alertActionCancel)
-    self.presentViewController(alertController, animated: true) { () -> Void in }
+    showAlertControllerWithTitle(NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), andMessage: "", andAlertActions: [alertActionTrash, alertActionCancel], andPreferredStyle: UIAlertControllerStyle.ActionSheet, popoverSource: sender)
   }
   
   @IBAction func saveButtonPressed(sender: UIBarButtonItem) {
@@ -235,11 +184,10 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
     alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
       self.textFieldListName = textField
       textField.delegate = self
-      textField.text = self.optionList.name
+      textField.text = self.listName
     }
     let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-      self.optionList.name = self.textFieldListName.text
-      self.tableView.reloadData()
+      self.addAndDecidePresenter.didProvideNewListName(self.textFieldListName.text)
     }
     let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
       
@@ -247,6 +195,47 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
     alertController.addAction(alertActionSave)
     alertController.addAction(alertActionCancel)
     self.presentViewController(alertController, animated: true) { () -> Void in }
+  }
+  
+  
+  // MARK: - Convenience alert
+  
+  func showAlertControllerWithTitle(title: String, andMessage message: String, andAlertActions alertActions: [UIAlertAction], andPreferredStyle preferredStyle: UIAlertControllerStyle, popoverSource: UIBarButtonItem?) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+    alertController.popoverPresentationController?.barButtonItem = popoverSource
+    for alertAction in alertActions {
+      alertController.addAction(alertAction)
+    }
+    self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
+  
+  // MARK: - IDFYAddAndDecideViewInterface
+  
+  func updateListName(listName: String) {
+    self.listName = listName
+    tableView.reloadData()
+  }
+  
+  func updateList(list: [String]) {
+    listItems = list
+  }
+  
+  func showDecisionWithTitle(title: String, andMessage message: String) {
+    let alertAction = UIAlertAction(title: NSLocalizedString("main.scene_dicision.alert.ok.button", comment: "button title for a dicision"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in }
+    showAlertControllerWithTitle(title, andMessage: message, andAlertActions: [alertAction], andPreferredStyle: UIAlertControllerStyle.Alert, popoverSource: nil)
+  }
+  
+  func askForNewListNameWithPredefinedListName(listName: String) {
+    
+  }
+  
+  func reloadView() {
+    tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+  }
+  
+  func setSaveEnabled(enabled: Bool) {
+    saveButton.enabled = enabled
   }
   
 }

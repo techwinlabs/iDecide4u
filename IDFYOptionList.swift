@@ -1,17 +1,19 @@
 //
-//  IDFYManagedOptionListSubclass.swift
+//  IDFYOptionList.swift
 //  iDecide4U
 //
-//  Created by Dominic Frei on 25/04/2015.
+//  Created by Dominic Frei on 26/04/2015.
 //  Copyright (c) 2015 dominicfrei.com. All rights reserved.
 //
 
 import Foundation
-import CoreData
 
-extension IDFYManagedOptionList  {
+class IDFYOptionList {
   
-  func initialize() {
+  var name: String
+  var options: [String]
+  
+  init() {
     name = ""
     options = [String]()
   }
@@ -43,7 +45,5 @@ extension IDFYManagedOptionList  {
   func clearList() {
     options = []
   }
-
   
 }
-
