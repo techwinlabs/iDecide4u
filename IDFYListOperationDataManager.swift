@@ -9,13 +9,13 @@
 import Foundation
 import CoreData
 
-class IDFYListOperationDataManager {
+class IDFYListOperationDataManager : IDFYDataManager {
   
   private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
   
   func getListOfLists() -> [IDFYOptionList] {
     let managedOptionListEntityName = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last! as String
-    let listOfManagedOptionLists = IDFYCommonDataManager.fetchEntity(managedOptionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYManagedOptionList]
+    let listOfManagedOptionLists = IDFYDataManager().fetchEntity(managedOptionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYManagedOptionList]
     var listOfOptionLists = [IDFYOptionList]()
     for managedOptionList : IDFYManagedOptionList in listOfManagedOptionLists {
       listOfOptionLists.append(IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options))

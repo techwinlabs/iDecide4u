@@ -16,7 +16,7 @@ class IDFYMockGenerator {
   
   class func generateMockIntoDatabase() {
     
-    let fetchResult = IDFYCommonDataManager.fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: NSPredicate(format: "name == 'Meals'")) as! [IDFYOptionList]
+    let fetchResult = IDFYDataManager().fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: NSPredicate(format: "name == 'Meals'")) as! [IDFYOptionList]
     if 0 == fetchResult.count {
       let newList = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
       newList!.name = "Meals"
