@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+class IDFYListOperationWireframe {
+  
+  func setupWiresForPresenter(presenter: IDFYListOperationPresenter) {
+    let listOperationInteractor = IDFYListOperationInteractor()
+    listOperationInteractor.listOperationPresenter = presenter
+    presenter.listOperationInteractor = listOperationInteractor
+  }
+  
+}

@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
+  
+  var listOperationPresenter : IDFYListOperationPresenterInterface!
+  
+  
+  // MARK: - IDFYListOperationInteractorInterface
+  
+  func updateListOfLists() {
+    listOperationPresenter.updateListOfListsWith([IDFYOptionList]())
+  }
+  
+}
