@@ -12,7 +12,8 @@ import CoreData
 class IDFYCommonDataManager {
   
   class func fetchEntity(entityName: String, fromManagedObjectContext managedObjectContext: NSManagedObjectContext, withPredicate predicate: NSPredicate?) -> [AnyObject]? {
-    let fetchRequest = NSFetchRequest(entityName: IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName)
+    
+    let fetchRequest = NSFetchRequest(entityName: entityName)
     fetchRequest.predicate = predicate
     var error: NSError?
     let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)
@@ -22,6 +23,7 @@ class IDFYCommonDataManager {
       abort()
     }
     return fetchResult
+    
   }
   
 }

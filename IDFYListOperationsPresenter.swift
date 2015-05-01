@@ -77,8 +77,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
       default: break
       }
     } else if 1 == indexPath.section {
-      let tempList = listOfLists[indexPath.row] as! IDFYOptionList
-      tableViewCell.textLabel?.text = tempList.name
+      tableViewCell.textLabel?.text = listOfLists[indexPath.row].name
     }
     
     return tableViewCell
