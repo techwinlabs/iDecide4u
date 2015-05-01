@@ -9,12 +9,11 @@
 import Foundation
 import CoreData
 
-class IDFYAddAndDecideDataManager: NSObject {
+class IDFYAddAndDecideDataManager {
   
+  private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext
   private var currentList: IDFYOptionList?
   private var managedOptionListForCurrentList: IDFYManagedOptionList?
-  private var optionListEntityName = "IDFYManagedOptionList"
-  private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext
   
   // This function needs to be used when the app starts and the last used list needs to be retrieved.
   func getListWithName(listName: String) -> IDFYOptionList {
@@ -42,7 +41,7 @@ class IDFYAddAndDecideDataManager: NSObject {
   }
   
   func fetchListWithPredicate(predicate: NSPredicate?) {
-    let fetchRequest = NSFetchRequest(entityName: optionListEntityName)
+    let fetchRequest = NSFetchRequest(entityName: IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName)
     fetchRequest.predicate = predicate
     var error: NSError?
     let fetchResult = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
@@ -52,7 +51,7 @@ class IDFYAddAndDecideDataManager: NSObject {
     } else if let fetchResult = fetchResult where 0 < fetchResult.count {
       managedOptionListForCurrentList = fetchResult[0] as? IDFYManagedOptionList
     } else {
-      managedOptionListForCurrentList = NSEntityDescription.insertNewObjectForEntityForName(optionListEntityName, inManagedObjectContext: managedObjectContext!) as? IDFYManagedOptionList
+      managedOptionListForCurrentList = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext!) as? IDFYManagedOptionList
       managedOptionListForCurrentList!.name = ""
       managedOptionListForCurrentList!.options = [String]()
     }
