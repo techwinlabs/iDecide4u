@@ -18,6 +18,11 @@ class IDFYOptionList {
     options = [String]()
   }
   
+  init(name: String, options: [String]) {
+    self.name = name
+    self.options = options
+  }
+  
   func count() -> Int {
     return options.count
   }
