@@ -7,3 +7,15 @@
 //
 
 import Foundation
+import CoreData
+
+class IDFYListOperationDataManager {
+  
+  private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
+  private let optionListEntityName = IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName
+  
+  func getListOfLists() -> [IDFYOptionList] {
+    return IDFYCommonDataManager.fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYOptionList]
+  }
+  
+}
