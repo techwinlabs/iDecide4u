@@ -76,6 +76,9 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
       case 1: tableViewCell.textLabel?.text = "Start a new list"
       default: break
       }
+    } else if 1 == indexPath.section {
+      let tempList = listOfLists[indexPath.row] as! IDFYOptionList
+      tableViewCell.textLabel?.text = tempList.name
     }
     
     return tableViewCell
