@@ -83,4 +83,12 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     return tableViewCell
   }
   
+  
+  // MARK: - Segues
+  
+  @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
+    self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  
 }
