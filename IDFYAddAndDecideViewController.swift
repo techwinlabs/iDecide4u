@@ -19,7 +19,6 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   @IBOutlet weak var textFieldTrailingSpaceContraint: NSLayoutConstraint!
   @IBOutlet weak var toolbar: UIToolbar!
   @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
-  @IBOutlet weak var saveButton: UIBarButtonItem!
   
   private var listName = ""
   private var listItems = [String]()
@@ -180,24 +179,6 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
     showAlertControllerWithTitle(NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), andMessage: "", andAlertActions: [alertActionTrash, alertActionCancel], andPreferredStyle: UIAlertControllerStyle.ActionSheet, popoverSource: sender)
   }
   
-  @IBAction func saveButtonPressed(sender: UIBarButtonItem) {
-    let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
-    alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-      self.textFieldListName = textField
-      textField.delegate = self
-      textField.text = self.listName
-    }
-    let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-      self.addAndDecidePresenter.didProvideNewListName(self.textFieldListName.text)
-    }
-    let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
-      
-    }
-    alertController.addAction(alertActionSave)
-    alertController.addAction(alertActionCancel)
-    self.presentViewController(alertController, animated: true) { () -> Void in }
-  }
-  
   
   // MARK: - Convenience alert
   
@@ -233,10 +214,6 @@ class IDFYAddAndDecideViewController : UIViewController, UITableViewDataSource, 
   
   func reloadView() {
     tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
-  }
-  
-  func setSaveEnabled(enabled: Bool) {
-    saveButton.enabled = enabled
   }
   
 }

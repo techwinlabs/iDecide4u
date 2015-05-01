@@ -14,5 +14,4 @@ protocol IDFYAddAndDecideViewInterface {
   func showDecisionWithTitle(title: String, andMessage message: String)
   func askForNewListNameWithPredefinedListName(listName: String)
   func reloadView()
-  func setSaveEnabled(enabled: Bool)
 }

@@ -104,9 +104,8 @@
                                     <constraint firstAttribute="height" constant="44" id="yCM-Vd-Zhb"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem enabled="NO" systemItem="organize" id="08C-hT-0bb">
+                                    <barButtonItem systemItem="organize" id="08C-hT-0bb">
                                         <connections>
-                                            <action selector="saveButtonPressed:" destination="bDO-PX-3D9" id="zdb-gP-TeO"/>
                                             <segue destination="DUy-D0-VXn" kind="presentation" id="2g4-6u-2uU"/>
                                         </connections>
                                     </barButtonItem>
@@ -184,7 +183,6 @@
                     <navigationItem key="navigationItem" title="iDecide4u" id="Pls-KV-13e"/>
                     <connections>
                         <outlet property="addButton" destination="cxL-6p-fHz" id="k0d-Gj-xqB"/>
-                        <outlet property="saveButton" destination="08C-hT-0bb" id="ayv-tM-vHa"/>
                         <outlet property="tableView" destination="NR9-N2-VD1" id="unt-IZ-U7f"/>
                         <outlet property="tableViewBottomConstraint" destination="svU-5j-XEX" id="ySG-I7-yCd"/>
                         <outlet property="textFieldAddNewOption" destination="oMC-BU-pKD" id="XzP-kC-UEQ"/>

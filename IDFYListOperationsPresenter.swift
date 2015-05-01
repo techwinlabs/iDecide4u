@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 
-class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource, UITableViewDelegate, IDFYListOperationPresenterInterface {
+class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, IDFYListOperationPresenterInterface {
   
   var listOperationWireframe : IDFYListOperationWireframe!
   var listOperationInteractor : IDFYListOperationInteractorInterface!
   var listOfLists: [IDFYOptionList]!
+  var textFieldNewListName : UITextField?
   
   
   // MARK: - Initialisation
@@ -87,10 +88,40 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   // MARK: - UITabelViewDelegate
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: "iDecide4u.lastUserListName")
-    self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    if 0 == indexPath.section {
+      switch (indexPath.row) {
+      case 0: savePressed()
+      case 1: break
+      default: break
+      }
+    } else if 1 == indexPath.section {
+      NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: "iDecide4u.lastUserListName")
+      self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
   }
   
+  
+  // MARK: - IBActions
+  
+  func savePressed() {
+    let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
+    alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+      textField.delegate = self
+      textField.text = IDFYCommonUtilities().getLastUsedListName()
+    }
+    let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+      if let newListName = self.textFieldNewListName?.text where !newListName.isEmpty {
+        IDFYCommonUtilities().setLastUsedListName(newListName)
+        self.listOperationInteractor.setNewNameForCurrentList(newListName)
+      }
+    }
+    let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+      
+    }
+    alertController.addAction(alertActionSave)
+    alertController.addAction(alertActionCancel)
+    self.presentViewController(alertController, animated: true) { () -> Void in }
+  }
   
   // MARK: - Segues
   
