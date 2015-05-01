@@ -84,6 +84,14 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   
+  // MARK: - UITabelViewDelegate
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: "iDecide4u.lastUserListName")
+    self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  
   // MARK: - Segues
   
   @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
