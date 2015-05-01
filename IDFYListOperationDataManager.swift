@@ -12,10 +12,15 @@ import CoreData
 class IDFYListOperationDataManager {
   
   private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
-  private let optionListEntityName = IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName
   
   func getListOfLists() -> [IDFYOptionList] {
-    return IDFYCommonDataManager.fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYOptionList]
+    let optionListEntityName = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last! as String
+    let managedOptionLists = IDFYCommonDataManager.fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYManagedOptionList]
+    var listOfTransformedLists = [IDFYOptionList]()
+    for managedOptionList : IDFYManagedOptionList in managedOptionLists {
+      listOfTransformedLists.append(IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options))
+    }
+    return listOfTransformedLists
   }
   
 }
