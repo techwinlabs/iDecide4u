@@ -12,7 +12,9 @@ import CoreData
 private var singletonHolder : IDFYCoreDataStack?
 
 class IDFYCoreDataStack {
-
+  
+  let optionListEntityName = "IDFYManagedOptionList"
+  
   class func sharedCoreDataStack() -> IDFYCoreDataStack {
     let lockQueue = dispatch_queue_create("com.dominicfrei.idecide4u.IDFYCoreDataStack.singleton", nil)
     dispatch_sync(lockQueue, { () -> Void in
