@@ -104,7 +104,7 @@
                                     <constraint firstAttribute="height" constant="44" id="yCM-Vd-Zhb"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem enabled="NO" systemItem="save" id="08C-hT-0bb">
+                                    <barButtonItem enabled="NO" systemItem="organize" id="08C-hT-0bb">
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="bDO-PX-3D9" id="zdb-gP-TeO"/>
                                             <segue destination="DUy-D0-VXn" kind="showDetail" id="2g4-6u-2uU"/>
