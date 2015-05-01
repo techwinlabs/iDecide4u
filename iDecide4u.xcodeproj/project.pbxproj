@@ -146,9 +146,9 @@
 			children = (
 				2F0FB7441AED4AA000CB2179 /* IDFYOptionList.swift */,
 				2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */,
+				2FD603561AF3D4FE00227FD6 /* IDFYCommonDataManager.swift */,
 				2F20A6A31AF3CF6E007BB418 /* IDFYCoreDataStack.swift */,
 				2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */,
-				2FD603561AF3D4FE00227FD6 /* IDFYCommonDataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";

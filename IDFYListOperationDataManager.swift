@@ -14,13 +14,13 @@ class IDFYListOperationDataManager {
   private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
   
   func getListOfLists() -> [IDFYOptionList] {
-    let optionListEntityName = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last! as String
-    let managedOptionLists = IDFYCommonDataManager.fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYManagedOptionList]
-    var listOfTransformedLists = [IDFYOptionList]()
-    for managedOptionList : IDFYManagedOptionList in managedOptionLists {
-      listOfTransformedLists.append(IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options))
+    let managedOptionListEntityName = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last! as String
+    let listOfManagedOptionLists = IDFYCommonDataManager.fetchEntity(managedOptionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: nil) as! [IDFYManagedOptionList]
+    var listOfOptionLists = [IDFYOptionList]()
+    for managedOptionList : IDFYManagedOptionList in listOfManagedOptionLists {
+      listOfOptionLists.append(IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options))
     }
-    return listOfTransformedLists
+    return listOfOptionLists
   }
   
 }

@@ -13,7 +13,5 @@ protocol IDFYListOperationPresenterInterface {
 }
 
 protocol IDFYListOperationInteractorInterface {
-  
   func updateListOfLists()
-  
 }
