@@ -73,7 +73,15 @@ class IDFYDataManager : IDFYDataManagerInterface {
   // MARK: - Private methods
   
   private func fetchLastUsedManagedOptionList() -> [IDFYManagedOptionList] {
-    return fetchManagedOptionListWithPredicate(NSPredicate(format: "name == '" + getLastUsedListName()! + "'"))
+    if nil != getLastUsedListName() {
+      return fetchManagedOptionListWithPredicate(NSPredicate(format: "name == '" + getLastUsedListName()! + "'"))
+    } else {
+      let managedOptionList : IDFYManagedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!) as! IDFYManagedOptionList
+      managedOptionList.name = ""
+      managedOptionList.options = [String]()
+      setLastUsedListName("")
+      return [managedOptionList]
+    }
   }
   
   private func fetchManagedOptionListWithName(listName: String) -> [IDFYManagedOptionList] {
