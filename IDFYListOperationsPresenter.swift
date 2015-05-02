@@ -13,8 +13,9 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   var listOperationWireframe : IDFYListOperationWireframe!
   var listOperationInteractor : IDFYListOperationInteractorInterface!
-  var listOfLists: [IDFYOptionList]!
-  var textFieldNewListName : UITextField?
+  
+  private var listOfLists: [IDFYOptionList]!
+  private var textFieldNewListName : UITextField?
   
   
   // MARK: - Initialisation
@@ -91,7 +92,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     if 0 == indexPath.section {
       switch (indexPath.row) {
       case 0: savePressed()
-      case 1: break
+      case 1: startNewListPressed()
       default: break
       }
     } else if 1 == indexPath.section {
@@ -100,18 +101,17 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     }
   }
   
-  
-  // MARK: - IBActions
-  
-  func savePressed() {
+  private func savePressed() {
     let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
       textField.delegate = self
-      textField.text = IDFYCommonUtilities().getLastUsedListName()
+      textField.text = self.listOperationInteractor.getNameForCurrentList()
+      self.textFieldNewListName = textField
     }
     let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-      if let newListName = self.textFieldNewListName?.text where !newListName.isEmpty {
-        IDFYCommonUtilities().setLastUsedListName(newListName)
+      let foo = self.textFieldNewListName
+      let bar = foo?.text
+      if let newListName = self.textFieldNewListName?.text! where !newListName.isEmpty {
         self.listOperationInteractor.setNewNameForCurrentList(newListName)
       }
     }
@@ -123,11 +123,14 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     self.presentViewController(alertController, animated: true) { () -> Void in }
   }
   
+  private func startNewListPressed() {
+    listOperationInteractor.startNewList()
+  }
+  
   // MARK: - Segues
   
   @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
   }
-  
   
 }

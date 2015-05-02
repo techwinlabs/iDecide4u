@@ -13,5 +13,8 @@ protocol IDFYListOperationPresenterInterface {
 }
 
 protocol IDFYListOperationInteractorInterface {
+  func getNameForCurrentList() -> String
+  func setNewNameForCurrentList(listName: String)
   func updateListOfLists()
+  func startNewList()
 }

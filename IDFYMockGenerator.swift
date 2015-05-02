@@ -15,14 +15,31 @@ private let optionListEntityName = IDFYCoreDataStack.sharedCoreDataStack().optio
 class IDFYMockGenerator {
   
   class func generateMockIntoDatabase() {
-    
-    let fetchResult = IDFYDataManager().fetchEntity(optionListEntityName, fromManagedObjectContext: managedObjectContext, withPredicate: NSPredicate(format: "name == 'Meals'")) as! [IDFYOptionList]
-    if 0 == fetchResult.count {
-      let newList = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
-      newList!.name = "Meals"
-      newList!.options = ["", "", ""]
+    wipeOutDatabase()
+    createMockDatabaseEntries()
+  }
+  
+  class func wipeOutDatabase() {
+    let fetchRequest = NSFetchRequest(entityName: optionListEntityName)
+    var error: NSError?
+    let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [IDFYManagedOptionList]
+    if let error = error {
+      println("Error loading option list from data base: " + error.description)
+      abort()
     }
-    
+    for managedOptionList : IDFYManagedOptionList in fetchResult {
+      managedObjectContext.deleteObject(managedOptionList)
+    }
+  }
+  
+  class func createMockDatabaseEntries() {
+    let list1 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
+    list1!.name = "Meals"
+    list1!.options = ["Burger", "Pizza", "Lasagne"]
+    let list2 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
+    list2!.name = "Evening events"
+    list2!.options = ["cinema", "billard", "going out"]
+    NSUserDefaults.standardUserDefaults().setObject(list1?.name, forKey: "iDecide4u.lastUserListName")
   }
   
 }

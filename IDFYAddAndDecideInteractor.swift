@@ -8,73 +8,49 @@
 
 import Foundation
 
-class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInput {
+class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface {
   
-  var addAndDecidePresenter: IDFYAddAndDecideInteractorOutput!
-  var dataManager = IDFYAddAndDecideDataManager()
-  var optionList: IDFYOptionList!
+  var addAndDecidePresenter : IDFYAddAndDecidePresenterInterface!
+  var dataManager : IDFYDataManagerInterface!
   
-  init(presenter: IDFYAddAndDecidePresenter) {
-    addAndDecidePresenter = presenter
-  }
+  
+  // MARK: - IDFYAddAndDecideInteractorInterface
   
   func addNewEntry(entry: String) {
     let entryWithoutWhiteSpaces = entry.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-    println(entryWithoutWhiteSpaces)
     if !entryWithoutWhiteSpaces.isEmpty {
-      optionList.addOption(entry)
-      dataManager.updateCurrentList(optionList)
+      let list = dataManager.getCurrentList()
+      list.addOption(entry)
+      dataManager.updateCurrentList(list)
+      addAndDecidePresenter.updateListWithGivenList(list.options)
     }
-    addAndDecidePresenter.updateListWithGivenList(optionList.options)
   }
   
   func deleteEntry(entry: String) {
-    optionList.removeOption(entry)
-    dataManager.updateCurrentList(optionList)
-    addAndDecidePresenter.updateListWithGivenList(optionList.options)
+    dataManager.getCurrentList().removeOption(entry)
   }
   
   func decide() {
-    if 0 < optionList.count() {
-      let winningChoice = Int(rand()) % (optionList.count())
-      let winner = optionList.optionAtIndex(winningChoice)
+    let list = dataManager.getCurrentList()
+    if 0 < list.count() {
+      let winningChoice = Int(rand()) % (list.count())
+      let winner = list.optionAtIndex(winningChoice)
       addAndDecidePresenter.presentDecision(winner)
     } else {
-      addAndDecidePresenter.showNoOptionsWarning()
+      addAndDecidePresenter.decisionWithEmptyListInvoked()
     }
   }
   
   func deleteAllEntries() {
-    optionList.clearList()
-    dataManager.updateCurrentList(optionList)
+    dataManager.getCurrentList().clearList()
     addAndDecidePresenter.updateListWithGivenList([String]())
   }
   
-  func saveListWithName(name: String) {
-    optionList.name = name
-    dataManager.updateCurrentList(optionList)
-    addAndDecidePresenter.updateNameWithGivenName(name)
-  }
-  
-  func currentListName() -> String { // is there a better way instead of a return value?
-    return optionList.name
-  }
-  
-  func currentList() -> [String] {
-    return optionList.options
-  }
-  
-  func getInitialList() {
-    let lastUsedListName = IDFYCommonUtilities().getLastUsedListName()
+  func viewWillAppear() {
     // Check if there is a last used list saved. If so, retrieve that list.
-    if let lastUsedListName = lastUsedListName {
-      optionList = dataManager.getListWithName(lastUsedListName)
-    } else {
-      // If not, generate a new list.
-      optionList = dataManager.getCurrentList() // Which will generate a new list => might not be the perfect process.
-    }
-    addAndDecidePresenter.updateNameWithGivenName(optionList.name)
-    addAndDecidePresenter.updateListWithGivenList(optionList.options)
+    let list = dataManager.getCurrentList()
+    addAndDecidePresenter.updateNameWithGivenName(list.name)
+    addAndDecidePresenter.updateListWithGivenList(list.options)
   }
   
 }

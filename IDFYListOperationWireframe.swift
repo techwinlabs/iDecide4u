@@ -13,6 +13,7 @@ class IDFYListOperationWireframe {
   func setupWiresForPresenter(presenter: IDFYListOperationPresenter) {
     let listOperationInteractor = IDFYListOperationInteractor()
     listOperationInteractor.listOperationPresenter = presenter
+    listOperationInteractor.dataManager = IDFYDataManager()
     presenter.listOperationInteractor = listOperationInteractor
   }
   

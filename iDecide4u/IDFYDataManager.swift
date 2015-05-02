@@ -9,14 +9,76 @@
 import Foundation
 import CoreData
 
-class IDFYDataManager {
-  
-  var currentList: IDFYOptionList?
+class IDFYDataManager : IDFYDataManagerInterface {
   
   private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext
-  private var managedOptionListForCurrentList: IDFYManagedOptionList?
+  private let lastUsedListNameKey = "iDecide4u.lastUserListName"
+  private let managedOptionListEntityName : String = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last!
   
-  func fetchEntity(entityName: String, fromManagedObjectContext managedObjectContext: NSManagedObjectContext, withPredicate predicate: NSPredicate?) -> [AnyObject]? {
+  
+  // MARK: - IDFYDataManagerInterface
+  
+  func getCurrentList() -> IDFYOptionList {
+    let fetchResult : [IDFYManagedOptionList] = fetchLastUsedManagedOptionList()
+    if 0 < fetchResult.count {
+      let managedOptionList : IDFYManagedOptionList = fetchResult[0]
+      return IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options)
+    } else {
+      abort() // Shouldn't happen (by design)!
+    }
+  }
+  
+  func getAllLists() -> [IDFYOptionList] {
+    let listOfManagedOptionLists = fetchManagedOptionListWithPredicate(nil)
+    var listOfOptionLists = [IDFYOptionList]()
+    for managedOptionList : IDFYManagedOptionList in listOfManagedOptionLists {
+      listOfOptionLists.append(IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options))
+    }
+    return listOfOptionLists
+  }
+  
+  func updateCurrentList(list: IDFYOptionList) {
+    let fetchResult : [IDFYManagedOptionList] = fetchLastUsedManagedOptionList()
+    if 0 < fetchResult.count {
+      let managedOptionList = fetchResult[0]
+      managedOptionList.name = list.name
+      managedOptionList.options = list.options
+      managedObjectContext?.save(nil)
+      setLastUsedListName(list.name)
+    } else {
+      abort() // Shouldn't happen (by design)!
+    }
+  }
+  
+  func startNewList() {
+    var fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName("")
+    var managedOptionList : IDFYManagedOptionList
+    if 0 < fetchResult.count {
+      managedOptionList = fetchResult[0]
+    } else {
+      managedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!) as! IDFYManagedOptionList
+      managedOptionList.name = ""
+    }
+    managedOptionList.options = [String]()
+    setLastUsedListName("")
+  }
+  
+  
+  // MARK: - Private methods
+  
+  private func fetchLastUsedManagedOptionList() -> [IDFYManagedOptionList] {
+    return fetchManagedOptionListWithPredicate(NSPredicate(format: "name == '" + getLastUsedListName()! + "'"))
+  }
+  
+  private func fetchManagedOptionListWithName(listName: String) -> [IDFYManagedOptionList] {
+    return fetchManagedOptionListWithPredicate(NSPredicate(format: "name == '" + listName + "'"))
+  }
+  
+  private func fetchManagedOptionListWithPredicate(predicate: NSPredicate?) -> [IDFYManagedOptionList] {
+    return fetchEntity(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, fromManagedObjectContext: managedObjectContext!, withPredicate: predicate) as! [IDFYManagedOptionList]
+  }
+  
+  private func fetchEntity(entityName: String, fromManagedObjectContext managedObjectContext: NSManagedObjectContext, withPredicate predicate: NSPredicate?) -> [AnyObject] {
     
     let fetchRequest = NSFetchRequest(entityName: entityName)
     fetchRequest.predicate = predicate
@@ -27,46 +89,21 @@ class IDFYDataManager {
       println("Error loading option list from data base: " + error.description)
       abort()
     }
-    return fetchResult
+    
+    println()
+    println(fetchResult)
+    println()
+    
+    return fetchResult!
     
   }
   
-  func getCurrentList() -> IDFYOptionList {
-    if nil == currentList {
-      fetchListWithPredicate(nil)
-      transferManagedOptionListDataToCurrentList()
-    }
-    return currentList!
+  private func getLastUsedListName() -> String? {
+    return NSUserDefaults.standardUserDefaults().stringForKey(lastUsedListNameKey)
   }
   
-  func fetchListWithPredicate(predicate: NSPredicate?) {
-    let fetchRequest = NSFetchRequest(entityName: IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName)
-    fetchRequest.predicate = predicate
-    var error: NSError?
-    let fetchResult = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
-    
-    if let error = error {
-      println("Error loading option list from data base: " + error.description)
-    } else if let fetchResult = fetchResult where 0 < fetchResult.count {
-      managedOptionListForCurrentList = fetchResult[0] as? IDFYManagedOptionList
-    } else {
-      managedOptionListForCurrentList = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext!) as? IDFYManagedOptionList
-      managedOptionListForCurrentList!.name = ""
-      managedOptionListForCurrentList!.options = [String]()
-    }
-  }
-  
-  func transferManagedOptionListDataToCurrentList() {
-    currentList = IDFYOptionList()
-    currentList!.name = managedOptionListForCurrentList!.name
-    currentList!.options = managedOptionListForCurrentList!.options
-  }
-  
-  func updateCurrentList(optionList: IDFYOptionList) {
-    currentList = optionList
-    managedOptionListForCurrentList?.name = currentList!.name
-    managedOptionListForCurrentList?.options = currentList!.options
-    IDFYCoreDataStack.sharedCoreDataStack().saveContext()
+  private func setLastUsedListName(listName: String) {
+    NSUserDefaults.standardUserDefaults().setObject(listName, forKey: lastUsedListNameKey)
   }
   
 }

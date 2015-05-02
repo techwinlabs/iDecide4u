@@ -11,13 +11,27 @@ import Foundation
 class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   
   var listOperationPresenter : IDFYListOperationPresenterInterface!
-  let listOperationDataManager = IDFYListOperationDataManager()
+  var dataManager : IDFYDataManagerInterface!
   
   
   // MARK: - IDFYListOperationInteractorInterface
   
+  func getNameForCurrentList() -> String {
+    return dataManager.getCurrentList().name
+  }
+  
+  func setNewNameForCurrentList(listName: String) {
+    let list = dataManager.getCurrentList()
+    list.name = listName
+    dataManager.updateCurrentList(list)
+  }
+  
   func updateListOfLists() {
-    listOperationPresenter.updateListOfListsWith(listOperationDataManager.getListOfLists())
+    listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
+  }
+  
+  func startNewList() {
+    dataManager.startNewList()
   }
   
 }
