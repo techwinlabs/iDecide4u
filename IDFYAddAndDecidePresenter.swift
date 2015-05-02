@@ -139,6 +139,9 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     if textField == textFieldAddNewOption {
       addAndDecideInteractor.addNewEntry(textFieldAddNewOption.text)
       textFieldAddNewOption.resignFirstResponder()
+      if !textFieldAddNewOption.text.isEmpty {
+        tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+      }
     }
     return true
   }
@@ -193,9 +196,7 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     addAndDecideInteractor.addNewEntry(textFieldAddNewOption.text)
     textFieldAddNewOption.text = ""
     addButton.enabled = false
-
-    // We need to scroll to the new item so the user can see it.
-//    tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+    tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
   }
   
   @IBAction func decideButtonPressed(sender: UIBarButtonItem) {
