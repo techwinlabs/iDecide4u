@@ -91,9 +91,12 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     if 0 == indexPath.section {
       switch (indexPath.row) {
-      case 0: savePressed()
-      case 1: startNewListPressed()
-      default: break
+      case 0:
+        savePressed()
+      case 1:
+        startNewListPressed()
+      default:
+        break
       }
     } else if 1 == indexPath.section {
       NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: "iDecide4u.lastUserListName")
@@ -102,6 +105,14 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   private func savePressed() {
+    showSaveDialogueWithFinalNewList(false)
+  }
+  
+  private func startNewListPressed() {
+    showSaveDialogueWithFinalNewList(true)
+  }
+  
+  private func showSaveDialogueWithFinalNewList(newList: Bool) {
     let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
       textField.delegate = self
@@ -114,6 +125,10 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
       if let newListName = self.textFieldNewListName?.text! where !newListName.isEmpty {
         self.listOperationInteractor.setNewNameForCurrentList(newListName)
       }
+      if newList {
+        self.listOperationInteractor.startNewList()
+      }
+      self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
     let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
       
@@ -121,10 +136,6 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     alertController.addAction(alertActionSave)
     alertController.addAction(alertActionCancel)
     self.presentViewController(alertController, animated: true) { () -> Void in }
-  }
-  
-  private func startNewListPressed() {
-    listOperationInteractor.startNewList()
   }
   
   // MARK: - Segues
