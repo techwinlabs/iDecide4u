@@ -24,7 +24,13 @@ class IDFYDataManager : IDFYDataManagerInterface {
       let managedOptionList : IDFYManagedOptionList = fetchResult[0]
       return IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options)
     } else {
-      abort() // Shouldn't happen (by design)!
+      // Should only happen the first the app is started.
+      let managedOptionList : IDFYManagedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!)
+        as! IDFYManagedOptionList
+      managedOptionList.name = ""
+      managedOptionList.options = [String]()
+      setLastUsedListName("")
+      return IDFYOptionList()
     }
   }
   
