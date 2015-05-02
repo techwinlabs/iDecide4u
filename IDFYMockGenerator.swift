@@ -15,11 +15,6 @@ private let lastUsedListName = "iDecide4u.lastUsedListName"
 
 class IDFYMockGenerator {
   
-  class func generateMockIntoDatabase() {
-    wipeOutDatabase()
-    createMockDatabaseEntries()
-  }
-  
   class func wipeOutDatabase() {
     let fetchRequest = NSFetchRequest(entityName: optionListEntityName)
     var error: NSError?
