@@ -11,6 +11,7 @@ import CoreData
 
 private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
 private let optionListEntityName = IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName
+private let lastUsedListName = "iDecide4u.lastUsedListName"
 
 class IDFYMockGenerator {
   
@@ -30,6 +31,7 @@ class IDFYMockGenerator {
     for managedOptionList : IDFYManagedOptionList in fetchResult {
       managedObjectContext.deleteObject(managedOptionList)
     }
+    NSUserDefaults.standardUserDefaults().removeObjectForKey(lastUsedListName)
   }
   
   class func createMockDatabaseEntries() {
@@ -39,7 +41,7 @@ class IDFYMockGenerator {
     let list2 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
     list2!.name = "Evening events"
     list2!.options = ["cinema", "billard", "going out"]
-    NSUserDefaults.standardUserDefaults().setObject(list1?.name, forKey: "iDecide4u.lastUserListName")
+    NSUserDefaults.standardUserDefaults().setObject(list1?.name, forKey: lastUsedListName)
   }
   
 }

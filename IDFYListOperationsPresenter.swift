@@ -99,7 +99,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
         break
       }
     } else if 1 == indexPath.section {
-      NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: "iDecide4u.lastUserListName")
+      NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: IDFYDataManager().lastUsedListNameKey)
       self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
   }

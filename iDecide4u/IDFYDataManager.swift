@@ -11,8 +11,9 @@ import CoreData
 
 class IDFYDataManager : IDFYDataManagerInterface {
   
+  let lastUsedListNameKey = "iDecide4u.lastUsedListName"
+  
   private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext
-  private let lastUsedListNameKey = "iDecide4u.lastUserListName"
   private let managedOptionListEntityName : String = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last!
   
   
