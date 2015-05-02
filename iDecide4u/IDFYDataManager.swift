@@ -35,7 +35,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func getAllLists() -> [IDFYOptionList] {
-    let listOfManagedOptionLists = fetchManagedOptionListWithPredicate(nil)
+    let listOfManagedOptionLists = fetchManagedOptionListWithPredicate(NSPredicate(format: "name != ''"))
     var listOfOptionLists = [IDFYOptionList]()
     for managedOptionList : IDFYManagedOptionList in listOfManagedOptionLists {
       listOfOptionLists.append(IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options))
