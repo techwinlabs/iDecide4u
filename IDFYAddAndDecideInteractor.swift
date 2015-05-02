@@ -27,7 +27,10 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
   }
   
   func deleteEntry(entry: String) {
-    dataManager.getCurrentList().removeOption(entry)
+    let list = dataManager.getCurrentList()
+    list.removeOption(entry)
+    dataManager.updateCurrentList(list)
+    addAndDecidePresenter.updateListWithGivenList(list.options)
   }
   
   func decide() {
@@ -42,7 +45,9 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
   }
   
   func deleteAllEntries() {
-    dataManager.getCurrentList().clearList()
+    let list = dataManager.getCurrentList()
+    list.clearList()
+    dataManager.updateCurrentList(list)
     addAndDecidePresenter.updateListWithGivenList([String]())
   }
   
