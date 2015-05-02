@@ -15,6 +15,7 @@ class IDFYAppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     IDFYMockGenerator.wipeOutDatabase()
+    IDFYMockGenerator.createMockDatabaseEntries()
     return true
   }
   
