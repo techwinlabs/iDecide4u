@@ -15,25 +15,25 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
   
   
   // MARK: - IDFYAddAndDecideInteractorInterface
+
+  func viewWillAppear() {
+    // Check if there is a last used list saved. If so, retrieve that list.
+    let list = dataManager.getCurrentList()
+    addAndDecidePresenter.updateNameWithGivenName(list.name)
+    addAndDecidePresenter.updateListWithGivenList(list.options)
+  }
   
-  func addNewEntry(entry: String) {
-    let entryWithoutWhiteSpaces = entry.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
+  func willAddNewOption(option: String) {
+    let entryWithoutWhiteSpaces = option.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
     if !entryWithoutWhiteSpaces.isEmpty {
       let list = dataManager.getCurrentList()
-      list.addOption(entry)
+      list.addOption(option)
       dataManager.updateCurrentList(list)
       addAndDecidePresenter.updateListWithGivenList(list.options)
     }
   }
   
-  func deleteEntry(entry: String) {
-    let list = dataManager.getCurrentList()
-    list.removeOption(entry)
-    dataManager.updateCurrentList(list)
-    addAndDecidePresenter.updateListWithGivenList(list.options)
-  }
-  
-  func decide() {
+  func willDecide() {
     let list = dataManager.getCurrentList()
     if 0 < list.count() {
       let winningChoice = Int(rand()) % (list.count())
@@ -44,18 +44,22 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
     }
   }
   
-  func deleteAllEntries() {
+  func willDeleteEntry(entry: String) {
+    let list = dataManager.getCurrentList()
+    list.removeOption(entry)
+    dataManager.updateCurrentList(list)
+    addAndDecidePresenter.updateListWithGivenList(list.options)
+  }
+  
+  func willTrashList() {
+    addAndDecidePresenter.askForTrashConfirmation()
+  }
+  
+  func didConfirmTrashList() {
     let list = dataManager.getCurrentList()
     list.clearList()
     dataManager.updateCurrentList(list)
     addAndDecidePresenter.updateListWithGivenList([String]())
-  }
-  
-  func viewWillAppear() {
-    // Check if there is a last used list saved. If so, retrieve that list.
-    let list = dataManager.getCurrentList()
-    addAndDecidePresenter.updateNameWithGivenName(list.name)
-    addAndDecidePresenter.updateListWithGivenList(list.options)
   }
   
 }

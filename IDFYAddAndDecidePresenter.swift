@@ -20,6 +20,7 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   @IBOutlet weak var textFieldTrailingSpaceContraint: NSLayoutConstraint!
   @IBOutlet weak var toolbar: UIToolbar!
   @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var trashButton: UIBarButtonItem!
   
   private var listName = ""
   private var listItems = [String]()
@@ -49,6 +50,24 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   }
   
   
+  // MARK: - IBActions
+  
+  @IBAction func addButtonPressed(sender: UIButton) {
+    addAndDecideInteractor.willAddNewOption(textFieldAddNewOption.text)
+    textFieldAddNewOption.text = ""
+    addButton.enabled = false
+    tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+  }
+  
+  @IBAction func decideButtonPressed(sender: UIBarButtonItem) {
+    addAndDecideInteractor.willDecide()
+  }
+  
+  @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
+    addAndDecideInteractor.willTrashList()
+  }
+  
+  
   // MARK: - IDFYAddAndDecidePresenterInterface
   
   func updateNameWithGivenName(listName: String) {
@@ -64,10 +83,8 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   func presentDecision(option: String) {
     let title = NSLocalizedString("main.scene_dicision.alert.title", comment: "title for a decision")
     let message = option
-    
     let alertAction = UIAlertAction(title: NSLocalizedString("main.scene_dicision.alert.ok.button", comment: "button title for a dicision"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in }
     showAlertControllerWithTitle(title, andMessage: message, andAlertActions: [alertAction], andPreferredStyle: UIAlertControllerStyle.Alert, popoverSource: nil)
-    
   }
   
   func decisionWithEmptyListInvoked() {
@@ -75,6 +92,28 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     let message = "\n" + NSLocalizedString("main.scene_dicision.alert.no.items.message", comment: "message for a dicision without options") + "\n"
     let alertAction = UIAlertAction(title: NSLocalizedString("main.scene_dicision.alert.ok.button", comment: "button title for a dicision"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in }
     showAlertControllerWithTitle(title, andMessage: message, andAlertActions: [alertAction], andPreferredStyle: UIAlertControllerStyle.Alert, popoverSource: nil)
+  }
+  
+  func askForTrashConfirmation() {
+    let alertActionTrash = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.yes", comment: "yes button for trash alert"), style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
+      self.addAndDecideInteractor.didConfirmTrashList()
+    }
+    let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.cancel", comment: "cancel button for trash alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+      
+    }
+    showAlertControllerWithTitle(NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), andMessage: "", andAlertActions: [alertActionTrash, alertActionCancel], andPreferredStyle: UIAlertControllerStyle.ActionSheet, popoverSource: trashButton)
+  }
+  
+  
+  // MARK: - Convenience alert
+  
+  private func showAlertControllerWithTitle(title: String, andMessage message: String, andAlertActions alertActions: [UIAlertAction], andPreferredStyle preferredStyle: UIAlertControllerStyle, popoverSource: UIBarButtonItem?) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+    alertController.popoverPresentationController?.barButtonItem = popoverSource
+    for alertAction in alertActions {
+      alertController.addAction(alertAction)
+    }
+    self.presentViewController(alertController, animated: true, completion: nil)
   }
   
   
@@ -100,7 +139,7 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if UITableViewCellEditingStyle.Delete == editingStyle {
-      addAndDecideInteractor.deleteEntry(listItems[indexPath.row])
+      addAndDecideInteractor.willDeleteEntry(listItems[indexPath.row])
     }
   }
   
@@ -137,7 +176,7 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     if textField == textFieldAddNewOption {
-      addAndDecideInteractor.addNewEntry(textFieldAddNewOption.text)
+      addAndDecideInteractor.willAddNewOption(textFieldAddNewOption.text)
       textFieldAddNewOption.resignFirstResponder()
       if !textFieldAddNewOption.text.isEmpty {
         tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
@@ -168,13 +207,10 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     let userInfo = notification.userInfo!
     let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
     let keyboardRect = keyboardFrame.CGRectValue()
-    
     let keyboardHeight = keyboardRect.size.height;
     let toolBarHeight = toolbar.frame.size.height;
-    
     tableViewBottomConstraint.constant = keyboardHeight - toolBarHeight;
   }
-  
   
   // When the keyboard will be hidden we need to exapand the table view to it's original size.
   func keyboardWillHide(notification: NSNotification) {
@@ -187,42 +223,6 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
       }, completion: { (Bool) -> Void in
         self.tableViewBottomConstraint.constant = 0;
     })
-  }
-  
-  
-  // MARK: - IBActions
-  
-  @IBAction func addButtonPressed(sender: UIButton) {
-    addAndDecideInteractor.addNewEntry(textFieldAddNewOption.text)
-    textFieldAddNewOption.text = ""
-    addButton.enabled = false
-    tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-  }
-  
-  @IBAction func decideButtonPressed(sender: UIBarButtonItem) {
-    addAndDecideInteractor.decide()
-  }
-  
-  @IBAction func trashButtonPressed(sender: UIBarButtonItem) {
-    let alertActionTrash = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.yes", comment: "yes button for trash alert"), style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
-      self.addAndDecideInteractor.deleteAllEntries()
-    }
-    let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_trash.alert.button.cancel", comment: "cancel button for trash alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
-      
-    }
-    showAlertControllerWithTitle(NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), andMessage: "", andAlertActions: [alertActionTrash, alertActionCancel], andPreferredStyle: UIAlertControllerStyle.ActionSheet, popoverSource: sender)
-  }
-  
-  
-  // MARK: - Convenience alert
-  
-  func showAlertControllerWithTitle(title: String, andMessage message: String, andAlertActions alertActions: [UIAlertAction], andPreferredStyle preferredStyle: UIAlertControllerStyle, popoverSource: UIBarButtonItem?) {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-    alertController.popoverPresentationController?.barButtonItem = popoverSource
-    for alertAction in alertActions {
-      alertController.addAction(alertAction)
-    }
-    self.presentViewController(alertController, animated: true, completion: nil)
   }
   
 }

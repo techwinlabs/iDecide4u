@@ -188,6 +188,7 @@
                         <outlet property="textFieldAddNewOption" destination="oMC-BU-pKD" id="XzP-kC-UEQ"/>
                         <outlet property="textFieldTrailingSpaceContraint" destination="INZ-P3-HR5" id="uey-Of-1ha"/>
                         <outlet property="toolbar" destination="sIB-DH-NBy" id="QLE-UZ-k6F"/>
+                        <outlet property="trashButton" destination="jTl-GC-DbU" id="4i5-6v-Of6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBr-eg-33k" userLabel="First Responder" sceneMemberID="firstResponder"/>

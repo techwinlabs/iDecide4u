@@ -8,17 +8,19 @@
 
 import Foundation
 
-protocol IDFYAddAndDecideInteractorInterface {
-  func addNewEntry(entry: String)
-  func deleteEntry(entry: String)
-  func decide()
-  func deleteAllEntries()
-  func viewWillAppear()
-}
-
 protocol IDFYAddAndDecidePresenterInterface {
   func updateNameWithGivenName(listName: String)
   func updateListWithGivenList(list: [String])
   func presentDecision(option: String)
   func decisionWithEmptyListInvoked()
+  func askForTrashConfirmation()
+}
+
+protocol IDFYAddAndDecideInteractorInterface {
+  func viewWillAppear()
+  func willAddNewOption(option: String)
+  func willDecide()
+  func willDeleteEntry(entry: String)
+  func willTrashList()
+  func didConfirmTrashList()
 }
