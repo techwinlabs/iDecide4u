@@ -20,14 +20,19 @@ class IDFYDataManager : IDFYDataManagerInterface {
   // MARK: - IDFYDataManagerInterface
   
   func getCurrentList() -> IDFYOptionList {
-    let fetchResult : [IDFYManagedOptionList] = fetchLastUsedManagedOptionList()
-    if 0 < fetchResult.count {
-      let managedOptionList : IDFYManagedOptionList = fetchResult[0]
-      return IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options)
+    
+    if let lastUsedListName = getLastUsedListName() {
+      let listOfLastUsedManagedOptionLists = fetchManagedOptionListWithName(lastUsedListName)
+      if 0 < listOfLastUsedManagedOptionLists.count {
+        let managedOptionList : IDFYManagedOptionList = listOfLastUsedManagedOptionLists[0]
+        return IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options)
+      } else {
+        // This case must not be possible. If it is, further investigation is needed.
+        abort()
+      }
     } else {
-      // Should only happen the first the app is started.
-      let managedOptionList : IDFYManagedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!)
-        as! IDFYManagedOptionList
+      let entityDescriptionForNewList = NSEntityDescription.entityForName(managedOptionListEntityName, inManagedObjectContext: managedObjectContext!)
+      var managedOptionList = IDFYManagedOptionList(entity: entityDescriptionForNewList!, insertIntoManagedObjectContext: managedObjectContext)
       managedOptionList.name = ""
       managedOptionList.options = [String]()
       setLastUsedListName("")
@@ -45,7 +50,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func updateCurrentList(list: IDFYOptionList) {
-    let fetchResult : [IDFYManagedOptionList] = fetchLastUsedManagedOptionList()
+    let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(getLastUsedListName()!)
     if 0 < fetchResult.count {
       let managedOptionList = fetchResult[0]
       managedOptionList.name = list.name
@@ -72,18 +77,6 @@ class IDFYDataManager : IDFYDataManagerInterface {
   
   
   // MARK: - Private methods
-  
-  private func fetchLastUsedManagedOptionList() -> [IDFYManagedOptionList] {
-    if nil != getLastUsedListName() {
-      return fetchManagedOptionListWithPredicate(NSPredicate(format: "name == '" + getLastUsedListName()! + "'"))
-    } else {
-      let managedOptionList : IDFYManagedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!) as! IDFYManagedOptionList
-      managedOptionList.name = ""
-      managedOptionList.options = [String]()
-      setLastUsedListName("")
-      return [managedOptionList]
-    }
-  }
   
   private func fetchManagedOptionListWithName(listName: String) -> [IDFYManagedOptionList] {
     return fetchManagedOptionListWithPredicate(NSPredicate(format: "name == '" + listName + "'"))
