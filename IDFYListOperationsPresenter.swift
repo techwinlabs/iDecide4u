@@ -109,7 +109,12 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   private func startNewListPressed() {
-    showSaveDialogueWithFinalNewList(true)
+    if listOperationInteractor.getNameForCurrentList().isEmpty {
+      showSaveDialogueWithFinalNewList(true)
+    } else {
+      listOperationInteractor.startNewList()
+      self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
   }
   
   private func showSaveDialogueWithFinalNewList(newList: Bool) {
