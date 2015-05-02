@@ -32,6 +32,7 @@ class IDFYDataManagerTest: IDFYTestBase {
     }
     XCTAssert(!fetchResult.isEmpty, "fetchResult should not be empty!")
     XCTAssertEqual(fetchResult.count, 2, "There should be two entries in fetchResult!")
+    XCTAssertFalse(fetchResult.count > 2, "The fetchResult should not have more than two entries.")
   }
   
 }

@@ -13,7 +13,6 @@ import iDecide4u
 
 class IDFYTestBase: XCTestCase {
   
-  let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
   let optionListEntityName = IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName
   
   override func setUp() {
@@ -41,11 +40,14 @@ class IDFYTestBase: XCTestCase {
   }
   
   func createMockDatabaseEntries() {
-    NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as! IDFYManagedOptionList
-    let list1 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as! IDFYManagedOptionList
+    
+    let entityDescriptionForList1 = NSEntityDescription.entityForName("IDFYManagedOptionList", inManagedObjectContext: managedObjectContext!)
+    var list1 = IDFYManagedOptionList(entity: entityDescriptionForList1!, insertIntoManagedObjectContext: managedObjectContext)
     list1.name = "Meals"
     list1.options = ["Burger", "Pizza", "Lasagne"]
-    let list2 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as! IDFYManagedOptionList
+    
+    let entityDescriptionForList2 = NSEntityDescription.entityForName("IDFYManagedOptionList", inManagedObjectContext: managedObjectContext!)
+    var list2 = IDFYManagedOptionList(entity: entityDescriptionForList2!, insertIntoManagedObjectContext: managedObjectContext)
     list2.name = "Evening events"
     list2.options = ["cinema", "billard", "going out"]
     NSUserDefaults.standardUserDefaults().setObject(list1.name, forKey: "iDecide4u.lastUsedListName")
@@ -62,5 +64,38 @@ class IDFYTestBase: XCTestCase {
       // Put the code you want to measure the time of here.
     }
   }
+  
+  lazy var managedObjectModel: NSManagedObjectModel = {
+    let modelURL = NSBundle.mainBundle().URLForResource("iDecide4u", withExtension: "momd")!
+    return NSManagedObjectModel(contentsOfURL: modelURL)!
+    }()
+  
+  lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+    var error: NSError? = nil
+    var failureReason = "There was an error creating or loading the application’s saved data."
+    if coordinator!.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil, error: &error) == nil {
+      coordinator = nil
+      let dict = NSMutableDictionary()
+      dict[NSLocalizedDescriptionKey] = "Failed to initialize the application’s saved data"
+      dict[NSLocalizedFailureReasonErrorKey] = failureReason
+      dict[NSUnderlyingErrorKey] = error
+//      error = NSError.errorWithDomain("YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+//      NSLog("Unresolved error (error), (error!.userInfo)")
+      abort()
+    }
+    
+    return coordinator
+    }()
+  
+  lazy var managedObjectContext: NSManagedObjectContext! = {
+    let coordinator = self.persistentStoreCoordinator
+    if coordinator == nil {
+      return nil
+    }
+    var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    managedObjectContext.persistentStoreCoordinator = coordinator
+    return managedObjectContext
+    }()
   
 }
