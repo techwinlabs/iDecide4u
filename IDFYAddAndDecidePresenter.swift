@@ -163,7 +163,7 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   // When the keyboard is shown we need to shrink the table view so it does not get hidden by the keyboard.
   func keyboardDidShow(notification: NSNotification) {
     let userInfo = notification.userInfo!
-    let keyboardFrame = userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue
+    let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
     let keyboardRect = keyboardFrame.CGRectValue()
     
     let keyboardHeight = keyboardRect.size.height;
