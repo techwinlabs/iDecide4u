@@ -33,6 +33,9 @@
 		2F8141801AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */; };
 		2F8141881AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8141871AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift */; };
 		2F8141891AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8141871AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift */; };
+		2F86CFC91AF538FE00750031 /* iDecide4u.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */; };
+		2F86CFCC1AF5394500750031 /* IDFYTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F86CFCA1AF5394500750031 /* IDFYTestBase.swift */; };
+		2F86CFCD1AF5394500750031 /* IDFYDataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F86CFCB1AF5394500750031 /* IDFYDataManagerTest.swift */; };
 		2FD603571AF3D4FE00227FD6 /* IDFYDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603561AF3D4FE00227FD6 /* IDFYDataManager.swift */; };
 		2FD603581AF3D4FE00227FD6 /* IDFYDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603561AF3D4FE00227FD6 /* IDFYDataManager.swift */; };
 		2FD6035A1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */; };
@@ -75,6 +78,8 @@
 		2F327F1F1AB33FFC00EE1CF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYAppDelegate.swift; path = iDecide4u/IDFYAppDelegate.swift; sourceTree = "<group>"; };
 		2F8141871AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecidePresenter.swift; sourceTree = "<group>"; };
+		2F86CFCA1AF5394500750031 /* IDFYTestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYTestBase.swift; sourceTree = "<group>"; };
+		2F86CFCB1AF5394500750031 /* IDFYDataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYDataManagerTest.swift; sourceTree = "<group>"; };
 		2FD603561AF3D4FE00227FD6 /* IDFYDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYDataManager.swift; path = iDecide4u/IDFYDataManager.swift; sourceTree = "<group>"; };
 		2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYMockGenerator.swift; sourceTree = "<group>"; };
 		2FD603651AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecideWireframe.swift; sourceTree = "<group>"; };
@@ -174,6 +179,8 @@
 		2F327F1D1AB33FFC00EE1CF8 /* iDecide4uTests */ = {
 			isa = PBXGroup;
 			children = (
+				2F86CFCA1AF5394500750031 /* IDFYTestBase.swift */,
+				2F86CFCB1AF5394500750031 /* IDFYDataManagerTest.swift */,
 				2F327F1E1AB33FFC00EE1CF8 /* Supporting Files */,
 			);
 			path = iDecide4uTests;
@@ -336,9 +343,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F20A6961AF3BE14007BB418 /* IDFYListOperationsPresenter.swift in Sources */,
+				2F86CFCD1AF5394500750031 /* IDFYDataManagerTest.swift in Sources */,
 				2F0FB73D1AED422000CB2179 /* IDFYAddAndDecideInteractor.swift in Sources */,
 				2F03C42D1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */,
 				2F8141801AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */,
+				2F86CFCC1AF5394500750031 /* IDFYTestBase.swift in Sources */,
 				2F20A6991AF3BE20007BB418 /* IDFYListOperationInteractor.swift in Sources */,
 				2FD6035B1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */,
 				2FD603581AF3D4FE00227FD6 /* IDFYDataManager.swift in Sources */,
@@ -349,6 +358,7 @@
 				2F0FB7461AED4AA000CB2179 /* IDFYOptionList.swift in Sources */,
 				2F8141891AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift in Sources */,
 				2F20A6A21AF3C4A4007BB418 /* IDFYListOperationWireframe.swift in Sources */,
+				2F86CFC91AF538FE00750031 /* iDecide4u.xcdatamodeld in Sources */,
 				2FD6036A1AF4F6F100227FD6 /* IDFYDataManagerInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
