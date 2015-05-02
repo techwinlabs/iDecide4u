@@ -10,11 +10,14 @@ import Foundation
 
 protocol IDFYListOperationPresenterInterface {
   func updateListOfListsWith(listOfLists: [IDFYOptionList])
+  func askForListNameWithPredefinedListName(listName: String)
+  func showCurrentList()
 }
 
 protocol IDFYListOperationInteractorInterface {
-  func getNameForCurrentList() -> String
-  func setNewNameForCurrentList(listName: String)
   func updateListOfLists()
-  func startNewList()
+  func willSetNameForCurrentList()
+  func willStartNewList()
+  func willLoadSavedList(listName: String)
+  func didProvideNewListName(listName: String)
 }

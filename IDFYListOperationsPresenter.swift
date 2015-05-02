@@ -41,6 +41,27 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     self.listOfLists = listOfLists
   }
   
+  func askForListNameWithPredefinedListName(listName: String) {
+    let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
+    alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+      textField.delegate = self
+      textField.text = listName
+      self.textFieldNewListName = textField
+    }
+    let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+      self.listOperationInteractor.didProvideNewListName(self.textFieldNewListName!.text)
+    }
+    let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+    }
+    alertController.addAction(alertActionSave)
+    alertController.addAction(alertActionCancel)
+    self.presentViewController(alertController, animated: true) { () -> Void in }
+  }
+  
+  func showCurrentList() {
+    self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
   
   // MARK: - UITableViewDataSource
   
@@ -74,7 +95,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     
     if 0 == indexPath.section {
       switch (indexPath.row) {
-      case 0: tableViewCell.textLabel?.text = "Save the current list"
+      case 0: tableViewCell.textLabel?.text = "Save / rename the current list"
       case 1: tableViewCell.textLabel?.text = "Start a new list"
       default: break
       }
@@ -92,56 +113,18 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     if 0 == indexPath.section {
       switch (indexPath.row) {
       case 0:
-        savePressed()
+        listOperationInteractor.willSetNameForCurrentList()
       case 1:
-        startNewListPressed()
+        listOperationInteractor.willStartNewList()
       default:
         break
       }
     } else if 1 == indexPath.section {
-      NSUserDefaults.standardUserDefaults().setObject(listOfLists[indexPath.row].name, forKey: IDFYDataManager().lastUsedListNameKey)
-      self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+      listOperationInteractor.willLoadSavedList(listOfLists[indexPath.row].name)
     }
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
-  
-  private func savePressed() {
-    showSaveDialogueWithFinalNewList(false)
-  }
-  
-  private func startNewListPressed() {
-    if listOperationInteractor.getNameForCurrentList().isEmpty {
-      showSaveDialogueWithFinalNewList(true)
-    } else {
-      listOperationInteractor.startNewList()
-      self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-  }
-  
-  private func showSaveDialogueWithFinalNewList(newList: Bool) {
-    let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
-    alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-      textField.delegate = self
-      textField.text = self.listOperationInteractor.getNameForCurrentList()
-      self.textFieldNewListName = textField
-    }
-    let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-      let foo = self.textFieldNewListName
-      let bar = foo?.text
-      if let newListName = self.textFieldNewListName?.text! where !newListName.isEmpty {
-        self.listOperationInteractor.setNewNameForCurrentList(newListName)
-      }
-      if newList {
-        self.listOperationInteractor.startNewList()
-      }
-      self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-    }
-    let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
-      
-    }
-    alertController.addAction(alertActionSave)
-    alertController.addAction(alertActionCancel)
-    self.presentViewController(alertController, animated: true) { () -> Void in }
-  }
+
   
   // MARK: - Segues
   

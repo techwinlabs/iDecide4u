@@ -75,6 +75,10 @@ class IDFYDataManager : IDFYDataManagerInterface {
     setLastUsedListName("")
   }
   
+  func loadListWithName(listName: String) {
+    NSUserDefaults.standardUserDefaults().setValue(listName, forKey: lastUsedListNameKey)
+  }
+  
   
   // MARK: - Private methods
   

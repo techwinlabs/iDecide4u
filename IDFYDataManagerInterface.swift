@@ -13,4 +13,5 @@ protocol IDFYDataManagerInterface {
   func getAllLists() -> [IDFYOptionList]
   func updateCurrentList(IDFYOptionList)
   func startNewList()
+  func loadListWithName(listName: String)
 }
