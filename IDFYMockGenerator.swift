@@ -30,13 +30,20 @@ class IDFYMockGenerator {
   }
   
   class func createMockDatabaseEntries() {
+    
     let list1 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
-    list1!.name = "Meals"
-    list1!.options = ["Burger", "Pizza", "Lasagne"]
+    list1!.name = "meals"
+    list1!.options = ["pizza", "lasagne", "vegetable gratin", "bread", "spinach and potatoes"]
+    
     let list2 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
-    list2!.name = "Evening events"
-    list2!.options = ["cinema", "billard", "going out"]
-    NSUserDefaults.standardUserDefaults().setObject(list1?.name, forKey: lastUsedListName)
+    list2!.name = "evening activities"
+    list2!.options = ["cinema", "billard", "go for a meal"]
+    
+    let list3 = NSEntityDescription.insertNewObjectForEntityForName(IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName, inManagedObjectContext: managedObjectContext) as? IDFYManagedOptionList
+    list3!.name = "vacation"
+    list3!.options = ["Hawaii", "Bali", "Australia"]
+    
+//    NSUserDefaults.standardUserDefaults().setObject("", forKey: lastUsedListName)
   }
   
 }
