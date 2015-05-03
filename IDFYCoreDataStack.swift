@@ -12,7 +12,9 @@ import CoreData
 private var singletonHolder : IDFYCoreDataStack?
 
 class IDFYCoreDataStack {
-
+  
+  let optionListEntityName = "IDFYManagedOptionList"
+  
   class func sharedCoreDataStack() -> IDFYCoreDataStack {
     let lockQueue = dispatch_queue_create("com.dominicfrei.idecide4u.IDFYCoreDataStack.singleton", nil)
     dispatch_sync(lockQueue, { () -> Void in
@@ -22,6 +24,9 @@ class IDFYCoreDataStack {
     })
     return singletonHolder!
   }
+  
+  
+  // MARK: - Core Data stack
   
   lazy var applicationDocumentsDirectory: NSURL = {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "frei.dominic.iDecide4u" in the application's documents Application Support directory.

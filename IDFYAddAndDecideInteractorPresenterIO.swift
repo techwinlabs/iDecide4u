@@ -8,19 +8,19 @@
 
 import Foundation
 
-protocol IDFYAddAndDecideInteractorInput {
-  func addNewEntry(entry: String)
-  func deleteEntry(entry: String)
-  func decide()
-  func deleteAllEntries()
-  func saveListWithName(name: String)
-  func currentListName() -> String // is there a better way instead of a return value?
-  func getInitialList()
-}
-
-protocol IDFYAddAndDecideInteractorOutput {
+protocol IDFYAddAndDecidePresenterInterface {
   func updateNameWithGivenName(listName: String)
   func updateListWithGivenList(list: [String])
   func presentDecision(option: String)
-  func showNoOptionsWarning()
+  func decisionWithEmptyListInvoked()
+  func askForTrashConfirmation()
+}
+
+protocol IDFYAddAndDecideInteractorInterface {
+  func viewWillAppear()
+  func willAddNewOption(option: String)
+  func willDecide()
+  func willDeleteEntry(entry: String)
+  func willTrashList()
+  func didConfirmTrashList()
 }
