@@ -21,12 +21,6 @@ class IDFYUserDefaultsUtility {
     return oldValue
   }
   
-  // Just for MOCK usage.
-  class func deleteAppWasLaunchedBeforeFlag() {
-    NSUserDefaults.standardUserDefaults().removeObjectForKey(lastUsedListNameKey)
-    NSUserDefaults.standardUserDefaults().synchronize()
-  }
-  
   class func setLastUsedListName(lastUsedListName : String) {
     NSUserDefaults.standardUserDefaults().setObject(lastUsedListName, forKey: lastUsedListNameKey)
     NSUserDefaults.standardUserDefaults().synchronize()

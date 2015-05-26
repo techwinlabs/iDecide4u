@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2F00FA1F1ADEC3DA000A3AC5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F00FA1D1ADEC3DA000A3AC5 /* Localizable.strings */; };
+		2F01991D1B15011900024E1C /* ExampleOptionLists_EN.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F01991C1B15011900024E1C /* ExampleOptionLists_EN.plist */; };
+		2F01991E1B15011900024E1C /* ExampleOptionLists_EN.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F01991C1B15011900024E1C /* ExampleOptionLists_EN.plist */; };
+		2F0199231B15024600024E1C /* ExampleOptionLists_DE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F0199221B15024600024E1C /* ExampleOptionLists_DE.plist */; };
+		2F0199241B15024600024E1C /* ExampleOptionLists_DE.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F0199221B15024600024E1C /* ExampleOptionLists_DE.plist */; };
 		2F03C42C1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */; };
 		2F03C42D1AEC3A37006CEE65 /* IDFYManagedOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */; };
 		2F0FB73C1AED422000CB2179 /* IDFYAddAndDecideInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0FB73B1AED422000CB2179 /* IDFYAddAndDecideInteractor.swift */; };
@@ -29,8 +33,8 @@
 		2F327F0A1AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F327F081AB33FFB00EE1CF8 /* iDecide4u.xcdatamodeld */; };
 		2F327F101AB33FFB00EE1CF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F0E1AB33FFB00EE1CF8 /* Main.storyboard */; };
 		2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F327F111AB33FFB00EE1CF8 /* Images.xcassets */; };
-		2F6358651B14EE420049F598 /* IDFYOptionListUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6358641B14EE420049F598 /* IDFYOptionListUtility.swift */; };
-		2F6358661B14F1D70049F598 /* IDFYOptionListUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6358641B14EE420049F598 /* IDFYOptionListUtility.swift */; };
+		2F6358651B14EE420049F598 /* IDFYUserDefaultsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6358641B14EE420049F598 /* IDFYUserDefaultsUtility.swift */; };
+		2F6358661B14F1D70049F598 /* IDFYUserDefaultsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6358641B14EE420049F598 /* IDFYUserDefaultsUtility.swift */; };
 		2F6358681B14F4790049F598 /* IDFYLoggingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6358671B14F4790049F598 /* IDFYLoggingUtilities.swift */; };
 		2F6358691B14F4E00049F598 /* IDFYLoggingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6358671B14F4790049F598 /* IDFYLoggingUtilities.swift */; };
 		2F81417F1AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */; };
@@ -42,8 +46,8 @@
 		2F86CFCD1AF5394500750031 /* IDFYDataManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F86CFCB1AF5394500750031 /* IDFYDataManagerTest.swift */; };
 		2FD603571AF3D4FE00227FD6 /* IDFYDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603561AF3D4FE00227FD6 /* IDFYDataManager.swift */; };
 		2FD603581AF3D4FE00227FD6 /* IDFYDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603561AF3D4FE00227FD6 /* IDFYDataManager.swift */; };
-		2FD6035A1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */; };
-		2FD6035B1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */; };
+		2FD6035A1AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift */; };
+		2FD6035B1AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603591AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift */; };
 		2FD603661AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603651AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift */; };
 		2FD603671AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603651AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift */; };
 		2FD603691AF4F6F100227FD6 /* IDFYDataManagerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD603681AF4F6F100227FD6 /* IDFYDataManagerInterface.swift */; };
@@ -64,6 +68,8 @@
 		2F00FA181ADEBEF8000A3AC5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		2F00FA1E1ADEC3DA000A3AC5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2F00FA201ADEC3E1000A3AC5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2F01991C1B15011900024E1C /* ExampleOptionLists_EN.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExampleOptionLists_EN.plist; sourceTree = "<group>"; };
+		2F0199221B15024600024E1C /* ExampleOptionLists_DE.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExampleOptionLists_DE.plist; sourceTree = "<group>"; };
 		2F03C42B1AEC3A37006CEE65 /* IDFYManagedOptionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYManagedOptionList.swift; path = iDecide4u/IDFYManagedOptionList.swift; sourceTree = "<group>"; };
 		2F0FB73B1AED422000CB2179 /* IDFYAddAndDecideInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecideInteractor.swift; sourceTree = "<group>"; };
 		2F0FB73E1AED422600CB2179 /* IDFYAddAndDecideInteractorPresenterIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecideInteractorPresenterIO.swift; sourceTree = "<group>"; };
@@ -80,14 +86,14 @@
 		2F327F111AB33FFB00EE1CF8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F327F1A1AB33FFC00EE1CF8 /* iDecide4uTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iDecide4uTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F327F1F1AB33FFC00EE1CF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F6358641B14EE420049F598 /* IDFYOptionListUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYOptionListUtility.swift; sourceTree = "<group>"; };
+		2F6358641B14EE420049F598 /* IDFYUserDefaultsUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYUserDefaultsUtility.swift; sourceTree = "<group>"; };
 		2F6358671B14F4790049F598 /* IDFYLoggingUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYLoggingUtilities.swift; sourceTree = "<group>"; };
 		2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYAppDelegate.swift; path = iDecide4u/IDFYAppDelegate.swift; sourceTree = "<group>"; };
 		2F8141871AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecidePresenter.swift; sourceTree = "<group>"; };
 		2F86CFCA1AF5394500750031 /* IDFYTestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYTestBase.swift; sourceTree = "<group>"; };
 		2F86CFCB1AF5394500750031 /* IDFYDataManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYDataManagerTest.swift; sourceTree = "<group>"; };
 		2FD603561AF3D4FE00227FD6 /* IDFYDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDFYDataManager.swift; path = iDecide4u/IDFYDataManager.swift; sourceTree = "<group>"; };
-		2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYMockGenerator.swift; sourceTree = "<group>"; };
+		2FD603591AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYInitialAppSetupGenerator.swift; sourceTree = "<group>"; };
 		2FD603651AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYAddAndDecideWireframe.swift; sourceTree = "<group>"; };
 		2FD603681AF4F6F100227FD6 /* IDFYDataManagerInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDFYDataManagerInterface.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				2F81417E1AEBF32000E9E8EB /* IDFYAppDelegate.swift */,
-				2FD603591AF3D7AC00227FD6 /* IDFYMockGenerator.swift */,
 				2F0FB7521AEEAAA600CB2179 /* View */,
 				2F0FB7531AEEAAB100CB2179 /* Model */,
 				2F6358631B14EDF60049F598 /* Utilities */,
@@ -215,8 +220,11 @@
 		2F6358631B14EDF60049F598 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2F6358641B14EE420049F598 /* IDFYOptionListUtility.swift */,
+				2FD603591AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift */,
+				2F6358641B14EE420049F598 /* IDFYUserDefaultsUtility.swift */,
 				2F6358671B14F4790049F598 /* IDFYLoggingUtilities.swift */,
+				2F01991C1B15011900024E1C /* ExampleOptionLists_EN.plist */,
+				2F0199221B15024600024E1C /* ExampleOptionLists_DE.plist */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -316,6 +324,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F327F101AB33FFB00EE1CF8 /* Main.storyboard in Resources */,
+				2F0199231B15024600024E1C /* ExampleOptionLists_DE.plist in Resources */,
+				2F01991D1B15011900024E1C /* ExampleOptionLists_EN.plist in Resources */,
 				2F00FA1F1ADEC3DA000A3AC5 /* Localizable.strings in Resources */,
 				2F327F121AB33FFB00EE1CF8 /* Images.xcassets in Resources */,
 			);
@@ -325,6 +335,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F01991E1B15011900024E1C /* ExampleOptionLists_EN.plist in Resources */,
+				2F0199241B15024600024E1C /* ExampleOptionLists_DE.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,10 +352,10 @@
 				2FD603691AF4F6F100227FD6 /* IDFYDataManagerInterface.swift in Sources */,
 				2F0FB7451AED4AA000CB2179 /* IDFYOptionList.swift in Sources */,
 				2F20A69B1AF3BE2C007BB418 /* IDFYListOperationInteractorPresenterIO.swift in Sources */,
-				2F6358651B14EE420049F598 /* IDFYOptionListUtility.swift in Sources */,
+				2F6358651B14EE420049F598 /* IDFYUserDefaultsUtility.swift in Sources */,
 				2FD603661AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift in Sources */,
 				2F81417F1AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */,
-				2FD6035A1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */,
+				2FD6035A1AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift in Sources */,
 				2F20A6981AF3BE20007BB418 /* IDFYListOperationInteractor.swift in Sources */,
 				2F0FB73F1AED422600CB2179 /* IDFYAddAndDecideInteractorPresenterIO.swift in Sources */,
 				2F20A6951AF3BE14007BB418 /* IDFYListOperationsPresenter.swift in Sources */,
@@ -368,13 +380,13 @@
 				2F8141801AEBF32000E9E8EB /* IDFYAppDelegate.swift in Sources */,
 				2F86CFCC1AF5394500750031 /* IDFYTestBase.swift in Sources */,
 				2F20A6991AF3BE20007BB418 /* IDFYListOperationInteractor.swift in Sources */,
-				2FD6035B1AF3D7AC00227FD6 /* IDFYMockGenerator.swift in Sources */,
+				2FD6035B1AF3D7AC00227FD6 /* IDFYInitialAppSetupGenerator.swift in Sources */,
 				2FD603581AF3D4FE00227FD6 /* IDFYDataManager.swift in Sources */,
 				2FD603671AF406EB00227FD6 /* IDFYAddAndDecideWireframe.swift in Sources */,
 				2F20A6A51AF3CF6E007BB418 /* IDFYCoreDataStack.swift in Sources */,
 				2F20A69C1AF3BE2C007BB418 /* IDFYListOperationInteractorPresenterIO.swift in Sources */,
 				2F0FB7401AED422600CB2179 /* IDFYAddAndDecideInteractorPresenterIO.swift in Sources */,
-				2F6358661B14F1D70049F598 /* IDFYOptionListUtility.swift in Sources */,
+				2F6358661B14F1D70049F598 /* IDFYUserDefaultsUtility.swift in Sources */,
 				2F0FB7461AED4AA000CB2179 /* IDFYOptionList.swift in Sources */,
 				2F8141891AEBFC8400E9E8EB /* IDFYAddAndDecidePresenter.swift in Sources */,
 				2F20A6A21AF3C4A4007BB418 /* IDFYListOperationWireframe.swift in Sources */,

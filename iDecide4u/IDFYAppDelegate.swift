@@ -15,7 +15,7 @@ class IDFYAppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     if (!IDFYUserDefaultsUtility.wasAppLaunchedBefore()) {
-      IDFYMockGenerator.createMockDatabaseEntries()
+      IDFYInitialAppSetupGenerator.generateInitialAppData()
     }
     return true
   }

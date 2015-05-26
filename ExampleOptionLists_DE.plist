@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>ja/nein</string>
+		<string>ja</string>
+		<string>nein</string>
+	</array>
+	<array>
+		<string>1-10</string>
+		<string>1</string>
+		<string>2</string>
+		<string>3</string>
+		<string>4</string>
+		<string>5</string>
+		<string>6</string>
+		<string>7</string>
+		<string>8</string>
+		<string>9</string>
+		<string>10</string>
+	</array>
+	<array>
+		<string>Abendessen</string>
+		<string>Brot</string>
+		<string>Gemüsegratin</string>
+		<string>Lasagne</string>
+		<string>Pizza</string>
+		<string>Spinat und Kartoffeln</string>
+	</array>
+	<array>
+		<string>Abendgestaltung</string>
+		<string>Billard</string>
+		<string>Essen gehen</string>
+		<string>Kino</string>
+	</array>
+	<array>
+		<string>Urlaub</string>
+		<string>Australien</string>
+		<string>Ägypten</string>
+		<string>Brasilien</string>
+		<string>Hawaii</string>
+		<string>Italien</string>
+		<string>Japan</string>
+		<string>Kanada</string>
+		<string>Neuseeland</string>
+		<string>Südafrika</string>
+	</array>
+</array>
+</plist>

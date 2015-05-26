@@ -93,6 +93,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
     
     let fetchRequest = NSFetchRequest(entityName: entityName)
     fetchRequest.predicate = predicate
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
     var error: NSError?
     let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)
     
