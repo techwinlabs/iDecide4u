@@ -11,7 +11,6 @@ import CoreData
 
 private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!
 private let optionListEntityName = IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName
-private let lastUsedListName = "iDecide4u.lastUsedListName"
 
 class IDFYMockGenerator {
   
@@ -26,7 +25,7 @@ class IDFYMockGenerator {
     for managedOptionList : IDFYManagedOptionList in fetchResult {
       managedObjectContext.deleteObject(managedOptionList)
     }
-    NSUserDefaults.standardUserDefaults().removeObjectForKey(lastUsedListName)
+    IDFYUserDefaultsUtility.deleteAppWasLaunchedBeforeFlag()
   }
   
   class func createMockDatabaseEntries() {
@@ -43,7 +42,13 @@ class IDFYMockGenerator {
     list3!.name = "vacation"
     list3!.options = ["Hawaii", "Bali", "Australia"]
     
-//    NSUserDefaults.standardUserDefaults().setObject("", forKey: lastUsedListName)
+    var error: NSError?
+    IDFYCoreDataStack.sharedCoreDataStack().saveContext()
+    if let error = error {
+      IDFYLoggingUtilities.log("Error while saving database after mock data generation: " + error.description)
+    }
+    
+    IDFYUserDefaultsUtility.setLastUsedListName("")
   }
   
 }

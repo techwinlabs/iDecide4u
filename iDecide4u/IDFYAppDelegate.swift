@@ -13,12 +13,8 @@ class IDFYAppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  let appWasLaunchedBeforeKey : String = "appWasLaunchedBefore"
-  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    if (!NSUserDefaults.standardUserDefaults().boolForKey(self.appWasLaunchedBeforeKey)) {
-      NSUserDefaults.standardUserDefaults().setBool(true, forKey: self.appWasLaunchedBeforeKey)
-      NSUserDefaults.standardUserDefaults().synchronize()
+    if (!IDFYUserDefaultsUtility.wasAppLaunchedBefore()) {
       IDFYMockGenerator.createMockDatabaseEntries()
     }
     return true

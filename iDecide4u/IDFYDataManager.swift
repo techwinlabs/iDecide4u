@@ -11,8 +11,6 @@ import CoreData
 
 class IDFYDataManager : IDFYDataManagerInterface {
   
-  let lastUsedListNameKey = "iDecide4u.lastUsedListName"
-  
   private let managedObjectContext = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext
   private let managedOptionListEntityName : String = NSStringFromClass(IDFYManagedOptionList).componentsSeparatedByString(".").last!
   
@@ -21,23 +19,24 @@ class IDFYDataManager : IDFYDataManagerInterface {
   
   func getCurrentList() -> IDFYOptionList {
     
-    if let lastUsedListName = getLastUsedListName() {
+    var optionList : IDFYOptionList = IDFYOptionList()
+    
+    if let lastUsedListName = IDFYUserDefaultsUtility.getLastUsedListName() {
       let listOfLastUsedManagedOptionLists = fetchManagedOptionListWithName(lastUsedListName)
       if 0 < listOfLastUsedManagedOptionLists.count {
         let managedOptionList : IDFYManagedOptionList = listOfLastUsedManagedOptionLists[0]
-        return IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options)
-      } else {
-        // This case must not be possible. If it is, further investigation is needed.
-        abort()
+        optionList = IDFYOptionList(name: managedOptionList.name, options: managedOptionList.options)
       }
     } else {
       let entityDescriptionForNewList = NSEntityDescription.entityForName(managedOptionListEntityName, inManagedObjectContext: managedObjectContext!)
       var managedOptionList = IDFYManagedOptionList(entity: entityDescriptionForNewList!, insertIntoManagedObjectContext: managedObjectContext)
       managedOptionList.name = ""
       managedOptionList.options = [String]()
-      setLastUsedListName("")
-      return IDFYOptionList()
+      // A new list need to be returned, which was already set at the beginnig of this function. But it's name needs to be saved still.
+      IDFYUserDefaultsUtility.setLastUsedListName("")
     }
+    
+    return optionList
   }
   
   func getAllLists() -> [IDFYOptionList] {
@@ -50,13 +49,13 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func updateCurrentList(list: IDFYOptionList) {
-    let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(getLastUsedListName()!)
+    let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(IDFYUserDefaultsUtility.getLastUsedListName()!)
     if 0 < fetchResult.count {
       let managedOptionList = fetchResult[0]
       managedOptionList.name = list.name
       managedOptionList.options = list.options
-      managedObjectContext?.save(nil)
-      setLastUsedListName(list.name)
+      IDFYCoreDataStack.sharedCoreDataStack().saveContext()
+      IDFYUserDefaultsUtility.setLastUsedListName(list.name)
     } else {
       IDFYLoggingUtilities.log("Error while updating the list! Must not happen!")
     }
@@ -72,11 +71,11 @@ class IDFYDataManager : IDFYDataManagerInterface {
       managedOptionList.name = ""
     }
     managedOptionList.options = [String]()
-    setLastUsedListName("")
+    IDFYUserDefaultsUtility.setLastUsedListName("")
   }
   
   func loadListWithName(listName: String) {
-    NSUserDefaults.standardUserDefaults().setValue(listName, forKey: lastUsedListNameKey)
+    IDFYUserDefaultsUtility.setLastUsedListName(listName)
   }
   
   
@@ -102,15 +101,6 @@ class IDFYDataManager : IDFYDataManagerInterface {
     }
     
     return fetchResult!
-    
-  }
-  
-  private func getLastUsedListName() -> String? {
-    return NSUserDefaults.standardUserDefaults().stringForKey(lastUsedListNameKey)
-  }
-  
-  private func setLastUsedListName(listName: String) {
-    NSUserDefaults.standardUserDefaults().setObject(listName, forKey: lastUsedListNameKey)
   }
   
 }
