@@ -20,8 +20,8 @@ class IDFYMockGenerator {
     var error: NSError?
     let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [IDFYManagedOptionList]
     if let error = error {
-      println("Error loading option list from data base: " + error.description)
-      abort()
+      IDFYLoggingUtilities.log("Error loading option list from data base: " + error.description)
+      abort() // This function is not used in production, so the abort() is ok here.
     }
     for managedOptionList : IDFYManagedOptionList in fetchResult {
       managedObjectContext.deleteObject(managedOptionList)

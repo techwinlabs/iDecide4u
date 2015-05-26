@@ -66,7 +66,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       case .NewList: dataManager.startNewList()
       case .SaveList: break
       case .LoadList: dataManager.loadListWithName(previouslyForLoadSelectedListName)
-      case .Unspecified: abort()
+      case .Unspecified: IDFYLoggingUtilities.log("This state must not be possible!")
       }
       listOperationPresenter.showCurrentList()
     }

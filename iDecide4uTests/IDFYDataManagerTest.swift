@@ -27,7 +27,7 @@ class IDFYDataManagerTest: IDFYTestBase {
     var error: NSError?
     let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [IDFYManagedOptionList]
     if let error = error {
-      println("Error loading option list from data base: " + error.description)
+      IDFYLoggingUtilities.log("Error loading option list from data base: " + error.description)
       abort()
     }
     XCTAssert(!fetchResult.isEmpty, "fetchResult should not be empty!")

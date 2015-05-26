@@ -58,7 +58,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
       managedObjectContext?.save(nil)
       setLastUsedListName(list.name)
     } else {
-      abort() // Shouldn't happen (by design)!
+      IDFYLoggingUtilities.log("Error while updating the list! Must not happen!")
     }
   }
   
@@ -98,13 +98,8 @@ class IDFYDataManager : IDFYDataManagerInterface {
     let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)
     
     if let error = error {
-      println("Error loading option list from data base: " + error.description)
-      abort()
+      IDFYLoggingUtilities.log("Error loading option list from data base: " + error.description)
     }
-    
-    println()
-    println(fetchResult)
-    println()
     
     return fetchResult!
     
