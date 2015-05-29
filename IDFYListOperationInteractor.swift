@@ -72,9 +72,10 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     }
   }
   
-  func willDeleteList(listName: String) {
+  func willDeleteList(listName: String, atIndexPath indexPath: NSIndexPath) {
     dataManager.deleteListWithName(listName)
     listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
+    listOperationPresenter.didDeleteList(listName, atIndexPath: indexPath)
   }
   
 }

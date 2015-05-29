@@ -39,7 +39,6 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   func updateListOfListsWith(listOfLists: [IDFYOptionList]) {
     self.listOfLists = listOfLists
-    tableView.reloadData()
   }
   
   func askForListNameWithPredefinedListName(listName: String) {
@@ -61,6 +60,10 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   func showCurrentList() {
     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func didDeleteList(listName: String, atIndexPath indexPath: NSIndexPath) {
+    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
   }
   
   
@@ -109,7 +112,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if UITableViewCellEditingStyle.Delete == editingStyle {
-      listOperationInteractor.willDeleteList(listOfLists[indexPath.row].name)
+      listOperationInteractor.willDeleteList(listOfLists[indexPath.row].name, atIndexPath:indexPath)
     }
   }
   
