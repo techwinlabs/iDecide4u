@@ -41,20 +41,30 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     self.listOfLists = listOfLists
   }
   
-  func askForListNameWithPredefinedListName(listName: String) {
+  func askForListNameWithPredefinedListName(listName: String, shouldShowDiscardDraftOption: Bool) {
     let alertController = UIAlertController(title: NSLocalizedString("main.scene_save.alert.title", comment: "title for save alert"), message: NSLocalizedString("main.scene_save.alert.message", comment: "message for trash alert"), preferredStyle: UIAlertControllerStyle.Alert)
     alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
       textField.delegate = self
       textField.text = listName
       self.textFieldNewListName = textField
     }
+    
     let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
       self.listOperationInteractor.didProvideNewListName(self.textFieldNewListName!.text)
     }
+    alertController.addAction(alertActionSave)
+    
     let alertActionCancel = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.cancel", comment: "cancel button for save alert"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
     }
-    alertController.addAction(alertActionSave)
     alertController.addAction(alertActionCancel)
+    
+    if shouldShowDiscardDraftOption {
+      let alertActionDiscardDraft = UIAlertAction(title: NSLocalizedString("list_operation_scene.save_new_list_dialog.discard_draft_button_title", comment: "discard draft option button"), style: UIAlertActionStyle.Destructive, handler: { (UIAlertAction) -> Void in
+        self.listOperationInteractor.willDiscardDraft()
+      })
+      alertController.addAction(alertActionDiscardDraft)
+    }
+    
     self.presentViewController(alertController, animated: true) { () -> Void in }
   }
   

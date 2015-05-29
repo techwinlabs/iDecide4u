@@ -30,13 +30,13 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   
   func willSetNameForCurrentList() {
     listOperationState = ListOperationState.SaveList
-    listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name)
+    listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name, shouldShowDiscardDraftOption:false)
   }
   
   func willStartNewList() {
     listOperationState = ListOperationState.NewList
     if dataManager.getCurrentList().name.isEmpty && !dataManager.getCurrentList().options.isEmpty {
-      listOperationPresenter.askForListNameWithPredefinedListName("")
+      listOperationPresenter.askForListNameWithPredefinedListName("", shouldShowDiscardDraftOption:true)
     } else {
       dataManager.startNewList()
       listOperationPresenter.showCurrentList()
@@ -47,7 +47,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     listOperationState = ListOperationState.LoadList
     previouslyForLoadSelectedListName = listName
     if dataManager.getCurrentList().name.isEmpty && !dataManager.getCurrentList().options.isEmpty {
-      listOperationPresenter.askForListNameWithPredefinedListName("")
+      listOperationPresenter.askForListNameWithPredefinedListName("", shouldShowDiscardDraftOption:false)
     } else {
       dataManager.loadListWithName(listName)
       listOperationPresenter.showCurrentList()
@@ -56,7 +56,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   
   func didProvideNewListName(listName: String) {
     if listName.isEmpty {
-      listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name)
+      listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name, shouldShowDiscardDraftOption:false)
     } else {
       let list = dataManager.getCurrentList()
       list.name = listName
@@ -79,6 +79,12 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     dataManager.deleteListWithName(listName)
     listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
     listOperationPresenter.didDeleteList(listName, atIndexPath: indexPath)
+  }
+  
+  func willDiscardDraft() {
+    dataManager.deleteListWithName(dataManager.getCurrentList().name)
+    dataManager.startNewList()
+    listOperationPresenter.showCurrentList()
   }
   
 }
