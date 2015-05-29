@@ -47,7 +47,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     listOperationState = ListOperationState.LoadList
     previouslyForLoadSelectedListName = listName
     if dataManager.getCurrentList().name.isEmpty && !dataManager.getCurrentList().options.isEmpty {
-      listOperationPresenter.askForListNameWithPredefinedListName("", shouldShowDiscardDraftOption:false)
+      listOperationPresenter.askForListNameWithPredefinedListName("", shouldShowDiscardDraftOption:true)
     } else {
       dataManager.loadListWithName(listName)
       listOperationPresenter.showCurrentList()
@@ -56,7 +56,15 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   
   func didProvideNewListName(listName: String) {
     if listName.isEmpty {
-      listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name, shouldShowDiscardDraftOption:false)
+      var shouldShowDiscardDraftOption = false
+      switch listOperationState {
+      case .NewList: shouldShowDiscardDraftOption = true
+      case .SaveList: shouldShowDiscardDraftOption = false
+      case .LoadList: shouldShowDiscardDraftOption = true
+      case .Unspecified: IDFYLoggingUtilities.log("This state must not be possible!")
+      }
+      listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name, shouldShowDiscardDraftOption:shouldShowDiscardDraftOption)
+      
     } else {
       let list = dataManager.getCurrentList()
       list.name = listName
