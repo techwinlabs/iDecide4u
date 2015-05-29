@@ -10,9 +10,8 @@ import Foundation
 
 class IDFYUserDefaultsUtility {
 
-  static let appWasLaunchedBeforeKey : String = "appWasLaunchedBefore"
-  
-  static let lastUsedListNameKey = "iDecide4u.lastUsedListName"
+  static let appWasLaunchedBeforeKey : String = "iDecide4u.userDefaultsKey.appWasLaunchedBefore"
+  static let lastUsedListNameKey = "iDecide4u.userDefaultsKey.lastUsedListName"
   
   class func wasAppLaunchedBefore() -> Bool {
     let oldValue = NSUserDefaults.standardUserDefaults().boolForKey(appWasLaunchedBeforeKey)
