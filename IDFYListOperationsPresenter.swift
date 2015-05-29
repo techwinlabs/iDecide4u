@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, IDFYListOperationPresenterInterface {
-  
+    
   var listOperationWireframe : IDFYListOperationWireframe!
   var listOperationInteractor : IDFYListOperationInteractorInterface!
   
@@ -35,10 +35,11 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   
-  // MARK: - IDFYListOperationPresenterInterface
+  // MARK: - IDFYListOperationPresenterInterface  
   
   func updateListOfListsWith(listOfLists: [IDFYOptionList]) {
     self.listOfLists = listOfLists
+    tableView.reloadData()
   }
   
   func askForListNameWithPredefinedListName(listName: String) {
@@ -104,6 +105,12 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     }
     
     return tableViewCell
+  }
+  
+  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if UITableViewCellEditingStyle.Delete == editingStyle {
+      listOperationInteractor.willDeleteList(listOfLists[indexPath.row].name)
+    }
   }
   
   

@@ -72,4 +72,9 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     }
   }
   
+  func willDeleteList(listName: String) {
+    dataManager.deleteListWithName(listName)
+    listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
+  }
+  
 }

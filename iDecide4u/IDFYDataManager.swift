@@ -79,6 +79,15 @@ class IDFYDataManager : IDFYDataManagerInterface {
     NSUserDefaults.standardUserDefaults().setValue(listName, forKey: lastUsedListNameKey)
   }
   
+  func deleteListWithName(listName: String) {
+    let managedOptionLists = fetchManagedOptionListWithName(listName)
+    if 0 < managedOptionLists.count {
+      managedObjectContext?.deleteObject(managedOptionLists[0])
+    } else {
+      println("Error while loading the list, which should be deleted.")
+    }
+  }
+  
   
   // MARK: - Private methods
   

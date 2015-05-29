@@ -20,4 +20,5 @@ protocol IDFYListOperationInteractorInterface {
   func willStartNewList()
   func willLoadSavedList(listName: String)
   func didProvideNewListName(listName: String)
+  func willDeleteList(listName: String)
 }
