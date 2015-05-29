@@ -73,6 +73,9 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   }
   
   func willDeleteList(listName: String, atIndexPath indexPath: NSIndexPath) {
+    if dataManager.getCurrentList().name == listName {
+      dataManager.startNewList()
+    }
     dataManager.deleteListWithName(listName)
     listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
     listOperationPresenter.didDeleteList(listName, atIndexPath: indexPath)
