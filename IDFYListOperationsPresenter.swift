@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, IDFYListOperationPresenterInterface {
-  
+    
   var listOperationWireframe : IDFYListOperationWireframe!
   var listOperationInteractor : IDFYListOperationInteractorInterface!
   
@@ -35,7 +35,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   
-  // MARK: - IDFYListOperationPresenterInterface
+  // MARK: - IDFYListOperationPresenterInterface  
   
   func updateListOfListsWith(listOfLists: [IDFYOptionList]) {
     self.listOfLists = listOfLists
@@ -60,6 +60,10 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   func showCurrentList() {
     self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func didDeleteList(listName: String, atIndexPath indexPath: NSIndexPath) {
+    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
   }
   
   
@@ -104,6 +108,12 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     }
     
     return tableViewCell
+  }
+  
+  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if UITableViewCellEditingStyle.Delete == editingStyle {
+      listOperationInteractor.willDeleteList(listOfLists[indexPath.row].name, atIndexPath:indexPath)
+    }
   }
   
   

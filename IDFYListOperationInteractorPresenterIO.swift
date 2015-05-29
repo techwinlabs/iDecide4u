@@ -12,6 +12,7 @@ protocol IDFYListOperationPresenterInterface {
   func updateListOfListsWith(listOfLists: [IDFYOptionList])
   func askForListNameWithPredefinedListName(listName: String)
   func showCurrentList()
+  func didDeleteList(listName: String, atIndexPath indexPath: NSIndexPath)
 }
 
 protocol IDFYListOperationInteractorInterface {
@@ -20,4 +21,5 @@ protocol IDFYListOperationInteractorInterface {
   func willStartNewList()
   func willLoadSavedList(listName: String)
   func didProvideNewListName(listName: String)
+  func willDeleteList(listName: String, atIndexPath indexPath: NSIndexPath)
 }
