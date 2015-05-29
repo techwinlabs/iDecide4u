@@ -25,7 +25,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   // MARK: - IDFYListOperationInteractorInterface
   
   func updateListOfLists() {
-    listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
+    listOperationPresenter.updateListOfListsWith(dataManager.getAllLists(), withCurrentlyActiveList: indexOfCurrentlyActiveList())
   }
   
   func willSetNameForCurrentList() {
@@ -77,7 +77,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       dataManager.startNewList()
     }
     dataManager.deleteListWithName(listName)
-    listOperationPresenter.updateListOfListsWith(dataManager.getAllLists())
+    listOperationPresenter.updateListOfListsWith(dataManager.getAllLists(), withCurrentlyActiveList: indexOfCurrentlyActiveList())
     listOperationPresenter.didDeleteList(listName, atIndexPath: indexPath)
   }
   
@@ -85,6 +85,21 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     dataManager.deleteListWithName(dataManager.getCurrentList().name)
     dataManager.startNewList()
     listOperationPresenter.showCurrentList()
+  }
+  
+  
+  // MARK: - Convenience functions
+  
+  private func indexOfCurrentlyActiveList() -> NSInteger {
+    let listArray = dataManager.getAllLists()
+    var indexOfCurrentlyActiveList = -1
+    let currentListName = dataManager.getCurrentList().name
+    for (var i=0; i<listArray.count; i++) {
+      if currentListName == listArray[i].name {
+        indexOfCurrentlyActiveList = i
+      }
+    }
+    return indexOfCurrentlyActiveList
   }
   
 }

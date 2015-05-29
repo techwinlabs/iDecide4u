@@ -16,6 +16,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   private var listOfLists: [IDFYOptionList]!
   private var textFieldNewListName : UITextField?
+  private var indexOfCurrentlyActiveList : NSInteger?
   
   
   // MARK: - Initialisation
@@ -37,8 +38,9 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   // MARK: - IDFYListOperationPresenterInterface  
   
-  func updateListOfListsWith(listOfLists: [IDFYOptionList]) {
+  func updateListOfListsWith(listOfLists: [IDFYOptionList], withCurrentlyActiveList indexOfCurrentlyActiveList: NSInteger) {
     self.listOfLists = listOfLists
+    self.indexOfCurrentlyActiveList = indexOfCurrentlyActiveList
   }
   
   func askForListNameWithPredefinedListName(listName: String, shouldShowDiscardDraftOption: Bool) {
@@ -115,6 +117,11 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
       }
     } else if 1 == indexPath.section {
       tableViewCell.textLabel?.text = listOfLists[indexPath.row].name
+      if let indexOfCurrentlyActiveList = self.indexOfCurrentlyActiveList {
+        if indexPath.row == indexOfCurrentlyActiveList {
+          tableViewCell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
+      }
     }
     
     return tableViewCell

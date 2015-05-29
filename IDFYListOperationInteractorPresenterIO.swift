@@ -9,7 +9,7 @@
 import Foundation
 
 protocol IDFYListOperationPresenterInterface {
-  func updateListOfListsWith(listOfLists: [IDFYOptionList])
+  func updateListOfListsWith(listOfLists: [IDFYOptionList], withCurrentlyActiveList indexOfCurrentlyActiveList: NSInteger)
   func askForListNameWithPredefinedListName(listName: String, shouldShowDiscardDraftOption: Bool)
   func showCurrentList()
   func didDeleteList(listName: String, atIndexPath indexPath: NSIndexPath)
