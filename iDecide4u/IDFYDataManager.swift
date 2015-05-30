@@ -57,7 +57,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
       IDFYCoreDataStack.sharedCoreDataStack().saveContext()
       IDFYUserDefaultsUtility.setLastUsedListName(list.name)
     } else {
-      IDFYLoggingUtilities.log("Error while updating the list! Must not happen!")
+      IDFYLoggingUtilities.error("Error while updating the list! Must not happen!")
     }
   }
   
@@ -107,7 +107,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
     let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)
     
     if let error = error {
-      IDFYLoggingUtilities.log("Error loading option list from data base: " + error.description)
+      IDFYLoggingUtilities.error("Error loading option list from data base: " + error.description)
     }
     
     return fetchResult!

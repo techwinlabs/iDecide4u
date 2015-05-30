@@ -41,6 +41,9 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     addAndDecideInteractor.viewWillAppear()
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    // Reload needs to be called here, even if nothing changed.
+    // Problem: When it is for example called after updateNameWithGivenName, but before updateListWithGivenList, the app might crash, because a tableView:cellForRowAtIndexPath is invoked before the list was updated.
+    tableView.reloadData()
   }
   
   override func viewWillDisappear(animated: Bool) {
@@ -72,12 +75,10 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   
   func updateNameWithGivenName(listName: String) {
     self.listName = listName
-    tableView.reloadData()
   }
   
   func updateListWithGivenList(list: [String]) {
     listItems = list
-    tableView.reloadData()
   }
   
   func presentDecision(option: String) {
@@ -104,6 +105,14 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     showAlertControllerWithTitle(NSLocalizedString("main.scene_trash.alert.title", comment: "title for trash alert"), andMessage: "", andAlertActions: [alertActionTrash, alertActionCancel], andPreferredStyle: UIAlertControllerStyle.ActionSheet, popoverSource: trashButton)
   }
   
+  func didDeleteEntry(entry: String, atIndexPath indexPath: NSIndexPath) {
+    IDFYLoggingUtilities.debug("entry: \(entry), indexPath: \(indexPath.row), size of list before delete: \(listItems.count)")
+    IDFYLoggingUtilities.debug("numberOfRowsInSection: \(tableView.numberOfRowsInSection(0))")
+    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    IDFYLoggingUtilities.debug("numberOfRowsInSection: \(tableView.numberOfRowsInSection(0))")
+    IDFYLoggingUtilities.debug("size of list after delete: \(listItems.count)")
+  }
+  
   
   // MARK: - Convenience alert
   
@@ -128,18 +137,20 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    IDFYLoggingUtilities.debug("numberOfRowsInSection: \(listItems.count)")
     return listItems.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let tableViewCell = tableView.dequeueReusableCellWithIdentifier(tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+    IDFYLoggingUtilities.debug("listItems: \(listItems), listItems.count: \(listItems.count), indexPath.row: \(indexPath.row)")
     tableViewCell.textLabel?.text = listItems[indexPath.row]
     return tableViewCell
   }
   
   func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
     if UITableViewCellEditingStyle.Delete == editingStyle {
-      addAndDecideInteractor.willDeleteEntry(listItems[indexPath.row])
+      addAndDecideInteractor.willDeleteEntry(listItems[indexPath.row], atIndexPath: indexPath)
     }
   }
   

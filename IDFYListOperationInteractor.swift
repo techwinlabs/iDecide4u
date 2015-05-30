@@ -61,7 +61,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       case .NewList: shouldShowDiscardDraftOption = true
       case .SaveList: shouldShowDiscardDraftOption = false
       case .LoadList: shouldShowDiscardDraftOption = true
-      case .Unspecified: IDFYLoggingUtilities.log("This state must not be possible!")
+      case .Unspecified: IDFYLoggingUtilities.error("This state must not be possible!")
       }
       listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name, shouldShowDiscardDraftOption:shouldShowDiscardDraftOption)
       
@@ -74,7 +74,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       case .NewList: dataManager.startNewList()
       case .SaveList: break
       case .LoadList: dataManager.loadListWithName(previouslyForLoadSelectedListName)
-      case .Unspecified: IDFYLoggingUtilities.log("This state must not be possible!")
+      case .Unspecified: IDFYLoggingUtilities.error("This state must not be possible!")
       }
       listOperationPresenter.showCurrentList()
     }
@@ -98,7 +98,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   
   // MARK: - Convenience functions
   
-  private func indexOfCurrentlyActiveList() -> NSInteger {
+  private func indexOfCurrentlyActiveList() -> Int {
     let listArray = dataManager.getAllLists()
     var indexOfCurrentlyActiveList = -1
     let currentListName = dataManager.getCurrentList().name

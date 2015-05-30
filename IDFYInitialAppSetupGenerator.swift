@@ -35,7 +35,7 @@ class IDFYInitialAppSetupGenerator {
     var error: NSError?
     IDFYCoreDataStack.sharedCoreDataStack().saveContext()
     if let error = error {
-      IDFYLoggingUtilities.log("Error while saving database after mock data generation: " + error.description)
+      IDFYLoggingUtilities.error("Error while saving database after mock data generation: " + error.description)
     }
     
     IDFYUserDefaultsUtility.setLastUsedListName("")

@@ -14,13 +14,14 @@ protocol IDFYAddAndDecidePresenterInterface {
   func presentDecision(option: String)
   func decisionWithEmptyListInvoked()
   func askForTrashConfirmation()
+  func didDeleteEntry(entry: String, atIndexPath: NSIndexPath)
 }
 
 protocol IDFYAddAndDecideInteractorInterface {
   func viewWillAppear()
   func willAddNewOption(option: String)
   func willDecide()
-  func willDeleteEntry(entry: String)
+  func willDeleteEntry(entry: String, atIndexPath indexPath: NSIndexPath)
   func willTrashList()
   func didConfirmTrashList()
 }

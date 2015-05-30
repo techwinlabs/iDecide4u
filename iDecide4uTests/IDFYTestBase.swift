@@ -31,7 +31,7 @@ class IDFYTestBase: XCTestCase {
     var error: NSError?
     let fetchResult : NSArray? = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [IDFYManagedOptionList]
     if let error = error {
-      IDFYLoggingUtilities.log("Error loading option list from data base: " + error.description)
+      IDFYLoggingUtilities.fatal("Error loading option list from data base: " + error.description)
       abort()
     }
     for managedOptionList : AnyObject in fetchResult! {
