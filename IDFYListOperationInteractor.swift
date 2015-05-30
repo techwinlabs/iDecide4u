@@ -98,7 +98,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
   
   // MARK: - Convenience functions
   
-  private func indexOfCurrentlyActiveList() -> NSInteger {
+  private func indexOfCurrentlyActiveList() -> Int {
     let listArray = dataManager.getAllLists()
     var indexOfCurrentlyActiveList = -1
     let currentListName = dataManager.getCurrentList().name
