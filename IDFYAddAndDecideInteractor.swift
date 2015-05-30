@@ -44,11 +44,12 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
     }
   }
   
-  func willDeleteEntry(entry: String) {
+  func willDeleteEntry(entry: String, atIndexPath indexPath: NSIndexPath) {
     let list = dataManager.getCurrentList()
     list.removeOption(entry)
     dataManager.updateCurrentList(list)
     addAndDecidePresenter.updateListWithGivenList(list.options)
+    addAndDecidePresenter.didDeleteEntry(entry, atIndexPath: indexPath)
   }
   
   func willTrashList() {
