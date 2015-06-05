@@ -21,31 +21,31 @@ class IDFYLoggingUtilities {
   private static let currentLogLevel = LogLevel.Info
 
   class func debug<T>(object: T, filename: String = __FILE__, line: Int = __LINE__, funcname: String = __FUNCTION__) {
-    if LogLevel.Debug.rawValue <= self.currentLogLevel.rawValue {
+    if LogLevel.Debug.rawValue >= self.currentLogLevel.rawValue {
       log(object, filename: filename, line: line, funcname: funcname)
     }
   }
   
   class func info<T>(object: T, filename: String = __FILE__, line: Int = __LINE__, funcname: String = __FUNCTION__) {
-    if LogLevel.Info.rawValue <= self.currentLogLevel.rawValue {
+    if LogLevel.Info.rawValue >= self.currentLogLevel.rawValue {
       log(object, filename: filename, line: line, funcname: funcname)
     }
   }
   
   class func warning<T>(object: T, filename: String = __FILE__, line: Int = __LINE__, funcname: String = __FUNCTION__) {
-    if LogLevel.Warning.rawValue <= self.currentLogLevel.rawValue {
+    if LogLevel.Warning.rawValue >= self.currentLogLevel.rawValue {
       log(object, filename: filename, line: line, funcname: funcname)
     }
   }
   
   class func error<T>(object: T, filename: String = __FILE__, line: Int = __LINE__, funcname: String = __FUNCTION__) {
-    if LogLevel.Error.rawValue <= self.currentLogLevel.rawValue {
+    if LogLevel.Error.rawValue >= self.currentLogLevel.rawValue {
       log(object, filename: filename, line: line, funcname: funcname)
     }
   }
   
   class func fatal<T>(object: T, filename: String = __FILE__, line: Int = __LINE__, funcname: String = __FUNCTION__) {
-    if LogLevel.Fatal.rawValue <= self.currentLogLevel.rawValue {
+    if LogLevel.Fatal.rawValue >= self.currentLogLevel.rawValue {
       log(object, filename: filename, line: line, funcname: funcname)
     }
   }
