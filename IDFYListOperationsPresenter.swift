@@ -71,14 +71,14 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   func askIfListShouldBeOverridden(listName: String) {
-    let alertController = UIAlertController(title: "A list with that name already exists. Do you want to override it?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-    let alertActionOverride = UIAlertAction(title: "Yes, override it!", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+    let alertController = UIAlertController(title: NSLocalizedString("list_operation_scene.override_alert.title", comment: "override alert title"), message: NSLocalizedString("list_operation_scene.override_alert.message", comment: "override alert message"), preferredStyle: UIAlertControllerStyle.Alert)
+    let alertActionOverride = UIAlertAction(title: NSLocalizedString("list_operation_scene.override_alert.confirmation_button_title", comment: "override alert confirmation button title"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
       self.listOperationInteractor.didProvideNewListName(listName, shouldOverride: true)
     }
-    let alertActionTryAgain = UIAlertAction(title: "No, choose another name.", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+    let alertActionTryAgain = UIAlertAction(title: NSLocalizedString("list_operation_scene.override_alert.retry_button_title", comment: "override alert retry button title"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
       self.listOperationInteractor.willSetNameForCurrentList()
     }
-    let alertActionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+    let alertActionCancel = UIAlertAction(title: NSLocalizedString("list_operation_scene.override_alert.cancel_button_title", comment: "override alert cancel button title"), style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
       
     }
     alertController.addAction(alertActionOverride)
