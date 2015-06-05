@@ -82,7 +82,11 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   // MARK: - UITableViewDataSource
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    if 0 < listOfLists.count {
     return 2
+    } else {
+      return 1
+    }
   }
   
   override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
