@@ -54,7 +54,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     }
   }
   
-  func didProvideNewListName(listName: String) {
+  func didProvideNewListName(listName: String, shouldOverride: Bool) {
     if listName.isEmpty {
       var shouldShowDiscardDraftOption = false
       switch listOperationState {
@@ -66,16 +66,31 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       listOperationPresenter.askForListNameWithPredefinedListName(dataManager.getCurrentList().name, shouldShowDiscardDraftOption:shouldShowDiscardDraftOption)
       
     } else {
-      let list = dataManager.getCurrentList()
-      list.name = listName
-      dataManager.updateCurrentList(list)
-      switch listOperationState {
-      case .NewList: dataManager.startNewList()
-      case .SaveList: break
-      case .LoadList: dataManager.loadListWithName(previouslyForLoadSelectedListName)
-      case .Unspecified: IDFYLoggingUtilities.error("This state must not be possible!")
+      if dataManager.doesListWithNameExist(listName) && false == shouldOverride {
+        listOperationPresenter.askIfListShouldBeOverridden(listName)
+      } else {
+        switch listOperationState  {
+        case .NewList:
+          persistNewListName(listName)
+          dataManager.startNewList()
+        case .SaveList:
+          if shouldOverride {
+            let oldList = dataManager.getCurrentList()
+            oldList.name = listName
+            IDFYLoggingUtilities.debug("previouslyForSaveSelectedList: \(oldList.description())")
+            dataManager.deleteListWithName(listName)
+            dataManager.updateCurrentList(oldList)
+          } else {
+            persistNewListName(listName)
+          }
+        case .LoadList:
+          persistNewListName(listName)
+          dataManager.loadListWithName(previouslyForLoadSelectedListName)
+        case .Unspecified:
+          IDFYLoggingUtilities.error("This state must not be possible!")
+        }
+        listOperationPresenter.showCurrentList()
       }
-      listOperationPresenter.showCurrentList()
     }
   }
   
@@ -107,6 +122,13 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       }
     }
     return indexOfCurrentlyActiveList
+  }
+  
+  private func persistNewListName(listName: String) {
+    let list = dataManager.getCurrentList()
+    IDFYLoggingUtilities.debug("current list:\n\(list.description())")
+    list.name = listName
+    dataManager.updateCurrentList(list)
   }
   
 }

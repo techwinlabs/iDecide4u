@@ -15,4 +15,5 @@ protocol IDFYDataManagerInterface {
   func startNewList()
   func loadListWithName(listName: String)
   func deleteListWithName(listName: String)
+  func doesListWithNameExist(listName: String) -> Bool
 }

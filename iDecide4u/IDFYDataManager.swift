@@ -49,6 +49,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func updateCurrentList(optionList: IDFYOptionList) {
+    IDFYLoggingUtilities.debug("Updating current list with name: '\(IDFYUserDefaultsUtility.getLastUsedListName()!)' with given list: \(optionList.description())")
     let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(IDFYUserDefaultsUtility.getLastUsedListName()!)
     if 0 < fetchResult.count {
       let managedOptionList = fetchResult[0]
@@ -57,7 +58,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
       let managedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!) as! IDFYManagedOptionList
       transferDataOfOptionList(optionList, toManagedOptionList: managedOptionList)
     } else {
-      IDFYLoggingUtilities.error("Error while updating the list! Must not happen!")
+      IDFYLoggingUtilities.error("Error while updating the list! Must not happen!\nValues for the given list:\n\(optionList.description())")
     }
   }
   
@@ -87,6 +88,11 @@ class IDFYDataManager : IDFYDataManagerInterface {
     }
   }
   
+  func doesListWithNameExist(listName: String) -> Bool {
+    let lists = fetchManagedOptionListWithName(listName)
+    return 0 != lists.count
+  }
+  
   
   // MARK: - Private methods
   
@@ -114,9 +120,12 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func transferDataOfOptionList(optionList: IDFYOptionList, toManagedOptionList managedOptionList: IDFYManagedOptionList) {
+    IDFYLoggingUtilities.debug("optionList.name: '\(optionList.name)', optionList.options: \(optionList.options)")
     managedOptionList.name = optionList.name
     managedOptionList.options = optionList.options
+    IDFYLoggingUtilities.debug("managedOptionList.name: '\(managedOptionList.name)', managedOptionList.options: \(managedOptionList.options)")
     IDFYCoreDataStack.sharedCoreDataStack().saveContext()
+    IDFYLoggingUtilities.debug("set last used list: '\(optionList.name)'")
     IDFYUserDefaultsUtility.setLastUsedListName(optionList.name)
   }
   
