@@ -26,7 +26,7 @@ class IDFYUserDefaultsUtility {
   }
   
   class func getLastUsedListName() -> String? {
-    IDFYLoggingUtilities.info("lastUsedListName: " + NSUserDefaults.standardUserDefaults().stringForKey(lastUsedListNameKey)!)
+    IDFYLoggingUtilities.info("lastUsedListName: '\(NSUserDefaults.standardUserDefaults().stringForKey(lastUsedListNameKey)!)'")
     return NSUserDefaults.standardUserDefaults().stringForKey(lastUsedListNameKey)
   }
 
