@@ -51,4 +51,8 @@ class IDFYOptionList {
     options = []
   }
   
+  func description() -> String {
+    return "name: \(self.name)\noptions: \(self.options)"
+  }
+  
 }
