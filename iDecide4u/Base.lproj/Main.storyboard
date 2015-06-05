@@ -195,7 +195,7 @@
             </objects>
             <point key="canvasLocation" x="2241" y="-317"/>
         </scene>
-        <!--List operations-->
+        <!--List administration-->
         <scene sceneID="vBt-VW-U5f">
             <objects>
                 <tableViewController id="BCm-Qb-2ah" customClass="IDFYListOperationPresenter" customModule="iDecide4u" customModuleProvider="target" sceneMemberID="viewController">
@@ -216,7 +216,7 @@
                             <outlet property="delegate" destination="BCm-Qb-2ah" id="PDq-3d-eXW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="List operations" id="4RS-cc-9tE">
+                    <navigationItem key="navigationItem" title="List administration" id="4RS-cc-9tE">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="3qJ-QZ-Upy">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="BCm-Qb-2ah" id="2aL-fC-seN"/>
