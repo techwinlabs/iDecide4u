@@ -20,7 +20,6 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     case LoadList
   }
   private var previouslyForLoadSelectedListName : String = ""
-  private var previouslyForSaveSelectedList : IDFYOptionList = IDFYOptionList()
   private var listOperationState : ListOperationState = ListOperationState.Unspecified
   
   // MARK: - IDFYListOperationInteractorInterface
@@ -70,20 +69,25 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       if dataManager.doesListWithNameExist(listName) && false == shouldOverride {
         listOperationPresenter.askIfListShouldBeOverridden(listName)
       } else {
-        if shouldOverride {
-          previouslyForSaveSelectedList = dataManager.getCurrentList()
-          previouslyForSaveSelectedList.name = listName
-          IDFYLoggingUtilities.debug("previouslyForSaveSelectedList: \(previouslyForSaveSelectedList.description())")
-        }
-        let list = dataManager.getCurrentList()
-        IDFYLoggingUtilities.debug("current list:\n\(list.description())")
-        list.name = listName
-        dataManager.updateCurrentList(list)
-        switch listOperationState {
-        case .NewList: dataManager.startNewList()
-        case .SaveList: dataManager.updateCurrentList(previouslyForSaveSelectedList)
-        case .LoadList: dataManager.loadListWithName(previouslyForLoadSelectedListName)
-        case .Unspecified: IDFYLoggingUtilities.error("This state must not be possible!")
+        switch listOperationState  {
+        case .NewList:
+          persistNewListName(listName)
+          dataManager.startNewList()
+        case .SaveList:
+          if shouldOverride {
+            let oldList = dataManager.getCurrentList()
+            oldList.name = listName
+            IDFYLoggingUtilities.debug("previouslyForSaveSelectedList: \(oldList.description())")
+            dataManager.deleteListWithName(listName)
+            dataManager.updateCurrentList(oldList)
+          } else {
+            persistNewListName(listName)
+          }
+        case .LoadList:
+          persistNewListName(listName)
+          dataManager.loadListWithName(previouslyForLoadSelectedListName)
+        case .Unspecified:
+          IDFYLoggingUtilities.error("This state must not be possible!")
         }
         listOperationPresenter.showCurrentList()
       }
