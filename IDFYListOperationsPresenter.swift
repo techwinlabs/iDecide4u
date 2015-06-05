@@ -97,7 +97,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     var title = ""
     switch (section) {
     case 0: title = ""
-    case 1: title = "Load a saved list"
+    case 1: title = NSLocalizedString("list_operation_scene.list_of_lists_section.header_title", comment: "section header title for list of lists")
     default: break
     }
     return title
@@ -119,8 +119,8 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     
     if 0 == indexPath.section {
       switch (indexPath.row) {
-      case 0: tableViewCell.textLabel?.text = "Save / rename the current list"
-      case 1: tableViewCell.textLabel?.text = "Start a new list"
+      case 0: tableViewCell.textLabel?.text = NSLocalizedString("list_operation_scene.start_new_list_cell.text_label", comment: "label for start a new list cell")
+      case 1: tableViewCell.textLabel?.text = NSLocalizedString("list_operation_scene.save_current_list_cell.text_label", comment: "label for save or rename the current list cell")
       default: break
       }
     } else if 1 == indexPath.section {
@@ -148,9 +148,9 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     if 0 == indexPath.section {
       switch (indexPath.row) {
       case 0:
-        listOperationInteractor.willSetNameForCurrentList()
-      case 1:
         listOperationInteractor.willStartNewList()
+      case 1:
+        listOperationInteractor.willSetNameForCurrentList()
       default:
         break
       }
