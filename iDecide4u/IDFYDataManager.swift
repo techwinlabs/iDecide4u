@@ -48,15 +48,15 @@ class IDFYDataManager : IDFYDataManagerInterface {
     return listOfOptionLists
   }
   
-  func updateCurrentList(list: IDFYOptionList) {
+  func updateCurrentList(optionList: IDFYOptionList) {
     IDFYLoggingUtilities.debug("Updating current list with name: \(IDFYUserDefaultsUtility.getLastUsedListName())")
     let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(IDFYUserDefaultsUtility.getLastUsedListName()!)
     if 0 < fetchResult.count {
       let managedOptionList = fetchResult[0]
-      managedOptionList.name = list.name
-      managedOptionList.options = list.options
-      IDFYCoreDataStack.sharedCoreDataStack().saveContext()
-      IDFYUserDefaultsUtility.setLastUsedListName(list.name)
+      transferDataOfOptionList(optionList, toManagedOptionList: managedOptionList)
+    } else if "" == IDFYUserDefaultsUtility.getLastUsedListName()! {
+      let managedOptionList = NSEntityDescription.insertNewObjectForEntityForName(managedOptionListEntityName, inManagedObjectContext:managedObjectContext!) as! IDFYManagedOptionList
+      transferDataOfOptionList(optionList, toManagedOptionList: managedOptionList)
     } else {
       IDFYLoggingUtilities.error("Error while updating the list! Must not happen!\nValues for the given list:\n\(list.description())")
     }
@@ -117,6 +117,13 @@ class IDFYDataManager : IDFYDataManagerInterface {
     }
     
     return fetchResult!
+  }
+  
+  func transferDataOfOptionList(optionList: IDFYOptionList, toManagedOptionList managedOptionList: IDFYManagedOptionList) {
+    managedOptionList.name = optionList.name
+    managedOptionList.options = optionList.options
+    IDFYCoreDataStack.sharedCoreDataStack().saveContext()
+    IDFYUserDefaultsUtility.setLastUsedListName(optionList.name)
   }
   
 }
