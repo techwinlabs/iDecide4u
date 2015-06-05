@@ -120,4 +120,11 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     return indexOfCurrentlyActiveList
   }
   
+  private func persistNewListName(listName: String) {
+    let list = dataManager.getCurrentList()
+    IDFYLoggingUtilities.debug("current list:\n\(list.description())")
+    list.name = listName
+    dataManager.updateCurrentList(list)
+  }
+  
 }
