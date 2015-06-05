@@ -75,7 +75,11 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   func didDeleteList(listName: String, atIndexPath indexPath: NSIndexPath) {
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    if 0 < listOfLists.count {
+      tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    } else {
+      tableView.deleteSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Fade)
+    }
   }
   
   
@@ -83,7 +87,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     if 0 < listOfLists.count {
-    return 2
+      return 2
     } else {
       return 1
     }
