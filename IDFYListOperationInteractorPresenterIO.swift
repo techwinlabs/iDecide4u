@@ -11,6 +11,7 @@ import Foundation
 protocol IDFYListOperationPresenterInterface {
   func updateListOfListsWith(listOfLists: [IDFYOptionList], withCurrentlyActiveList indexOfCurrentlyActiveList: NSInteger)
   func askForListNameWithPredefinedListName(listName: String, shouldShowDiscardDraftOption: Bool)
+  func askIfListShouldBeOverridden(listName: String)
   func showCurrentList()
   func didDeleteList(listName: String, atIndexPath indexPath: NSIndexPath)
 }
