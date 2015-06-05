@@ -67,6 +67,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       
     } else {
       let list = dataManager.getCurrentList()
+        IDFYLoggingUtilities.debug("current list:\n\(list.description())")
       list.name = listName
       dataManager.updateCurrentList(list)
       switch listOperationState {

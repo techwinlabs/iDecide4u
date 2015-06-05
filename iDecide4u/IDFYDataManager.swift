@@ -49,6 +49,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func updateCurrentList(list: IDFYOptionList) {
+    IDFYLoggingUtilities.debug("Updating current list with name: \(IDFYUserDefaultsUtility.getLastUsedListName())")
     let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(IDFYUserDefaultsUtility.getLastUsedListName()!)
     if 0 < fetchResult.count {
       let managedOptionList = fetchResult[0]
@@ -57,7 +58,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
       IDFYCoreDataStack.sharedCoreDataStack().saveContext()
       IDFYUserDefaultsUtility.setLastUsedListName(list.name)
     } else {
-      IDFYLoggingUtilities.error("Error while updating the list! Must not happen!")
+      IDFYLoggingUtilities.error("Error while updating the list! Must not happen!\nValues for the given list:\n\(list.description())")
     }
   }
   
@@ -89,11 +90,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
   
   func doesListWithNameExist(listName: String) -> Bool {
     let lists = fetchManagedOptionListWithName(listName)
-    if 0 == lists.count {
-      return false
-    } else {
-      return true
-    }
+    return 0 != lists.count
   }
   
   
