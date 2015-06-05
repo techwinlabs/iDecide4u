@@ -30,6 +30,7 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
       list.addOption(option)
       dataManager.updateCurrentList(list)
       addAndDecidePresenter.updateListWithGivenList(list.options)
+      addAndDecidePresenter.updateInterfaceWithNewData()
     }
   }
   

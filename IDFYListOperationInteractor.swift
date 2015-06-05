@@ -69,7 +69,6 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
       let list = dataManager.getCurrentList()
       list.name = listName
       dataManager.updateCurrentList(list)
-      
       switch listOperationState {
       case .NewList: dataManager.startNewList()
       case .SaveList: break
