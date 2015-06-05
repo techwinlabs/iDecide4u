@@ -49,7 +49,7 @@ class IDFYDataManager : IDFYDataManagerInterface {
   }
   
   func updateCurrentList(optionList: IDFYOptionList) {
-    IDFYLoggingUtilities.debug("Updating current list with name: '\(IDFYUserDefaultsUtility.getLastUsedListName()!)'")
+    IDFYLoggingUtilities.debug("Updating current list with name: '\(IDFYUserDefaultsUtility.getLastUsedListName()!)' with given list: \(optionList.description())")
     let fetchResult : [IDFYManagedOptionList] = fetchManagedOptionListWithName(IDFYUserDefaultsUtility.getLastUsedListName()!)
     if 0 < fetchResult.count {
       let managedOptionList = fetchResult[0]
