@@ -52,7 +52,7 @@ class IDFYOptionList {
   }
   
   func description() -> String {
-    return "name: \(self.name)\noptions: \(self.options)"
+    return "name: '\(self.name)'\noptions: \(self.options)"
   }
   
 }

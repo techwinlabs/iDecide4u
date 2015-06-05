@@ -144,13 +144,12 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    IDFYLoggingUtilities.debug("numberOfRowsInSection: \(listItems.count)")
+    IDFYLoggingUtilities.debug("listItems: \(listItems), listItems.count: \(listItems.count)")
     return listItems.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let tableViewCell = tableView.dequeueReusableCellWithIdentifier(tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
-    IDFYLoggingUtilities.debug("listItems: \(listItems), listItems.count: \(listItems.count), indexPath.row: \(indexPath.row)")
     tableViewCell.textLabel?.text = listItems[indexPath.row]
     return tableViewCell
   }
