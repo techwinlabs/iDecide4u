@@ -15,6 +15,7 @@ protocol IDFYAddAndDecidePresenterInterface {
   func decisionWithEmptyListInvoked()
   func askForTrashConfirmation()
   func didDeleteEntry(entry: String, atIndexPath: NSIndexPath)
+  func updateInterfaceWithNewData()
 }
 
 protocol IDFYAddAndDecideInteractorInterface {

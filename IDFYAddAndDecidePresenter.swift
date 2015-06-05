@@ -59,6 +59,7 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     addAndDecideInteractor.willAddNewOption(textFieldAddNewOption.text)
     textFieldAddNewOption.text = ""
     addButton.enabled = false
+    IDFYLoggingUtilities.debug("Scrolling to row: \(listItems.count-1)")
     tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: listItems.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
   }
   
@@ -108,9 +109,15 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   func didDeleteEntry(entry: String, atIndexPath indexPath: NSIndexPath) {
     IDFYLoggingUtilities.debug("entry: \(entry), indexPath: \(indexPath.row), size of list before delete: \(listItems.count)")
     IDFYLoggingUtilities.debug("numberOfRowsInSection: \(tableView.numberOfRowsInSection(0))")
+    
     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    
     IDFYLoggingUtilities.debug("numberOfRowsInSection: \(tableView.numberOfRowsInSection(0))")
     IDFYLoggingUtilities.debug("size of list after delete: \(listItems.count)")
+  }
+  
+  func updateInterfaceWithNewData() {
+    tableView.reloadData()
   }
   
   
