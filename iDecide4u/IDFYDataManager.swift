@@ -87,6 +87,15 @@ class IDFYDataManager : IDFYDataManagerInterface {
     }
   }
   
+  func doesListWithNameExist(listName: String) -> Bool {
+    let lists = fetchManagedOptionListWithName(listName)
+    if 0 == lists.count {
+      return false
+    } else {
+      return true
+    }
+  }
+  
   
   // MARK: - Private methods
   
