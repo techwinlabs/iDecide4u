@@ -54,7 +54,7 @@ class IDFYListOperationInteractor : IDFYListOperationInteractorInterface {
     }
   }
   
-  func didProvideNewListName(listName: String) {
+  func didProvideNewListName(listName: String, shouldOverride: Bool) {
     if listName.isEmpty {
       var shouldShowDiscardDraftOption = false
       switch listOperationState {

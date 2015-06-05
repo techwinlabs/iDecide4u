@@ -21,7 +21,7 @@ protocol IDFYListOperationInteractorInterface {
   func willSetNameForCurrentList()
   func willStartNewList()
   func willLoadSavedList(listName: String)
-  func didProvideNewListName(listName: String)
+  func didProvideNewListName(listName: String, shouldOverride: Bool)
   func willDeleteList(listName: String, atIndexPath indexPath: NSIndexPath)
   func willDiscardDraft()
 }

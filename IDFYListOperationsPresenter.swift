@@ -52,7 +52,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
     }
     
     let alertActionSave = UIAlertAction(title: NSLocalizedString("main.scene_save.alert.button.save", comment: "save button for save alert"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-      self.listOperationInteractor.didProvideNewListName(self.textFieldNewListName!.text)
+      self.listOperationInteractor.didProvideNewListName(self.textFieldNewListName!.text, shouldOverride: false)
     }
     alertController.addAction(alertActionSave)
     
