@@ -71,7 +71,7 @@ class IDFYListOperationPresenter : UITableViewController, UITableViewDataSource,
   }
   
   func askIfListShouldBeOverridden(listName: String) {
-    let alertController = UIAlertController(title: "A list with that name already exists. Do you want to override it?", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let alertController = UIAlertController(title: "A list with that name already exists. Do you want to override it?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
     let alertActionOverride = UIAlertAction(title: "Yes, override it!", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
       self.listOperationInteractor.didProvideNewListName(listName, shouldOverride: true)
     }
