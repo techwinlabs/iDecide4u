@@ -6,33 +6,53 @@
 //  Copyright (c) 2015 dominicfrei.com. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import XCTest
+import UIKit
 import CoreData
 
-class IDFYDataManagerTest: IDFYTestBase {
+class IDFYDataManagerTest : IDFYTestBase {
+  
+//  class MockInitialAppSetupGenerator : IDFYInitialAppSetupGenerator {
+//    @objc override class func generateInitialAppData() {
+//      
+//    }
+//  }
+  
+  class MockAppDelegate : IDFYAppDelegate {
+    @objc override func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+      IDFYInitialAppSetupGenerator.generateInitialAppData()
+      return true
+    }
+  }
+  
+  let dataManager = IDFYDataManager()
   
   override func setUp() {
     super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    IDFYCoreDataStack.sharedCoreDataStack().urlToDatabase = "MockiDecide4u.sqlite"
+    UIApplication.sharedApplication().delegate = MockAppDelegate()
   }
   
   override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
     super.tearDown()
   }
   
   func test() {
-    let fetchRequest = NSFetchRequest(entityName: optionListEntityName)
+    let fetchRequest = NSFetchRequest(entityName: IDFYCoreDataStack.sharedCoreDataStack().optionListEntityName)
     var error: NSError?
-    let fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: &error) as! [IDFYManagedOptionList]
+    let fetchResult = IDFYCoreDataStack.sharedCoreDataStack().managedObjectContext!.executeFetchRequest(fetchRequest, error: &error) as! [IDFYManagedOptionList]
     if let error = error {
       IDFYLoggingUtilities.fatal("Error loading option list from data base: " + error.description)
       abort()
     }
+    
     XCTAssert(!fetchResult.isEmpty, "fetchResult should not be empty!")
-    XCTAssertEqual(fetchResult.count, 2, "There should be two entries in fetchResult!")
-    XCTAssertFalse(fetchResult.count > 2, "The fetchResult should not have more than two entries.")
+    XCTAssertEqual(fetchResult.count, 3, "The fetch result should contain five entries.")
+    
+//    let list1 = fetchResult[0]
+    
   }
   
 }
