@@ -1,0 +1,6 @@
+framework module RealmSwift {
+  umbrella header "Pods-iDecide4u-RealmSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
