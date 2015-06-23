@@ -13,8 +13,9 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   
   var addAndDecideWireframe : IDFYAddAndDecideWireframe!
   var addAndDecideInteractor: IDFYAddAndDecideInteractorInterface!
-  
-  @IBOutlet weak var tableView: UITableView!
+    var selectedValue = 10000 //variable for selected tableview cell
+
+    @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var textFieldAddNewOption: UITextField!
   @IBOutlet weak var addButton: UIButton!
   @IBOutlet weak var textFieldTrailingSpaceContraint: NSLayoutConstraint!
@@ -82,11 +83,13 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
     listItems = list
   }
   
-  func presentDecision(option: String) {
+    func presentDecision(option: String, selected: Int) {
+        selectedValue = selected
     let title = NSLocalizedString("main.scene_dicision.alert.title", comment: "title for a decision")
     let message = option
     let alertAction = UIAlertAction(title: NSLocalizedString("main.scene_dicision.alert.ok.button", comment: "button title for a dicision"), style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in }
     showAlertControllerWithTitle(title, andMessage: message, andAlertActions: [alertAction], andPreferredStyle: UIAlertControllerStyle.Alert, popoverSource: nil)
+        tableView.reloadData()
   }
   
   func decisionWithEmptyListInvoked() {
@@ -151,6 +154,14 @@ class IDFYAddAndDecidePresenter : UIViewController, UITableViewDataSource, UITab
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let tableViewCell = tableView.dequeueReusableCellWithIdentifier(tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
     tableViewCell.textLabel?.text = listItems[indexPath.row]
+    if selectedValue == indexPath.row {
+        tableViewCell.backgroundColor = UIColor(red: 173.0/255.0, green: 216.0/255.0, blue: 230.0/255.0, alpha: 1.0)
+        tableViewCell.accessoryType = .Checkmark
+    } else {
+        tableViewCell.backgroundColor = UIColor.whiteColor()
+        tableViewCell.accessoryType = .None
+
+    }
     return tableViewCell
   }
   
