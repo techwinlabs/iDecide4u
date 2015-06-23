@@ -39,7 +39,7 @@ class IDFYAddAndDecideInteractor: NSObject, IDFYAddAndDecideInteractorInterface 
     if 0 < list.count() {
       let winningChoice = Int(rand()) % (list.count())
       let winner = list.optionAtIndex(winningChoice)
-      addAndDecidePresenter.presentDecision(winner)
+      addAndDecidePresenter.presentDecision(winner,selected: winningChoice)
     } else {
       addAndDecidePresenter.decisionWithEmptyListInvoked()
     }
