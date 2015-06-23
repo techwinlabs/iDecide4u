@@ -11,7 +11,7 @@ import Foundation
 protocol IDFYAddAndDecidePresenterInterface {
   func updateNameWithGivenName(listName: String)
   func updateListWithGivenList(list: [String])
-  func presentDecision(option: String)
+    func presentDecision(option: String, selected: Int)
   func decisionWithEmptyListInvoked()
   func askForTrashConfirmation()
   func didDeleteEntry(entry: String, atIndexPath: NSIndexPath)
