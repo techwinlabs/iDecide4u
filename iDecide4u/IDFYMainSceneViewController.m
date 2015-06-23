@@ -20,6 +20,8 @@
 
 @implementation IDFYMainSceneViewController
 
+int selectedIndex = 100000; //integer used to save the value of selected cell
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad {
@@ -57,6 +59,15 @@
     // Just a standard UITableViewCell.
     UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     tableViewCell.textLabel.text = self.itemList[indexPath.row];
+    
+    //Change colour of highlighted cell
+    if (indexPath.row == selectedIndex) {
+        [tableViewCell setBackgroundColor:[UIColor colorWithRed: 173.0/255.0 green: 216.0/255.0 blue:230.0/255.0 alpha: 1.0]];
+        tableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else { //White for all the other cells
+        [tableViewCell setBackgroundColor:[UIColor whiteColor]];
+        tableViewCell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return tableViewCell;
 }
 
@@ -133,6 +144,8 @@
         
         // Chose a winner and show it to the user.
         NSUInteger winningChoice = arc4random() % self.itemList.count;
+        selectedIndex = (int)winningChoice; //assigning random variable to selectedindex
+        
 //        title = NSLocalizedString(@"main.scene_dicision.alert.title", @"title for a decision");
         title = [NSString stringWithFormat:@"%@:\n%@", NSLocalizedString(@"main.scene_dicision.alert.message", @"message for a decision"), self.itemList[winningChoice]];
         
@@ -149,7 +162,7 @@
     UIAlertAction *alertAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"main.scene_dicision.alert.ok.button", @"button title for a dicision") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {}];
     [alertController addAction:alertAction];
     [self presentViewController:alertController animated:YES completion:nil];
-    
+    [self.tableView reloadData];
 }
 
 - (IBAction)trashButtonPressed:(id)sender {
