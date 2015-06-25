@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vcH-3T-7AR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vcH-3T-7AR">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--iDecide4u-->
         <scene sceneID="RuH-eA-q1F">
             <objects>
-                <viewController id="bDO-PX-3D9" customClass="IDFYMainSceneViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IDFYAddAndDecideView" id="bDO-PX-3D9" customClass="IDFYAddAndDecidePresenter" customModule="iDecide4u" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mEo-xk-zSp"/>
                         <viewControllerLayoutGuide type="bottom" id="s9P-Db-KGO"/>
@@ -38,7 +38,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="addButtonPressed:" destination="bDO-PX-3D9" eventType="touchUpInside" id="met-a6-7U8"/>
+                                            <action selector="addButtonPressed:" destination="bDO-PX-3D9" eventType="touchUpInside" id="YHr-Kf-etO"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a new option" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oMC-BU-pKD">
@@ -53,7 +53,7 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="cxL-6p-fHz" secondAttribute="centerY" id="FUc-Vm-wkc"/>
                                     <constraint firstAttribute="trailing" secondItem="oMC-BU-pKD" secondAttribute="trailing" constant="12" id="INZ-P3-HR5"/>
@@ -104,17 +104,21 @@
                                     <constraint firstAttribute="height" constant="44" id="yCM-Vd-Zhb"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem width="12" systemItem="fixedSpace" id="08C-hT-0bb"/>
+                                    <barButtonItem systemItem="organize" id="08C-hT-0bb">
+                                        <connections>
+                                            <segue destination="DUy-D0-VXn" kind="presentation" id="2g4-6u-2uU"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="IBp-Nb-aN3"/>
                                     <barButtonItem title="Decide!" id="Wnu-56-eQJ">
                                         <connections>
-                                            <action selector="decideButtonPressed:" destination="bDO-PX-3D9" id="twc-NC-Rq9"/>
+                                            <action selector="decideButtonPressed:" destination="bDO-PX-3D9" id="Kx2-Ag-rNw"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LV0-nP-xev"/>
                                     <barButtonItem systemItem="trash" id="jTl-GC-DbU">
                                         <connections>
-                                            <action selector="trashButtonPressed:" destination="bDO-PX-3D9" id="MjG-hr-nQa"/>
+                                            <action selector="trashButtonPressed:" destination="bDO-PX-3D9" id="xhA-Z3-7QF"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -178,17 +182,51 @@
                     </view>
                     <navigationItem key="navigationItem" title="iDecide4u" id="Pls-KV-13e"/>
                     <connections>
-                        <outlet property="addButton" destination="cxL-6p-fHz" id="dLc-EL-AbV"/>
-                        <outlet property="tableView" destination="NR9-N2-VD1" id="Vwc-Eb-xzZ"/>
-                        <outlet property="tableViewBottomConstraint" destination="svU-5j-XEX" id="zLb-np-xWD"/>
-                        <outlet property="textFieldAddNewOption" destination="oMC-BU-pKD" id="yGa-S7-rhJ"/>
-                        <outlet property="textFieldTrailingSpaceConstraint" destination="INZ-P3-HR5" id="4B8-Io-6F4"/>
-                        <outlet property="toolbar" destination="sIB-DH-NBy" id="2gq-Hj-nVT"/>
+                        <outlet property="addButton" destination="cxL-6p-fHz" id="k0d-Gj-xqB"/>
+                        <outlet property="tableView" destination="NR9-N2-VD1" id="unt-IZ-U7f"/>
+                        <outlet property="tableViewBottomConstraint" destination="svU-5j-XEX" id="ySG-I7-yCd"/>
+                        <outlet property="textFieldAddNewOption" destination="oMC-BU-pKD" id="XzP-kC-UEQ"/>
+                        <outlet property="textFieldTrailingSpaceContraint" destination="INZ-P3-HR5" id="uey-Of-1ha"/>
+                        <outlet property="toolbar" destination="sIB-DH-NBy" id="QLE-UZ-k6F"/>
+                        <outlet property="trashButton" destination="jTl-GC-DbU" id="4i5-6v-Of6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBr-eg-33k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2339" y="-317"/>
+            <point key="canvasLocation" x="2241" y="-317"/>
+        </scene>
+        <!--List administration-->
+        <scene sceneID="vBt-VW-U5f">
+            <objects>
+                <tableViewController id="BCm-Qb-2ah" customClass="IDFYListOperationPresenter" customModule="iDecide4u" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="lwg-QL-Cec">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IDFYListOperationTabelViewCell" id="bDZ-9T-LRa">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bDZ-9T-LRa" id="rv7-iH-EZi">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="BCm-Qb-2ah" id="WJi-2x-pk6"/>
+                            <outlet property="delegate" destination="BCm-Qb-2ah" id="PDq-3d-eXW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="List administration" id="4RS-cc-9tE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="3qJ-QZ-Upy">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="BCm-Qb-2ah" id="2aL-fC-seN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BpU-Ro-bpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2241" y="423"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gbE-Ds-U53">
@@ -207,6 +245,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Bi-Wk-Qta" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1527" y="-317"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="iTi-2c-V7K">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DUy-D0-VXn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8HR-OR-zaX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BCm-Qb-2ah" kind="relationship" relationship="rootViewController" id="nkd-iH-EUN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tHt-U8-0b3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="423"/>
         </scene>
     </scenes>
 </document>

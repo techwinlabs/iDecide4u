@@ -13,3 +13,6 @@
 
 /* Class = "UITextField"; normalTitle = "Save new item!"; ObjectID = "oMC-BU-pKD"; */
 "oMC-BU-pKD.placeholder" = "Neue Option hinzufügen";
+
+/* Title of list operation scene */
+"4RS-cc-9tE.title" = "Listenverwaltung";
